@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>SmartQRCraft - QR Code Generator &amp; Management Platform</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary-fixed-dim":"#c3c0ff","primary":"#3525cd","on-primary":"#ffffff","surface-container-lowest":"#ffffff","tertiary":"#3130c0","on-primary-container":"#dad7ff","secondary-container":"#8a4cfc","surface-container":"#eaedff","on-background":"#131b2e","tertiary-container":"#4b4dd8","surface":"#faf8ff","surface-container-highest":"#dae2fd","surface-variant":"#dae2fd","on-error-container":"#93000a","on-surface":"#131b2e","inverse-primary":"#c3c0ff","surface-container-high":"#e2e7ff","inverse-on-surface":"#eef0ff","surface-tint":"#4d44e3","on-tertiary-container":"#d9d8ff","error":"#ba1a1a","inverse-surface":"#283044","outline":"#777587","error-container":"#ffdad6","on-surface-variant":"#464555","primary-container":"#4f46e5","tertiary-fixed-dim":"#c0c1ff","surface-dim":"#d2d9f4","surface-bright":"#faf8ff","on-secondary":"#ffffff","surface-container-low":"#f2f3ff","secondary-fixed-dim":"#d2bbff","on-tertiary":"#ffffff","on-secondary-fixed-variant":"#5a00c6","on-primary-fixed":"#0f0069","on-tertiary-fixed-variant":"#2f2ebe","on-secondary-container":"#fffbff","outline-variant":"#c7c4d8","secondary-fixed":"#eaddff","tertiary-fixed":"#e1e0ff","background":"#faf8ff","on-primary-fixed-variant":"#3323cc","primary-fixed":"#e2dfff","on-tertiary-fixed":"#07006c","secondary":"#712ae2","on-secondary-fixed":"#25005a","on-error":"#ffffff"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"gutter-sm":"1rem","space-sm":"0.5rem","space-md":"1rem","space-xl":"2rem",gutter:"1.5rem","space-lg":"1.5rem","margin-sm":"1rem",margin:"2rem","space-xs":"0.25rem"},fontFamily:{"headline-lg-mobile":["Plus Jakarta Sans"],"label-md":["Inter"],"title-md":["Inter"],"headline-sm":["Plus Jakarta Sans"],"label-sm":["Inter"],"headline-lg":["Plus Jakarta Sans"],"code-sm":["Inter"],"headline-display-mobile":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-lg":["Inter"],"body-sm":["Inter"],"title-sm":["Inter"],"headline-display":["Plus Jakarta Sans"],"body-md":["Inter"]},fontSize:{"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.01em",fontWeight:"500"}],"title-md":["16px",{lineHeight:"24px",letterSpacing:"-0.005em",fontWeight:"600"}],"headline-sm":["20px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.03em",fontWeight:"600"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"700"}],"code-sm":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"500"}],"headline-display-mobile":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"700"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.015em",fontWeight:"600"}],"body-lg":["16px",{lineHeight:"26px",letterSpacing:"-0.005em",fontWeight:"400"}],"body-sm":["13px",{lineHeight:"18px",letterSpacing:"0em",fontWeight:"400"}],"title-sm":["14px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"600"}],"headline-display":["48px",{lineHeight:"56px",letterSpacing:"-0.03em",fontWeight:"700"}],"body-md":["14px",{lineHeight:"22px",letterSpacing:"0em",fontWeight:"400"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-7xl mx-auto px-margin-sm lg:px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><a class="flex items-center gap-space-sm text-on-surface focus:outline-none" data-path="home" href="#"><div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center shadow-[0_4px_12px_rgba(79,70,229,0.25)]"><span class="material-symbols-outlined text-on-primary text-[22px]">qr_code_2</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">Smart<span class="text-primary">QRCraft</span></span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-0.5">Enterprise QR</span></div></a><nav class="hidden xl:flex items-center gap-space-xs p-1" data-active-classes="bg-surface-container-high text-on-surface font-title-sm font-semibold rounded-lg"><a class="px-space-sm py-2 rounded-lg font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="qr-code-generator" href="#">QR Code Generator</a><a class="px-space-sm py-2 rounded-lg font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="qr-types" href="#">QR Types</a><a class="px-space-sm py-2 rounded-lg font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="features" href="#">Features</a><a class="px-space-sm py-2 rounded-lg font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="pricing" href="#">Pricing</a><a class="px-space-sm py-2 rounded-lg font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="resources" href="#">Resources</a></nav></div><div class="flex items-center gap-space-sm"><a class="hidden sm:inline-flex px-space-md py-2 font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface rounded-lg transition-colors" data-path="login" href="#">Log In</a><a class="hidden md:inline-flex px-space-md py-2 font-title-sm text-title-sm text-on-surface hover:bg-surface-container rounded-lg transition-colors" data-path="signup" href="#">Sign Up</a><a class="inline-flex items-center gap-space-xs px-space-md py-2.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-title-sm text-title-sm shadow-[0_1px_3px_0_rgba(15,23,42,0.04),0_1px_2px_-1px_rgba(15,23,42,0.04)] transition-all hover:brightness-105" data-path="create-qr-code" href="#"><span class="material-symbols-outlined text-[18px]">add</span><span>Create QR Code</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 ml-space-xs"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-20rem)]"><div class="flex flex-col w-full">
+<!-- HERO SECTION -->
+<section class="relative w-full overflow-hidden bg-surface py-12 lg:py-20">
+<!-- Ambient subtle background glow -->
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-primary-fixed opacity-40 blur-[130px] pointer-events-none -z-10"></div>
+<div class="absolute bottom-0 right-10 w-96 h-96 bg-secondary-fixed opacity-30 blur-[100px] pointer-events-none -z-10"></div>
+<div class="max-w-7xl mx-auto px-margin-sm lg:px-margin">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+<!-- Hero Text & Value Proposition -->
+<div class="lg:col-span-6 flex flex-col items-start">
+<div class="flex flex-wrap items-center gap-2 mb-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm shadow-sm">
+<span class="material-symbols-outlined text-[15px] text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+              Next-Gen QR Infrastructure for US Businesses
+            </span>
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">
+              Free QR Code Generator
+            </span>
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">
+              No credit card required
+            </span>
+</div>
+<h1 class="font-headline-display text-headline-display text-on-surface mb-6 tracking-tight">
+            Create QR Codes That Connect Your Business to the <span class="text-primary">Digital World</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-xl">
+            Generate custom QR codes for websites, menus, payments, contact information, social media, and more. Customize your design, track scans, and download in print-ready vector formats in seconds.
+          </p>
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mb-8">
+<a class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-title-sm text-title-sm shadow-md hover:shadow-lg transition-all" href="#interactive-generator">
+<span>Create Free QR Code</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<a class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-title-sm text-title-sm transition-colors" href="#qr-types">
+<span class="material-symbols-outlined text-[18px] text-primary">category</span>
+<span>Explore QR Types</span>
+</a>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="flex text-amber-500">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant">
+<strong class="text-on-surface font-semibold">4.9/5 rating</strong> by 35,000+ businesses · Instant high-res download
+            </p>
+</div>
+</div>
+<!-- Hero Interactive QR Code Generator UI Card -->
+<div class="lg:col-span-6 w-full" id="interactive-generator">
+<div class="bg-surface-container-lowest rounded-2xl shadow-xl overflow-hidden p-6 sm:p-7 relative">
+<!-- Top Mode Tabs -->
+<div class="flex items-center gap-2 overflow-x-auto pb-4 mb-5 scrollbar-none" id="hero-qr-type-tabs">
+<button class="hero-type-btn flex items-center gap-1.5 px-3.5 py-2 rounded-lg font-title-sm text-title-sm bg-primary text-on-primary transition-all shrink-0" data-type="url">
+<span class="material-symbols-outlined text-[18px]">link</span>
+<span>URL</span>
+</button>
+<button class="hero-type-btn flex items-center gap-1.5 px-3.5 py-2 rounded-lg font-title-sm text-title-sm bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all shrink-0" data-type="wifi">
+<span class="material-symbols-outlined text-[18px]">wifi</span>
+<span>WiFi</span>
+</button>
+<button class="hero-type-btn flex items-center gap-1.5 px-3.5 py-2 rounded-lg font-title-sm text-title-sm bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all shrink-0" data-type="vcard">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+<span>vCard</span>
+</button>
+<button class="hero-type-btn flex items-center gap-1.5 px-3.5 py-2 rounded-lg font-title-sm text-title-sm bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all shrink-0" data-type="menu">
+<span class="material-symbols-outlined text-[18px]">restaurant_menu</span>
+<span>Menu</span>
+</button>
+<button class="hero-type-btn flex items-center gap-1.5 px-3.5 py-2 rounded-lg font-title-sm text-title-sm bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all shrink-0" data-type="pdf">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+<span>PDF</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+<!-- Left Customization Inputs -->
+<div class="md:col-span-7 flex flex-col gap-4">
+<!-- URL / Content Input -->
+<div>
+<label class="block font-title-sm text-title-sm text-on-surface mb-1.5" id="hero-input-label">Target Website URL</label>
+<div class="relative flex items-center">
+<span class="absolute left-3 material-symbols-outlined text-outline text-[18px]">language</span>
+<input class="w-full h-10 pl-9 pr-3 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary transition-all" id="hero-qr-input" placeholder="https://yourbusiness.com" type="text" value="https://smartqrcraft.com"/>
+</div>
+</div>
+<!-- Customization Options Accordion Group -->
+<div class="space-y-3 pt-1">
+<!-- Colors Accordion -->
+<div class="rounded-xl bg-surface-container-low p-3.5">
+<div class="flex items-center justify-between cursor-pointer" onclick="document.getElementById('colors-accordion').classList.toggle('hidden')">
+<span class="font-title-sm text-title-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">palette</span>
+                        Foreground &amp; Background Colors
+                      </span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">expand_more</span>
+</div>
+<div class="pt-3 flex flex-col gap-3" id="colors-accordion">
+<div>
+<span class="block font-label-sm text-label-sm text-on-surface-variant mb-1.5">Foreground Color</span>
+<div class="flex items-center gap-2" id="hero-fg-swatches">
+<button class="hero-fg-swatch w-7 h-7 rounded-full bg-[#3525cd] ring-2 ring-primary ring-offset-2 transition-transform transform scale-110" data-color="#3525cd" title="Indigo Brand"></button>
+<button class="hero-fg-swatch w-7 h-7 rounded-full bg-[#131b2e] transition-transform" data-color="#131b2e" title="Midnight Navy"></button>
+<button class="hero-fg-swatch w-7 h-7 rounded-full bg-[#059669] transition-transform" data-color="#059669" title="Emerald Green"></button>
+<button class="hero-fg-swatch w-7 h-7 rounded-full bg-[#e11d48] transition-transform" data-color="#e11d48" title="Rose Red"></button>
+<button class="hero-fg-swatch w-7 h-7 rounded-full bg-[#ea580c] transition-transform" data-color="#ea580c" title="Sunset Orange"></button>
+</div>
+</div>
+<div>
+<span class="block font-label-sm text-label-sm text-on-surface-variant mb-1.5">Background Color</span>
+<div class="flex items-center gap-2" id="hero-bg-swatches">
+<button class="hero-bg-swatch w-7 h-7 rounded-full bg-white shadow-sm ring-2 ring-primary ring-offset-2 transition-transform scale-110" data-bg="#ffffff" title="Pure White"></button>
+<button class="hero-bg-swatch w-7 h-7 rounded-full bg-[#f2f3ff] transition-transform" data-bg="#f2f3ff" title="Soft Blue"></button>
+<button class="hero-bg-swatch w-7 h-7 rounded-full bg-[#fef3c7] transition-transform" data-bg="#fef3c7" title="Cream Warm"></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Shape Style Options -->
+<div class="rounded-xl bg-surface-container-low p-3.5">
+<div class="flex items-center justify-between cursor-pointer" onclick="document.getElementById('shapes-accordion').classList.toggle('hidden')">
+<span class="font-title-sm text-title-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">shapes</span>
+                        Design &amp; Corner Style
+                      </span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">expand_more</span>
+</div>
+<div class="pt-3 grid grid-cols-3 gap-2" id="shapes-accordion">
+<button class="hero-corner-btn py-1.5 px-2 rounded-lg text-center bg-primary text-on-primary font-label-sm text-label-sm transition-all" data-corner="square">Classic Square</button>
+<button class="hero-corner-btn py-1.5 px-2 rounded-lg text-center bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm transition-all" data-corner="rounded">Smooth Round</button>
+<button class="hero-corner-btn py-1.5 px-2 rounded-lg text-center bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm transition-all" data-corner="dots">Dot / Circles</button>
+</div>
+</div>
+<!-- Logo Toggle Simulation -->
+<div class="rounded-xl bg-surface-container-low p-3.5 flex items-center justify-between">
+<label class="flex items-center gap-2 cursor-pointer" for="hero-logo-toggle">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary" id="hero-logo-toggle" type="checkbox"/>
+<span class="font-title-sm text-title-sm text-on-surface">Embed Center Logo</span>
+</label>
+<span class="material-symbols-outlined text-primary text-[20px]">verified</span>
+</div>
+</div>
+</div>
+<!-- Right Live Vector QR Preview -->
+<div class="md:col-span-5 flex flex-col items-center justify-center">
+<div class="w-full flex flex-col items-center p-4 rounded-2xl bg-surface-container shadow-inner relative">
+<!-- Live Scannable SVG Container -->
+<div class="w-48 h-48 sm:w-52 sm:h-52 bg-white rounded-xl shadow-md p-3 relative flex items-center justify-center transition-colors" id="hero-qr-canvas">
+<!-- Scanner Laser Overlay -->
+<div class="absolute inset-x-2 top-2 h-0.5 bg-primary/80 shadow-[0_0_8px_rgba(79,70,229,0.8)] animate-pulse pointer-events-none"></div>
+<!-- Dynamic SVG Code -->
+<svg class="w-full h-full" id="hero-svg-code" viewbox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+<!-- Corner Eyes Top Left -->
+<rect class="qr-fill" fill="#3525cd" height="40" rx="8" width="40" x="10" y="10"></rect>
+<rect class="qr-bg-fill" fill="#ffffff" height="24" rx="4" width="24" x="18" y="18"></rect>
+<rect class="qr-fill" fill="#3525cd" height="12" rx="3" width="12" x="24" y="24"></rect>
+<!-- Corner Eyes Top Right -->
+<rect class="qr-fill" fill="#3525cd" height="40" rx="8" width="40" x="110" y="10"></rect>
+<rect class="qr-bg-fill" fill="#ffffff" height="24" rx="4" width="24" x="118" y="18"></rect>
+<rect class="qr-fill" fill="#3525cd" height="12" rx="3" width="12" x="124" y="24"></rect>
+<!-- Corner Eyes Bottom Left -->
+<rect class="qr-fill" fill="#3525cd" height="40" rx="8" width="40" x="10" y="110"></rect>
+<rect class="qr-bg-fill" fill="#ffffff" height="24" rx="4" width="24" x="18" y="118"></rect>
+<rect class="qr-fill" fill="#3525cd" height="12" rx="3" width="12" x="24" y="124"></rect>
+<!-- Dynamic Matrix Dots / Patterns -->
+<g class="qr-fill" fill="#3525cd">
+<rect height="8" rx="2" width="8" x="60" y="15"></rect>
+<rect height="8" rx="2" width="8" x="75" y="15"></rect>
+<rect height="8" rx="2" width="8" x="90" y="20"></rect>
+<rect height="8" rx="2" width="8" x="65" y="30"></rect>
+<rect height="8" rx="2" width="8" x="85" y="35"></rect>
+<rect height="8" rx="2" width="8" x="60" y="50"></rect>
+<rect height="8" rx="2" width="8" x="75" y="55"></rect>
+<rect height="8" rx="2" width="8" x="15" y="60"></rect>
+<rect height="8" rx="2" width="8" x="30" y="65"></rect>
+<rect height="8" rx="2" width="8" x="45" y="60"></rect>
+<rect height="8" rx="2" width="8" x="105" y="60"></rect>
+<rect height="8" rx="2" width="8" x="120" y="65"></rect>
+<rect height="8" rx="2" width="8" x="135" y="60"></rect>
+<rect height="8" rx="2" width="8" x="60" y="95"></rect>
+<rect height="8" rx="2" width="8" x="75" y="100"></rect>
+<rect height="8" rx="2" width="8" x="90" y="95"></rect>
+<rect height="8" rx="2" width="8" x="65" y="115"></rect>
+<rect height="8" rx="2" width="8" x="85" y="125"></rect>
+<rect height="8" rx="2" width="8" x="105" y="115"></rect>
+<rect height="8" rx="2" width="8" x="120" y="120"></rect>
+<rect height="8" rx="2" width="8" x="135" y="115"></rect>
+<rect height="8" rx="2" width="8" x="110" y="135"></rect>
+<rect height="8" rx="2" width="8" x="125" y="140"></rect>
+<rect height="8" rx="2" width="8" x="140" y="135"></rect>
+</g>
+<!-- Center Logo Badge -->
+<g id="hero-center-logo">
+<circle class="qr-bg-fill shadow-sm" cx="80" cy="80" fill="#ffffff" r="16"></circle>
+<rect class="qr-fill" fill="#3525cd" height="20" rx="5" width="20" x="70" y="70"></rect>
+<path d="M75 75h4v4h-4zm6 0h4v4h-4zm-6 6h4v4h-4zm6 6h4v-2h-2v-4h2v2h2v4h-4z" fill="#ffffff"></path>
+</g>
+</svg>
+</div>
+<div class="mt-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-lowest shadow-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Ready to scan · Dynamic URL</span>
+</div>
+<!-- Quick Download Actions -->
+<div class="w-full mt-4 flex flex-col gap-2">
+<button class="w-full py-2.5 px-4 rounded-xl bg-primary text-on-primary font-title-sm text-title-sm flex items-center justify-center gap-1.5 shadow-sm hover:brightness-105 transition-all" onclick="alert('Downloading high-res PNG (2048x2048)...')">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Download PNG (High-Res)</span>
+</button>
+<div class="grid grid-cols-2 gap-2">
+<button class="py-1.5 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-title-sm text-title-sm flex items-center justify-center gap-1 hover:bg-surface-container-high transition-colors" onclick="alert('Downloading SVG Vector file...')">
+<span class="material-symbols-outlined text-[16px] text-primary">draw</span>
+<span>SVG Vector</span>
+</button>
+<button class="py-1.5 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-title-sm text-title-sm flex items-center justify-center gap-1 hover:bg-surface-container-high transition-colors" onclick="alert('Preparing CMYK Print PDF...')">
+<span class="material-symbols-outlined text-[16px] text-primary">print</span>
+<span>Print PDF</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- TRUST & SOCIAL PROOF -->
+<section class="w-full bg-surface-container-low py-10">
+<div class="max-w-7xl mx-auto px-margin-sm lg:px-margin">
+<p class="font-label-md text-label-md text-on-surface-variant text-center mb-8 uppercase tracking-wider font-semibold">
+        Trusted by innovative US teams, retailers, restaurants &amp; creators
+      </p>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+<div class="flex flex-col items-center p-4 rounded-xl bg-surface-container-lowest shadow-sm text-center">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-[22px]">restaurant</span>
+</div>
+<span class="font-title-sm text-title-sm text-on-surface mb-0.5">Restaurants &amp; Cafes</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Menus &amp; Tabletop pay</span>
+</div>
+<div class="flex flex-col items-center p-4 rounded-xl bg-surface-container-lowest shadow-sm text-center">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-[22px]">inventory_2</span>
+</div>
+<span class="font-title-sm text-title-sm text-on-surface mb-0.5">Retail &amp; Packaging</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Smart touchpoints &amp; NFC</span>
+</div>
+<div class="flex flex-col items-center p-4 rounded-xl bg-surface-container-lowest shadow-sm text-center">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-[22px]">trending_up</span>
+</div>
+<span class="font-title-sm text-title-sm text-on-surface mb-0.5">Growth Marketers</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Attribution &amp; ROI tracking</span>
+</div>
+<div class="flex flex-col items-center p-4 rounded-xl bg-surface-container-lowest shadow-sm text-center">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-[22px]">confirmation_number</span>
+</div>
+<span class="font-title-sm text-title-sm text-on-surface mb-0.5">Events &amp; Venues</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Ticketing &amp; Check-ins</span>
+</div>
+<div class="flex flex-col items-center p-4 rounded-xl bg-surface-container-lowest shadow-sm text-center">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-[22px]">real_estate_agent</span>
+</div>
+<span class="font-title-sm text-title-sm text-on-surface mb-0.5">Real Estate</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Virtual tours &amp; vCards</span>
+</div>
+<div class="flex flex-col items-center p-4 rounded-xl bg-surface-container-lowest shadow-sm text-center">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-[22px]">storefront</span>
+</div>
+<span class="font-title-sm text-title-sm text-on-surface mb-0.5">Small Business</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Reviews &amp; Tap-to-pay</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 12 QR CODE TYPES GRID -->
+<section class="w-full py-20 bg-surface" id="qr-types">
+<div class="max-w-7xl mx-auto px-margin-sm lg:px-margin">
+<div class="flex flex-col items-center text-center mb-14">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm uppercase tracking-wider mb-3">
+          Versatile Formats
+        </span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4 tracking-tight">
+          Create a QR Code for Almost Anything
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+          Choose the exact QR format tailored to your workflow and customer touchpoint. Each type is optimized for sub-second smartphone recognition.
+        </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- 1. URL QR Code -->
+<div class="flex flex-col justify-between p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary text-[24px]">link</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">URL QR Code</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Direct customers to any website, custom landing page, online catalog, or payment checkout.</p>
+</div>
+<a class="inline-flex items-center gap-1 font-title-sm text-title-sm text-primary group-hover:underline" href="#interactive-generator">
+<span>Create QR</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- 2. WiFi QR Code -->
+<div class="flex flex-col justify-between p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary text-[24px]">wifi</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">WiFi QR Code</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Let guests join your encrypted wireless network automatically without typing long passwords.</p>
+</div>
+<a class="inline-flex items-center gap-1 font-title-sm text-title-sm text-primary group-hover:underline" href="#interactive-generator">
+<span>Create QR</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- 3. PDF QR Code -->
+<div class="flex flex-col justify-between p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary text-[24px]">picture_as_pdf</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">PDF QR Code</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Host and distribute digital brochures, product user manuals, whitepapers, and guides seamlessly.</p>
+</div>
+<a class="inline-flex items-center gap-1 font-title-sm text-title-sm text-primary group-hover:underline" href="#interactive-generator">
+<span>Create QR</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- 4. Menu QR Code -->
+<div class="flex flex-col justify-between p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary text-[24px]">restaurant_menu</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">Menu QR Code</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Update restaurant dishes, seasonal specials, prices, and allergen alerts in real-time without reprinting.</p>
+</div>
+<a class="inline-flex items-center gap-1 font-title-sm text-title-sm text-primary group-hover:underline" href="#interactive-generator">
+<span>Create QR</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- 5. vCard QR Code -->
+<div class="flex flex-col justify-between p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary text-[24px]">contact_page</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">vCard QR Code</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Share rich contact profiles directly into iOS and Android address books with a single camera tap.</p>
+</div>
+<a class="inline-flex items-center gap-1 font-title-sm text-title-sm text-primary group-hover:underline" href="#interactive-generator">
+<span>Create QR</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- 6. Email QR Code -->
+<div class="flex flex-col justify-between p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary text-[24px]">mail</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">Email QR Code</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Pre-populate recipient email address, subject headers, and drafted inquiry messages for quick response.</p>
+</div>
+<a class="inline-flex items-center gap-1 font-title-sm text-title-sm text-primary group-hover:underline" href="#interactive-generator">
+<span>Create QR</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- 7. SMS QR Code -->
+<div class="flex flex-col justify-between p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary text-[24px]">sms</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">SMS QR Code</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Trigger instant text-based promo entries, VIP rewards signups, or SMS customer support queries.</p>
+</div>
+<a class="inline-flex items-center gap-1 font-title-sm text-title-sm text-primary group-hover:underline" href="#interactive-generator">
+<span>Create QR</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- 8. Phone QR Code -->
+<div class="flex flex-col justify-between p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary text-[24px]">call</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">Phone QR Code</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Initiate immediate phone calls directly to your support line, booking concierge, or sales rep.</p>
+</div>
+<a class="inline-flex items-center gap-1 font-title-sm text-title-sm text-primary group-hover:underline" href="#interactive-generator">
+<span>Create QR</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- 9. Text QR Code -->
+<div class="flex flex-col justify-between p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary text-[24px]">article</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">Text QR Code</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Display up to 300 characters of plain text, serial numbers, activation keys, or access codes offline.</p>
+</div>
+<a class="inline-flex items-center gap-1 font-title-sm text-title-sm text-primary group-hover:underline" href="#interactive-generator">
+<span>Create QR</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- 10. Location QR Code -->
+<div class="flex flex-col justify-between p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary text-[24px]">pin_drop</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">Location QR Code</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Launch turn-by-turn driving directions in Apple Maps or Google Maps to your store or venue.</p>
+</div>
+<a class="inline-flex items-center gap-1 font-title-sm text-title-sm text-primary group-hover:underline" href="#interactive-generator">
+<span>Create QR</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- 11. Social Media QR Code -->
+<div class="flex flex-col justify-between p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary text-[24px]">hub</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">Social Media QR</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Consolidate Instagram, TikTok, LinkedIn, YouTube, and X handles into a single mobile link tree.</p>
+</div>
+<a class="inline-flex items-center gap-1 font-title-sm text-title-sm text-primary group-hover:underline" href="#interactive-generator">
+<span>Create QR</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- 12. App Download QR Code -->
+<div class="flex flex-col justify-between p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary text-[24px]">install_mobile</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">App Download QR</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Detect device operating system and instantly route to Apple App Store or Google Play Store.</p>
+</div>
+<a class="inline-flex items-center gap-1 font-title-sm text-title-sm text-primary group-hover:underline" href="#interactive-generator">
+<span>Create QR</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- FULL INTERACTIVE QR BUILDER PRODUCT SHOWCASE -->
+<section class="w-full py-20 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-margin-sm lg:px-margin">
+<div class="flex flex-col items-center text-center mb-14">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm uppercase tracking-wider mb-3">
+          Studio Grade Customization
+        </span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4 tracking-tight">
+          Build a QR Code That Matches Your Brand
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+          Fine-tune every dot, corner radius, frame, and call-to-action to ensure maximum scan rates and visual cohesion with your marketing assets.
+        </p>
+</div>
+<!-- Studio Showcase Mockup -->
+<div class="bg-surface-container-lowest rounded-3xl shadow-xl p-6 lg:p-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Control Column -->
+<div class="lg:col-span-7 space-y-6">
+<!-- Step Navigation Simulation -->
+<div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b-0">
+<button class="px-3.5 py-1.5 rounded-lg bg-primary text-on-primary font-title-sm text-title-sm shrink-0">1. Type</button>
+<button class="px-3.5 py-1.5 rounded-lg bg-surface-container text-on-surface-variant font-title-sm text-title-sm shrink-0">2. Content</button>
+<button class="px-3.5 py-1.5 rounded-lg bg-surface-container text-on-surface-variant font-title-sm text-title-sm shrink-0">3. Frame &amp; Eyes</button>
+<button class="px-3.5 py-1.5 rounded-lg bg-surface-container text-on-surface-variant font-title-sm text-title-sm shrink-0">4. Colors</button>
+<button class="px-3.5 py-1.5 rounded-lg bg-surface-container text-on-surface-variant font-title-sm text-title-sm shrink-0">5. Logo</button>
+</div>
+<!-- Frame CTA Presets -->
+<div>
+<label class="block font-title-sm text-title-sm text-on-surface mb-3">Custom Frame &amp; CTA Banner</label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="p-3 rounded-xl bg-surface-container-high cursor-pointer text-center hover:bg-surface-container transition-colors">
+<span class="block font-title-sm text-title-sm text-primary">"SCAN ME"</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Top Ribbon</span>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-low cursor-pointer text-center hover:bg-surface-container transition-colors">
+<span class="block font-title-sm text-title-sm text-on-surface">"VIEW MENU"</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Bottom Pill</span>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-low cursor-pointer text-center hover:bg-surface-container transition-colors">
+<span class="block font-title-sm text-title-sm text-on-surface">"CONNECT WIFI"</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Floating Badge</span>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-low cursor-pointer text-center hover:bg-surface-container transition-colors">
+<span class="block font-title-sm text-title-sm text-on-surface">"SPECIAL OFFER"</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Accent Card</span>
+</div>
+</div>
+</div>
+<!-- Pattern and Gradient Density -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="p-4 rounded-xl bg-surface-container-low">
+<span class="block font-title-sm text-title-sm text-on-surface mb-2">Matrix Pattern Style</span>
+<div class="flex gap-2">
+<button class="flex-1 py-1.5 rounded-lg bg-surface-container-lowest font-label-sm text-label-sm text-primary font-semibold shadow-sm">Square</button>
+<button class="flex-1 py-1.5 rounded-lg bg-surface-container-lowest font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface">Rounded</button>
+<button class="flex-1 py-1.5 rounded-lg bg-surface-container-lowest font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface">Radial</button>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-low">
+<span class="block font-title-sm text-title-sm text-on-surface mb-2">Corner Eye Anchor</span>
+<div class="flex gap-2">
+<button class="flex-1 py-1.5 rounded-lg bg-surface-container-lowest font-label-sm text-label-sm text-primary font-semibold shadow-sm">Sharp</button>
+<button class="flex-1 py-1.5 rounded-lg bg-surface-container-lowest font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface">Soft</button>
+<button class="flex-1 py-1.5 rounded-lg bg-surface-container-lowest font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface">Circle</button>
+</div>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-primary/5 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[22px] shrink-0 mt-0.5">verified_user</span>
+<div>
+<span class="block font-title-sm text-title-sm text-on-surface">Scan Reliability Guarantee</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Our generator automatically calculates the Reed-Solomon error correction level (Level H - 30%) so your codes scan reliably even when partially obscured or printed on textured materials.</p>
+</div>
+</div>
+</div>
+<!-- Live Framed QR Code Stage -->
+<div class="lg:col-span-5 flex flex-col items-center">
+<div class="w-full max-w-sm p-6 rounded-3xl bg-surface-container-low shadow-lg flex flex-col items-center">
+<!-- Frame Header Callout -->
+<div class="w-full py-2 px-4 rounded-xl bg-primary text-on-primary text-center font-title-sm text-title-sm uppercase tracking-wider mb-4 shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span>
+<span>SCAN WITH CAMERA</span>
+</div>
+<!-- White Scannable QR Board -->
+<div class="w-56 h-56 bg-white rounded-2xl p-4 shadow-md flex items-center justify-center">
+<svg class="w-full h-full" viewbox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+<!-- Eye Top Left -->
+<rect fill="#3525cd" height="42" rx="10" width="42" x="10" y="10"></rect>
+<rect fill="#ffffff" height="26" rx="6" width="26" x="18" y="18"></rect>
+<rect fill="#3525cd" height="12" rx="3" width="12" x="25" y="25"></rect>
+<!-- Eye Top Right -->
+<rect fill="#3525cd" height="42" rx="10" width="42" x="108" y="10"></rect>
+<rect fill="#ffffff" height="26" rx="6" width="26" x="116" y="18"></rect>
+<rect fill="#3525cd" height="12" rx="3" width="12" x="123" y="25"></rect>
+<!-- Eye Bottom Left -->
+<rect fill="#3525cd" height="42" rx="10" width="42" x="10" y="108"></rect>
+<rect fill="#ffffff" height="26" rx="6" width="26" x="18" y="116"></rect>
+<rect fill="#3525cd" height="12" rx="3" width="12" x="25" y="123"></rect>
+<!-- Pattern Blocks -->
+<g fill="#3525cd">
+<circle cx="65" cy="20" r="4"></circle>
+<circle cx="80" cy="20" r="4"></circle>
+<circle cx="95" cy="25" r="4"></circle>
+<circle cx="65" cy="35" r="4"></circle>
+<circle cx="80" cy="40" r="4"></circle>
+<circle cx="95" cy="35" r="4"></circle>
+<circle cx="20" cy="65" r="4"></circle>
+<circle cx="35" cy="70" r="4"></circle>
+<circle cx="50" cy="65" r="4"></circle>
+<circle cx="110" cy="65" r="4"></circle>
+<circle cx="125" cy="70" r="4"></circle>
+<circle cx="140" cy="65" r="4"></circle>
+<circle cx="65" cy="65" r="4"></circle>
+<circle cx="95" cy="65" r="4"></circle>
+<circle cx="65" cy="95" r="4"></circle>
+<circle cx="95" cy="95" r="4"></circle>
+<circle cx="65" cy="115" r="4"></circle>
+<circle cx="80" cy="120" r="4"></circle>
+<circle cx="95" cy="115" r="4"></circle>
+<circle cx="115" cy="115" r="4"></circle>
+<circle cx="130" cy="120" r="4"></circle>
+<circle cx="145" cy="115" r="4"></circle>
+<circle cx="115" cy="135" r="4"></circle>
+<circle cx="130" cy="140" r="4"></circle>
+<circle cx="145" cy="135" r="4"></circle>
+</g>
+<!-- Modern Center Icon -->
+<circle class="shadow-sm" cx="80" cy="80" fill="#ffffff" r="15"></circle>
+<circle cx="80" cy="80" fill="#4f46e5" r="11"></circle>
+<path d="M76 80l3 3 6-6" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</div>
+<!-- Reliability Score Meter -->
+<div class="w-full mt-4 p-3 rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-600 text-[20px]">check_circle</span>
+<span class="font-title-sm text-title-sm text-on-surface">Scan Score</span>
+</div>
+<span class="font-label-md text-label-md font-semibold text-emerald-600">99.8% · Optimal Contrast</span>
+</div>
+<!-- Quick Exporter Bar -->
+<div class="w-full mt-4 flex items-center justify-between gap-2">
+<button class="flex-1 py-2 rounded-lg bg-surface-container-lowest text-on-surface font-title-sm text-title-sm shadow-sm hover:bg-surface-container transition-colors text-center" onclick="alert('Exporting PNG at 300 DPI...')">PNG (300DPI)</button>
+<button class="flex-1 py-2 rounded-lg bg-surface-container-lowest text-on-surface font-title-sm text-title-sm shadow-sm hover:bg-surface-container transition-colors text-center" onclick="alert('Exporting SVG Vector...')">Vector SVG</button>
+<button class="flex-1 py-2 rounded-lg bg-surface-container-lowest text-on-surface font-title-sm text-title-sm shadow-sm hover:bg-surface-container transition-colors text-center" onclick="alert('Exporting CMYK PDF...')">Print PDF</button>
+</div>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant mt-4 text-center">
+              💡 Test your QR code on both iOS and Android camera before publishing.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- DYNAMIC QR CODES ENGINE (UPDATE WITHOUT REPRINTING) -->
+<section class="w-full py-20 bg-surface">
+<div class="max-w-7xl mx-auto px-margin-sm lg:px-margin">
+<div class="flex flex-col items-center text-center mb-14">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-sm text-label-sm uppercase tracking-wider mb-3">
+          Lifetime Flexibility
+        </span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4 tracking-tight">
+          Update Your QR Code Without Reprinting It
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+          Never worry about broken links or reprinting marketing collateral again. Smart dynamic routing allows you to change destination URLs, files, or menus on the fly.
+        </p>
+</div>
+<!-- Routing Pipeline Visual -->
+<div class="w-full p-8 rounded-3xl bg-surface-container-lowest shadow-md mb-12">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center relative">
+<!-- Node 1 -->
+<div class="flex flex-col items-center text-center p-6 rounded-2xl bg-surface-container-low">
+<div class="w-14 h-14 rounded-2xl bg-primary-container text-on-primary flex items-center justify-center mb-4 shadow-sm">
+<span class="material-symbols-outlined text-[28px]">print</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface mb-1">Printed Physical QR</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Table tents, product boxes, billboards, flyers, or business cards already in circulation.</p>
+</div>
+<!-- Connector 1 & Central Engine -->
+<div class="flex flex-col items-center text-center p-6 rounded-2xl bg-primary text-on-primary shadow-lg relative">
+<div class="w-14 h-14 rounded-2xl bg-surface-container-lowest text-primary flex items-center justify-center mb-4 shadow-md">
+<span class="material-symbols-outlined text-[28px]">alt_route</span>
+</div>
+<span class="font-title-md text-title-md mb-1 text-on-primary">Smart Routing Engine</span>
+<p class="font-body-sm text-body-sm text-on-primary/80">Sub-second SSL cloud proxy that resolves target URLs, collects scan data, and redirects instantly.</p>
+<div class="mt-3 px-2.5 py-0.5 rounded-full bg-on-primary/20 text-[11px] font-semibold">Zero Reprint Cost</div>
+</div>
+<!-- Node 2 -->
+<div class="flex flex-col items-center text-center p-6 rounded-2xl bg-surface-container-low">
+<div class="w-14 h-14 rounded-2xl bg-secondary text-on-secondary flex items-center justify-center mb-4 shadow-sm">
+<span class="material-symbols-outlined text-[28px]">dynamic_feed</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface mb-1">Live Dynamic Destination</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Updated daily specials, promo landing page, new PDF brochure, or revised contact card.</p>
+</div>
+</div>
+</div>
+<!-- 5 Practical Concrete Use Cases -->
+<div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+<div class="p-5 rounded-2xl bg-surface-container-low shadow-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-primary text-[18px]">restaurant</span>
+</div>
+<h4 class="font-title-sm text-title-sm text-on-surface mb-1.5">Seasonal Menus</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Rotate summer and winter cocktail lists without replacing thousands of acrylic table stands.</p>
+</div>
+<div class="p-5 rounded-2xl bg-surface-container-low shadow-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-primary text-[18px]">cached</span>
+</div>
+<h4 class="font-title-sm text-title-sm text-on-surface mb-1.5">A/B Testing</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Split test different promo landing pages to measure which converts more retail foot traffic.</p>
+</div>
+<div class="p-5 rounded-2xl bg-surface-container-low shadow-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-primary text-[18px]">inventory</span>
+</div>
+<h4 class="font-title-sm text-title-sm text-on-surface mb-1.5">CPG Packaging</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Update user instructions, compliance certifications, or recalls on products already in stores.</p>
+</div>
+<div class="p-5 rounded-2xl bg-surface-container-low shadow-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-primary text-[18px]">badge</span>
+</div>
+<h4 class="font-title-sm text-title-sm text-on-surface mb-1.5">Staff Changes</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Reassign printed sales cards when employee roles, phone numbers, or titles change.</p>
+</div>
+<div class="p-5 rounded-2xl bg-surface-container-low shadow-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-primary text-[18px]">event</span>
+</div>
+<h4 class="font-title-sm text-title-sm text-on-surface mb-1.5">Live Event Shifts</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Switch banner from 'Pre-register' to 'Today's Agenda &amp; Map' the morning the conference begins.</p>
+</div>
+</div>
+<div class="mt-10 text-center">
+<a class="inline-flex items-center gap-2 font-title-md text-title-md text-primary hover:underline" href="#interactive-generator">
+<span>Explore Dynamic QR Codes</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- BUSINESS USE CASES (6 DEEP-DIVE CARDS) -->
+<section class="w-full py-20 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-margin-sm lg:px-margin">
+<div class="flex flex-col items-center text-center mb-14">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm uppercase tracking-wider mb-3">
+          Real-World Applications
+        </span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4 tracking-tight">
+          QR Codes Built for Real Business Use
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+          From neighborhood bistros to nationwide retail distributions, see how organizations turn physical scans into quantifiable digital actions.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- 1. Restaurant & Hospitality -->
+<div class="flex flex-col rounded-3xl bg-surface-container-lowest shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="h-48 w-full bg-cover bg-center relative" data-alt="Warmly lit upscale modern bistro table with clean wooden surface featuring a minimal branded QR code stand beside glassware and culinary plates in soft natural daylight with subtle indigo accent decor" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCeNOmprpO6lofSaDaThrmIlz-CFNBEjRRA9oXwca1QcGdcrEe93k1zGR0uPGQZH197KwWT5ulX9reIsylpT_On-HnfPquMSD3oJN-3UU9hpRyvEV1de4bBp_m1EeH7m7eHGI-0WbOCW327V7rZ31K8n2npo1fBYuK45TEgeWTPMzNjbSypTOVU-Bz-w4AWbHj3cINoeFpejk8zVfbiyTzXgacGes1EOxGTymUc94NdzEJ2S9wgKuBDCw')">
+<span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur font-label-sm text-label-sm text-primary font-semibold">Hospitality</span>
+</div>
+<div class="p-6 flex flex-col flex-1 justify-between">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">Restaurant &amp; Hospitality</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">
+                Enable contactless dining, tabletop mobile ordering, allergy filter menus, and tap-to-pay checkouts that increase table turnover by up to 28%.
+              </p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t-0 bg-surface-container-low p-3 rounded-xl">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">+28% Table Turnover</span>
+<span class="material-symbols-outlined text-primary text-[18px]">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- 2. Marketing & Direct Mail -->
+<div class="flex flex-col rounded-3xl bg-surface-container-lowest shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="h-48 w-full bg-cover bg-center relative" data-alt="High quality graphic design studio desk with direct mail postcards, printed flyers, and modern smartphone scanning a high contrast QR code on textured paper with crisp typography" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA4z21LFDfs5CPKcihHOm4qDq7Uvs_4W3baiLF1Fnigs2W-aTLaImADkY2J24bP8PwtE0HnrtX42cn7UV24mk5hSiHlGwSutY4EDdBbC_wgusiVd9YKiOvhAZDBpsjlIm3EIS_8FKHLmwY0WG_LIHjZX_fqsv5keWfqxBaHNDvhLxYL1WurRJ9XvAMnEhVSGpyeGCMHp3R2ldgXqHng3GXvDx_Hrypub1YYZx-3NFLStXzHW3tauISrVA')">
+<span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur font-label-sm text-label-sm text-primary font-semibold">Growth &amp; Print</span>
+</div>
+<div class="p-6 flex flex-col flex-1 justify-between">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">Marketing &amp; Print Campaigns</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">
+                Bridge billboards, print collateral, bus wraps, and direct mail postcards to trackable Google Analytics UTM campaigns with zero conversion friction.
+              </p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t-0 bg-surface-container-low p-3 rounded-xl">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">100% UTM Attribution</span>
+<span class="material-symbols-outlined text-primary text-[18px]">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- 3. Real Estate Brokerage -->
+<div class="flex flex-col rounded-3xl bg-surface-container-lowest shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="h-48 w-full bg-cover bg-center relative" data-alt="Front yard of an architectural modern luxury house with a sleek Realtor sign post featuring an eye catching high res QR code sticker for instant 3D virtual home tour" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCsCS2fHYUU640EnibD1f62Ka6o-C66ATpdADYZnQDonGfoIh1wHU42JiLzE3eL9HtLRO5RtONLhmtr7eG_cu7vNsrkOvUMnVRkpi_3IxR__3bLNxRfTWHSfZEQyIOA4cRvRV97iBakXaSrSemqq66_rZLlxtt806u3BsrthNlcoO3Y1GF3ndtFwgSmUe3ccA0NQNSsJqgCUzgOjWv_Hy9yTtEAvTuwsurFHpqSGNSdvYuNkjUzdS0dCA')">
+<span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur font-label-sm text-label-sm text-primary font-semibold">Real Estate</span>
+</div>
+<div class="p-6 flex flex-col flex-1 justify-between">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">Real Estate Brokerage</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">
+                Curate virtual 3D video walkthroughs, instant floor plans, open house registration, and agent vCard distribution directly from yard signs.
+              </p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t-0 bg-surface-container-low p-3 rounded-xl">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">3.4x Faster Inquiries</span>
+<span class="material-symbols-outlined text-primary text-[18px]">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- 4. Retail & CPG Packaging -->
+<div class="flex flex-col rounded-3xl bg-surface-container-lowest shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="h-48 w-full bg-cover bg-center relative" data-alt="Minimalist luxury skincare and cosmetic bottles in clean studio setting showing elegant white and indigo QR code on secondary recyclable cardboard packaging" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAqrqEHETSDFHCnlP6SansfFUGw2D5DaMU7TO4QoJ7B6DQ1oZK76ZrFVILQW0CBaVQhTS2ZTqbSL3Dnzhk27ZcDdDwIkPNUK2IlWW3WfpsIJd6ukAXsFJk1QIJhcOFVjVi0P-NWIuyhMGCTMU4AF5QxaYw-za1VniWO6feib0C_bGBw1Tq1nC9oWUcP_5nldB90fzEyYiWSuQRv1iadrrorgZXBo56F3HMysQGeWIe0kJn7tghEsknV6A')">
+<span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur font-label-sm text-label-sm text-primary font-semibold">Retail &amp; CPG</span>
+</div>
+<div class="p-6 flex flex-col flex-1 justify-between">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">Retail &amp; CPG Packaging</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">
+                Enable smart unboxing journeys, warranty registrations, anti-counterfeit authenticity checks, and friction-free subscriber reorders.
+              </p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t-0 bg-surface-container-low p-3 rounded-xl">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">41% Warranty Opt-in</span>
+<span class="material-symbols-outlined text-primary text-[18px]">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- 5. Events & Conferences -->
+<div class="flex flex-col rounded-3xl bg-surface-container-lowest shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="h-48 w-full bg-cover bg-center relative" data-alt="Modern tech conference convention hall with attendee wearing lanyard badge with crisp vector QR code ready for fast optical badge scanner and interactive live agenda" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAJ9pQu5vwcDUgB3ucm5UEUTy6_xM0cmWKN2m-kK2_HThXywqv74Wcu5e7C3NKQH7CEnPOALTjXIJiopHXIjEkZOmr3-3EWhFLtIc1XFqQJjGzkzwMXbE3L1Zdl_mR_wDJ0jJPeotIpO1WmjOGR3KsxzrXdmk3_UQJsqylFXDxwhs_b1ScBn51_BXsmcPPXN7geDkTvOe8H5UHAa4D9QMrDkSM4myyT_Ta7_rEaALajUxaEmneTisymew')">
+<span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur font-label-sm text-label-sm text-primary font-semibold">Events &amp; Summits</span>
+</div>
+<div class="p-6 flex flex-col flex-1 justify-between">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">Events &amp; Conferences</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">
+                Power contactless attendee badge check-ins, live stage schedule updates, downloadable speaker slide decks, and sponsor lead retrieval.
+              </p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t-0 bg-surface-container-low p-3 rounded-xl">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Instant Badge Check-In</span>
+<span class="material-symbols-outlined text-primary text-[18px]">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- 6. Professional Networking -->
+<div class="flex flex-col rounded-3xl bg-surface-container-lowest shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="h-48 w-full bg-cover bg-center relative" data-alt="Close up of an executive matte black and aluminum business card with subtle silver foil stamp and pristine QR code being scanned by an iPhone at an executive lounge" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBXK1biF6OWQoywq14Z7iYQoO4NQmPT0kz5-Kx69mETPSdcc3u9ln0JTrsVhvKhoOGju4mgZOIxwSl6jO95Mkl_oEVVFYoRgjXJOCRJgdO7sEbyces_-8L8a9CupLT_ve6FeKBsu1bPjMjkrmxjL_U9zrTqw-ZfPBJhqLy7o74s-rL6Qglr4meR8U-xPF6RjPBcvjEEmQBzZwb6DFuGmbQXyr7wG5pLng92mRbTahU1UjNdq1cexjxnYw')">
+<span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur font-label-sm text-label-sm text-primary font-semibold">Networking</span>
+</div>
+<div class="p-6 flex flex-col flex-1 justify-between">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">Modern Business Cards</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">
+                Ditch outdated paper cards for digital vCards that save your phone, email, LinkedIn, and company link into clients' address books instantly.
+              </p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t-0 bg-surface-container-low p-3 rounded-xl">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Zero Paper Waste</span>
+<span class="material-symbols-outlined text-primary text-[18px]">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ENTERPRISE FEATURE MATRIX (3-COLUMN LAYOUT) -->
+<section class="w-full py-20 bg-surface">
+<div class="max-w-7xl mx-auto px-margin-sm lg:px-margin">
+<div class="flex flex-col items-center text-center mb-14">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm uppercase tracking-wider mb-3">
+          Enterprise Grade Engine
+        </span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4 tracking-tight">
+          Everything You Need to Create Better QR Codes
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+          Engineered for performance, compliance, and effortless high-volume deployment across organizations of any scale.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Feature 1 -->
+<div class="p-6 rounded-2xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="material-symbols-outlined text-primary text-[24px]">brush</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-surface-container text-on-surface-variant">Free &amp; Pro</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1.5">Custom QR Designs</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Custom body dots, eye frame shapes, corner accents, and corporate palettes tailored to brand guidelines.</p>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="p-6 rounded-2xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="material-symbols-outlined text-primary text-[24px]">high_quality</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-surface-container text-on-surface-variant">Free &amp; Pro</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1.5">High-Resolution Downloads</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Download ultra-crisp 300 DPI raster files or infinite resolution vector assets (PNG, SVG, PDF) ready for large billboards.</p>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="p-6 rounded-2xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="material-symbols-outlined text-primary text-[24px]">file_download_off</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-surface-container text-on-surface-variant">Free &amp; Pro</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1.5">Custom Brand Logo Support</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Embed your company symbol in the center with automatic alpha masking and error-recovery padding.</p>
+</div>
+</div>
+<!-- Feature 4 -->
+<div class="p-6 rounded-2xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="material-symbols-outlined text-primary text-[24px]">widgets</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-surface-container text-on-surface-variant">Free &amp; Pro</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1.5">12+ Specialized QR Types</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Pre-configured payloads for URLs, WiFi credentials, vCards, SMS drafts, geo-pins, and app store redirects.</p>
+</div>
+</div>
+<!-- Feature 5 -->
+<div class="p-6 rounded-2xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="material-symbols-outlined text-primary text-[24px]">smartphone</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-primary-fixed-dim text-on-primary-fixed font-bold">Pro Feature</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1.5">Mobile Landing Pages</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Host clean, fast micro-landing pages directly on SmartQRCraft without spinning up web servers or buying domains.</p>
+</div>
+</div>
+<!-- Feature 6 -->
+<div class="p-6 rounded-2xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="material-symbols-outlined text-primary text-[24px]">sync_saved_locally</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-primary-fixed-dim text-on-primary-fixed font-bold">Pro Feature</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1.5">Dynamic QR Codes</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Change destination links anytime in the cloud without ever replacing or reprinting your distributed physical codes.</p>
+</div>
+</div>
+<!-- Feature 7 -->
+<div class="p-6 rounded-2xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="material-symbols-outlined text-primary text-[24px]">folder_special</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-primary-fixed-dim text-on-primary-fixed font-bold">Pro Feature</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1.5">Centralized Fleet Management</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Organize thousands of QR codes by brand workspace, client campaign, tags, and production batch folders.</p>
+</div>
+</div>
+<!-- Feature 8 -->
+<div class="p-6 rounded-2xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="material-symbols-outlined text-primary text-[24px]">insights</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-primary-fixed-dim text-on-primary-fixed font-bold">Pro Feature</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1.5">Real-Time Scan Analytics</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Inspect scan volume, device operating systems (iOS vs Android), peak scan hours, and geographic city markers.</p>
+</div>
+</div>
+<!-- Feature 9 -->
+<div class="p-6 rounded-2xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="material-symbols-outlined text-primary text-[24px]">share</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-surface-container text-on-surface-variant">Free &amp; Pro</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1.5">Instant Social &amp; Direct Sharing</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">One-click copyable shortlinks, embeddable HTML snippets, and formatted digital sticker assets for team chats.</p>
+</div>
+</div>
+<!-- Feature 10 -->
+<div class="p-6 rounded-2xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="material-symbols-outlined text-primary text-[24px]">print</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-primary-fixed-dim text-on-primary-fixed font-bold">Pro Feature</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1.5">CMYK &amp; Vector Print Export</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Flawless offset and digital printing specs with embedded CMYK color profiles preventing color shifts on press.</p>
+</div>
+</div>
+<!-- Feature 11 -->
+<div class="p-6 rounded-2xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="material-symbols-outlined text-primary text-[24px]">color_lens</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-primary-fixed-dim text-on-primary-fixed font-bold">Pro Feature</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1.5">Brand Kits &amp; Palettes</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Save company hex values, high-res SVG logos, and frame typography templates for one-click team consistency.</p>
+</div>
+</div>
+<!-- Feature 12 -->
+<div class="p-6 rounded-2xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="material-symbols-outlined text-primary text-[24px]">bolt</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-surface-container text-on-surface-variant">Included All</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1.5">Sub-second Instant Generation</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Edge serverless architecture renders your high-complexity vector designs in less than 20 milliseconds.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- HOW IT WORKS (3-STEP VISUAL PIPELINE) -->
+<section class="w-full py-20 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-margin-sm lg:px-margin">
+<div class="flex flex-col items-center text-center mb-14">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm uppercase tracking-wider mb-3">
+          Frictionless Workflow
+        </span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4 tracking-tight">
+          Create Your QR Code in 3 Simple Steps
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+          Zero software downloads, zero complex configurations. Have your scan-ready asset ready in under thirty seconds.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Step 1 -->
+<div class="p-8 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col items-start relative">
+<div class="w-12 h-12 rounded-xl bg-primary text-on-primary flex items-center justify-center font-headline-sm text-headline-sm mb-6">
+            1
+          </div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Choose a QR Type</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Select from 12+ pre-configured formats including Website URLs, WiFi networks, digital restaurant menus, vCard contacts, or PDF brochures.
+          </p>
+</div>
+<!-- Step 2 -->
+<div class="p-8 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col items-start relative">
+<div class="w-12 h-12 rounded-xl bg-primary text-on-primary flex items-center justify-center font-headline-sm text-headline-sm mb-6">
+            2
+          </div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Add Your Information</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Paste your target URL, network credentials, social links, or upload documents. Our parser automatically validates link integrity and security.
+          </p>
+</div>
+<!-- Step 3 -->
+<div class="p-8 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col items-start relative">
+<div class="w-12 h-12 rounded-xl bg-primary text-on-primary flex items-center justify-center font-headline-sm text-headline-sm mb-6">
+            3
+          </div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Customize &amp; Download</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Style dot shapes, apply corporate colors, embed your brand logo, add a 'Scan Me' frame, and download instant print-ready vector files.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- REAL-TIME SCAN ANALYTICS DASHBOARD SHOWCASE -->
+<section class="w-full py-20 bg-surface">
+<div class="max-w-7xl mx-auto px-margin-sm lg:px-margin">
+<div class="flex flex-col items-center text-center mb-14">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm uppercase tracking-wider mb-3">
+          Data-Driven Decisions
+        </span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4 tracking-tight">
+          Understand How Your QR Codes Perform
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+          Get actionable scan intelligence to optimize campaigns, track physical foot traffic, and measure marketing ROI in real time.
+        </p>
+</div>
+<!-- SaaS Dashboard Mockup Container -->
+<div class="w-full rounded-3xl bg-surface-container-lowest shadow-xl p-6 lg:p-8">
+<!-- Dashboard Top Header Bar -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b-0">
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Summer Campaign 2026 Fleet</h3>
+<span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[12px] font-semibold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                Active Dynamic
+              </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">qr.smartqrcraft.com/c/summer-promo-us</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-3 py-1.5 rounded-lg bg-surface-container font-title-sm text-title-sm text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+              Last 30 Days
+            </span>
+<button class="px-3 py-1.5 rounded-lg bg-primary text-on-primary font-title-sm text-title-sm flex items-center gap-1 hover:bg-primary-container transition-colors" onclick="alert('Exporting CSV analytics data...')">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+              Export CSV
+            </button>
+</div>
+</div>
+<!-- 4 KPI Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
+<div class="p-5 rounded-2xl bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block mb-1">Total Scans</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">48,290</span>
+<span class="font-label-sm text-label-sm text-emerald-600 font-semibold flex items-center">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+                +18.4%
+              </span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1 block">vs. prior month period</span>
+</div>
+<div class="p-5 rounded-2xl bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block mb-1">Unique Visitors</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">39,120</span>
+<span class="font-label-sm text-label-sm text-emerald-600 font-semibold flex items-center">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+                +12.1%
+              </span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1 block">81% unique device ratio</span>
+</div>
+<div class="p-5 rounded-2xl bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block mb-1">Peak Scan Time</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">1:30 PM</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">EST</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1 block">Highest during lunch rush</span>
+</div>
+<div class="p-5 rounded-2xl bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block mb-1">Top Metro Region</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">New York</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">NY</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1 block">28.4% of total volume</span>
+</div>
+</div>
+<!-- Visual Data Grid: Interactive Trend Line + Device & Region Breakdown -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+<!-- Area Chart Mockup -->
+<div class="lg:col-span-8 p-6 rounded-2xl bg-surface-container-low flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h4 class="font-title-md text-title-md text-on-surface">Daily Scan Velocity</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Tracking scans per hour over current billing cycle</p>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-semibold px-2 py-1 bg-surface-container rounded-lg">Real-time Telemetry</span>
+</div>
+<!-- Inline SVG Area Chart -->
+<div class="w-full h-52 flex items-end pt-4">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 500 160">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#4f46e5" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#4f46e5" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Area fill -->
+<path d="M0,130 Q50,90 100,105 T200,60 T300,75 T400,25 T500,45 L500,160 L0,160 Z" fill="url(#chartGradient)"></path>
+<!-- Line curve -->
+<path d="M0,130 Q50,90 100,105 T200,60 T300,75 T400,25 T500,45" fill="none" stroke="#4f46e5" stroke-linecap="round" stroke-width="3"></path>
+<!-- Peak Highlight Dot -->
+<circle cx="400" cy="25" fill="#4f46e5" r="5" stroke="#ffffff" stroke-width="2"></circle>
+</svg>
+</div>
+<div class="flex justify-between items-center pt-3 text-on-surface-variant font-label-sm text-label-sm">
+<span>Day 1</span>
+<span>Day 7</span>
+<span>Day 14</span>
+<span>Day 21</span>
+<span>Day 30 (Today)</span>
+</div>
+</div>
+<!-- Device & Geography Split -->
+<div class="lg:col-span-4 flex flex-col gap-4">
+<!-- Operating System Progress Bar -->
+<div class="p-5 rounded-2xl bg-surface-container-low flex flex-col justify-between">
+<h4 class="font-title-sm text-title-sm text-on-surface mb-3">Operating Systems</h4>
+<div class="space-y-2.5">
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1 text-on-surface">
+<span>iOS (Apple)</span>
+<span class="font-semibold">64%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 64%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1 text-on-surface">
+<span>Android (Google)</span>
+<span class="font-semibold">33%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full" style="width: 33%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1 text-on-surface">
+<span>Other Desktop/Tablet</span>
+<span class="font-semibold">3%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-outline rounded-full" style="width: 3%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Top US States -->
+<div class="p-5 rounded-2xl bg-surface-container-low">
+<h4 class="font-title-sm text-title-sm text-on-surface mb-2">Top Scan Geos (US)</h4>
+<ul class="font-label-md text-label-md space-y-1.5 text-on-surface-variant">
+<li class="flex justify-between"><span>1. California</span><span class="font-semibold text-on-surface">14,210</span></li>
+<li class="flex justify-between"><span>2. New York</span><span class="font-semibold text-on-surface">11,940</span></li>
+<li class="flex justify-between"><span>3. Texas</span><span class="font-semibold text-on-surface">8,620</span></li>
+<li class="flex justify-between"><span>4. Florida</span><span class="font-semibold text-on-surface">6,430</span></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+<span class="inline-flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+            Sample Interface · Included on SmartQRCraft Pro &amp; Business Plans
+          </span>
+<a class="font-title-sm text-title-sm text-primary hover:underline flex items-center gap-1" href="#interactive-generator">
+<span>View QR Analytics Live Demo</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- TRANSPARENT PRICING SECTION -->
+<section class="w-full py-20 bg-surface-container-low" id="pricing-plans">
+<div class="max-w-7xl mx-auto px-margin-sm lg:px-margin">
+<div class="flex flex-col items-center text-center mb-12">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm uppercase tracking-wider mb-3">
+          Flexible Pricing
+        </span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4 tracking-tight">
+          Simple Plans for Every Stage
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+          Start completely free today. Upgrade when you need dynamic management, enterprise analytics, and team collaboration.
+        </p>
+<!-- Billing Cycle Toggle -->
+<div class="mt-6 flex items-center gap-3 p-1.5 rounded-full bg-surface-container-lowest shadow-sm">
+<button class="px-4 py-1.5 rounded-full bg-primary text-on-primary font-title-sm text-title-sm transition-all" id="billing-monthly-btn">Monthly</button>
+<button class="px-4 py-1.5 rounded-full text-on-surface-variant hover:text-on-surface font-title-sm text-title-sm flex items-center gap-1.5 transition-all" id="billing-annual-btn">
+<span>Annual</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed-dim text-on-primary-fixed text-[11px] font-bold">Save 20%</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+<!-- Free Plan -->
+<div class="p-8 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div>
+<div class="mb-4">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Free Tier</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">For individuals &amp; one-off QR creation</p>
+</div>
+<div class="flex items-baseline gap-1 my-6">
+<span class="font-headline-display text-headline-display text-on-surface">$0</span>
+<span class="font-body-md text-body-md text-on-surface-variant">/ forever</span>
+</div>
+<ul class="space-y-3 font-body-sm text-body-sm text-on-surface-variant mb-8">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Unlimited Static QR Codes</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Standard dot &amp; color customization</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>High-resolution PNG downloads</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>No code expiration on static assets</span>
+</li>
+<li class="flex items-center gap-2 text-on-surface-variant/50">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+<span>Dynamic link editing</span>
+</li>
+<li class="flex items-center gap-2 text-on-surface-variant/50">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+<span>Real-time scan tracking</span>
+</li>
+</ul>
+</div>
+<a class="w-full py-3 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface text-center font-title-sm text-title-sm transition-colors" href="#interactive-generator">
+            Start Free · No Credit Card
+          </a>
+</div>
+<!-- Pro Plan (Popular Highlight) -->
+<div class="p-8 rounded-3xl bg-surface-container-lowest shadow-xl flex flex-col justify-between relative ring-2 ring-primary">
+<div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider font-bold shadow-md">
+            Most Popular
+          </div>
+<div>
+<div class="mb-4">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Pro Creator</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">For growing businesses needing updates &amp; stats</p>
+</div>
+<div class="flex items-baseline gap-1 my-6">
+<span class="font-headline-display text-headline-display text-on-surface price-amount" data-annual="$9.60" data-monthly="$12">$12</span>
+<span class="font-body-md text-body-md text-on-surface-variant">/ month</span>
+</div>
+<ul class="space-y-3 font-body-sm text-body-sm text-on-surface mb-8">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span><strong>Up to 50 Dynamic QR Codes</strong></span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Change destination URL anytime</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Real-time scan analytics &amp; geos</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Vector SVG &amp; CMYK PDF exports</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Custom brand logo embedding</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Zero SmartQRCraft watermarks</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Priority email support</span>
+</li>
+</ul>
+</div>
+<button class="w-full py-3.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary text-center font-title-sm text-title-sm shadow-md transition-all" onclick="alert('Starting 14-day free Pro trial...')">
+            Start 14-Day Free Pro Trial
+          </button>
+</div>
+<!-- Business Plan -->
+<div class="p-8 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div>
+<div class="mb-4">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Business Fleet</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">For franchises, agencies &amp; large teams</p>
+</div>
+<div class="flex items-baseline gap-1 my-6">
+<span class="font-headline-display text-headline-display text-on-surface price-amount" data-annual="$31.20" data-monthly="$39">$39</span>
+<span class="font-body-md text-body-md text-on-surface-variant">/ month</span>
+</div>
+<ul class="space-y-3 font-body-sm text-body-sm text-on-surface-variant mb-8">
+<li class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span><strong>Unlimited Dynamic QR Codes</strong></span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Team member seats &amp; role access</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Bulk CSV generation (10,000+ codes)</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Custom short domains (qr.yourbrand.com)</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Full Developer REST API &amp; Webhooks</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Dedicated Account Manager &amp; SLA</span>
+</li>
+</ul>
+</div>
+<button class="w-full py-3 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface text-center font-title-sm text-title-sm transition-colors" onclick="alert('Connecting to enterprise sales...')">
+            Contact Enterprise Sales
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- COMPARISON MATRIX (SMARTQRCRAFT VS BASIC QR GENERATORS) -->
+<section class="w-full py-20 bg-surface">
+<div class="max-w-7xl mx-auto px-margin-sm lg:px-margin">
+<div class="flex flex-col items-center text-center mb-14">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-3 tracking-tight">
+          Everything You Need in One Unified QR Platform
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+          See why over 35,000 teams switched from ad-cluttered free generators to SmartQRCraft.
+        </p>
+</div>
+<div class="overflow-x-auto rounded-3xl bg-surface-container-lowest shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="p-4 sm:p-5 font-title-sm text-title-sm text-on-surface">Feature Capability</th>
+<th class="p-4 sm:p-5 font-title-sm text-title-sm text-primary text-center">SmartQRCraft</th>
+<th class="p-4 sm:p-5 font-title-sm text-title-sm text-on-surface-variant text-center">Generic Ad-Based Generators</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-transparent font-body-sm text-body-sm text-on-surface">
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="p-4 sm:p-5 font-semibold">Dynamic URL Editing (Post-print)</td>
+<td class="p-4 sm:p-5 text-center text-primary font-bold">
+<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">check_circle</span> Yes · Instant</span>
+</td>
+<td class="p-4 sm:p-5 text-center text-on-surface-variant">Requires reprinting</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="p-4 sm:p-5 font-semibold">Vector Export (SVG, EPS, PDF)</td>
+<td class="p-4 sm:p-5 text-center text-primary font-bold">
+<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">check_circle</span> Lossless CMYK</span>
+</td>
+<td class="p-4 sm:p-5 text-center text-on-surface-variant">Low-res pixelated PNG only</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="p-4 sm:p-5 font-semibold">Real-Time Scan Intelligence</td>
+<td class="p-4 sm:p-5 text-center text-primary font-bold">
+<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">check_circle</span> Device, City, Timestamp</span>
+</td>
+<td class="p-4 sm:p-5 text-center text-on-surface-variant">No tracking or fake counter</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="p-4 sm:p-5 font-semibold">Ad-Free Destination Pages</td>
+<td class="p-4 sm:p-5 text-center text-primary font-bold">
+<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">check_circle</span> 100% Ad-Free &amp; Clean</span>
+</td>
+<td class="p-4 sm:p-5 text-center text-on-surface-variant">Interstitials &amp; Spam ads</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="p-4 sm:p-5 font-semibold">Custom Logo &amp; Corporate Badges</td>
+<td class="p-4 sm:p-5 text-center text-primary font-bold">
+<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">check_circle</span> Auto error-corrected</span>
+</td>
+<td class="p-4 sm:p-5 text-center text-on-surface-variant">Distorts QR scannability</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="p-4 sm:p-5 font-semibold">Bulk CSV Generation</td>
+<td class="p-4 sm:p-5 text-center text-primary font-bold">
+<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">check_circle</span> 10,000+ in 10 seconds</span>
+</td>
+<td class="p-4 sm:p-5 text-center text-on-surface-variant">Manual 1-by-1 only</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="p-4 sm:p-5 font-semibold">Privacy First (GDPR &amp; US SOC-2)</td>
+<td class="p-4 sm:p-5 text-center text-primary font-bold">
+<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">check_circle</span> US Hosted &amp; Private</span>
+</td>
+<td class="p-4 sm:p-5 text-center text-on-surface-variant">Data sold to advertisers</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- FAQ ACCORDION (14 QUESTIONS) -->
+<section class="w-full py-20 bg-surface-container-low">
+<div class="max-w-4xl mx-auto px-margin-sm lg:px-margin">
+<div class="flex flex-col items-center text-center mb-14">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm uppercase tracking-wider mb-3">
+          Frequently Asked Questions
+        </span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-3 tracking-tight">
+          Everything You Need to Know About QR Codes
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+          Answers to common questions regarding generation, formatting, device compatibility, and tracking.
+        </p>
+</div>
+<!-- 14 Interactive Accordion Items -->
+<div class="space-y-3" id="faq-accordion-group">
+<!-- FAQ 1 -->
+<div class="rounded-2xl bg-surface-container-lowest shadow-sm overflow-hidden">
+<button class="faq-btn w-full p-5 text-left flex items-center justify-between gap-4">
+<span class="font-title-md text-title-md text-on-surface">1. What is a QR code?</span>
+<span class="material-symbols-outlined text-primary transition-transform">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant">
+            A QR (Quick Response) code is a two-dimensional matrix barcode invented to store optical data. Unlike traditional 1D barcodes that only hold numbers, QR codes can store complex URLs, WiFi passwords, contact vCards, and encrypted identifiers that any modern smartphone camera can scan instantly.
+          </div>
+</div>
+<!-- FAQ 2 -->
+<div class="rounded-2xl bg-surface-container-lowest shadow-sm overflow-hidden">
+<button class="faq-btn w-full p-5 text-left flex items-center justify-between gap-4">
+<span class="font-title-md text-title-md text-on-surface">2. How do I create a QR code?</span>
+<span class="material-symbols-outlined text-primary transition-transform">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant">
+            Creating a QR code on SmartQRCraft takes under 30 seconds: simply pick your QR type (e.g., URL or WiFi), enter your content, personalize colors or upload your brand logo, and click 'Download PNG' or 'SVG Vector'.
+          </div>
+</div>
+<!-- FAQ 3 -->
+<div class="rounded-2xl bg-surface-container-lowest shadow-sm overflow-hidden">
+<button class="faq-btn w-full p-5 text-left flex items-center justify-between gap-4">
+<span class="font-title-md text-title-md text-on-surface">3. Are QR codes free?</span>
+<span class="material-symbols-outlined text-primary transition-transform">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant">
+            Yes! Static QR codes generated on SmartQRCraft are 100% free with unlimited scans and zero expiration dates. Pro plans are available for advanced dynamic routing, live analytics, and high-volume team collaboration.
+          </div>
+</div>
+<!-- FAQ 4 -->
+<div class="rounded-2xl bg-surface-container-lowest shadow-sm overflow-hidden">
+<button class="faq-btn w-full p-5 text-left flex items-center justify-between gap-4">
+<span class="font-title-md text-title-md text-on-surface">4. Can I customize my QR code?</span>
+<span class="material-symbols-outlined text-primary transition-transform">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant">
+            Absolutely. You can modify background and foreground colors, change corner eye geometries, choose between rounded or square dot patterns, and append branded 'Scan Me' CTA ribbons.
+          </div>
+</div>
+<!-- FAQ 5 -->
+<div class="rounded-2xl bg-surface-container-lowest shadow-sm overflow-hidden">
+<button class="faq-btn w-full p-5 text-left flex items-center justify-between gap-4">
+<span class="font-title-md text-title-md text-on-surface">5. Can I add a logo to my QR code?</span>
+<span class="material-symbols-outlined text-primary transition-transform">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant">
+            Yes. SmartQRCraft utilizes high-level Reed-Solomon Error Correction (Level H - 30%), allowing up to 30% of the code center to be replaced with your corporate badge or logo while maintaining flawless scan reliability.
+          </div>
+</div>
+<!-- FAQ 6 -->
+<div class="rounded-2xl bg-surface-container-lowest shadow-sm overflow-hidden">
+<button class="faq-btn w-full p-5 text-left flex items-center justify-between gap-4">
+<span class="font-title-md text-title-md text-on-surface">6. What types of QR codes can I create?</span>
+<span class="material-symbols-outlined text-primary transition-transform">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant">
+            We support 12 distinct types: Website URLs, WiFi network setups, PDF downloads, restaurant menus, vCard contacts, Email drafts, SMS prompts, phone dialers, raw text notes, Google Maps pins, multi-social media trees, and App Store downloads.
+          </div>
+</div>
+<!-- FAQ 7 -->
+<div class="rounded-2xl bg-surface-container-lowest shadow-sm overflow-hidden">
+<button class="faq-btn w-full p-5 text-left flex items-center justify-between gap-4">
+<span class="font-title-md text-title-md text-on-surface">7. Can I download QR codes as PNG or SVG?</span>
+<span class="material-symbols-outlined text-primary transition-transform">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant">
+            Yes, both options are available immediately. PNG files are generated at 2048x2048 high resolution for digital and screen use, while vector SVG and CMYK PDF exports scale infinitely without quality loss for printing on billboards and product packaging.
+          </div>
+</div>
+<!-- FAQ 8 -->
+<div class="rounded-2xl bg-surface-container-lowest shadow-sm overflow-hidden">
+<button class="faq-btn w-full p-5 text-left flex items-center justify-between gap-4">
+<span class="font-title-md text-title-md text-on-surface">8. What is a dynamic QR code?</span>
+<span class="material-symbols-outlined text-primary transition-transform">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant">
+            A dynamic QR code encodes a secure short redirect URL rather than the final raw payload. This allows you to log into your SmartQRCraft dashboard and edit the target web link or document anytime without changing the printed graphic.
+          </div>
+</div>
+<!-- FAQ 9 -->
+<div class="rounded-2xl bg-surface-container-lowest shadow-sm overflow-hidden">
+<button class="faq-btn w-full p-5 text-left flex items-center justify-between gap-4">
+<span class="font-title-md text-title-md text-on-surface">9. Can I change a dynamic QR code after printing?</span>
+<span class="material-symbols-outlined text-primary transition-transform">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant">
+            Yes! That is the core superpower of dynamic codes. Even if you printed 100,000 product boxes, you can switch destination URLs from an expired promo to a new seasonal campaign in seconds with zero reprint expense.
+          </div>
+</div>
+<!-- FAQ 10 -->
+<div class="rounded-2xl bg-surface-container-lowest shadow-sm overflow-hidden">
+<button class="faq-btn w-full p-5 text-left flex items-center justify-between gap-4">
+<span class="font-title-md text-title-md text-on-surface">10. Do QR codes expire?</span>
+<span class="material-symbols-outlined text-primary transition-transform">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant">
+            Static QR codes never expire. As long as the target destination URL or information exists, your static QR code will scan indefinitely. Dynamic codes remain active as long as your account is maintained.
+          </div>
+</div>
+<!-- FAQ 11 -->
+<div class="rounded-2xl bg-surface-container-lowest shadow-sm overflow-hidden">
+<button class="faq-btn w-full p-5 text-left flex items-center justify-between gap-4">
+<span class="font-title-md text-title-md text-on-surface">11. Can I track QR code scans?</span>
+<span class="material-symbols-outlined text-primary transition-transform">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant">
+            Yes, through SmartQRCraft Dynamic QR codes. You can monitor scan frequencies, unique visitors, time of scan, mobile operating systems (iOS vs Android), and city-level geolocations in real time.
+          </div>
+</div>
+<!-- FAQ 12 -->
+<div class="rounded-2xl bg-surface-container-lowest shadow-sm overflow-hidden">
+<button class="faq-btn w-full p-5 text-left flex items-center justify-between gap-4">
+<span class="font-title-md text-title-md text-on-surface">12. Can I create a QR code for a restaurant menu?</span>
+<span class="material-symbols-outlined text-primary transition-transform">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant">
+            Yes. You can either link to an existing digital menu website, upload a PDF food list, or generate a hosted mobile-first touchless menu that guests can read comfortably on smartphones.
+          </div>
+</div>
+<!-- FAQ 13 -->
+<div class="rounded-2xl bg-surface-container-lowest shadow-sm overflow-hidden">
+<button class="faq-btn w-full p-5 text-left flex items-center justify-between gap-4">
+<span class="font-title-md text-title-md text-on-surface">13. Can I create a WiFi QR code?</span>
+<span class="material-symbols-outlined text-primary transition-transform">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant">
+            Yes! Select the 'WiFi' type in the generator, enter your SSID network name, select your encryption (WPA/WPA2/WPA3), and input the password. Guests can point their phone camera and tap 'Join Network' without entering the password manually.
+          </div>
+</div>
+<!-- FAQ 14 -->
+<div class="rounded-2xl bg-surface-container-lowest shadow-sm overflow-hidden">
+<button class="faq-btn w-full p-5 text-left flex items-center justify-between gap-4">
+<span class="font-title-md text-title-md text-on-surface">14. Are SmartQRCraft QR codes compatible with iPhone and Android?</span>
+<span class="material-symbols-outlined text-primary transition-transform">expand_more</span>
+</button>
+<div class="faq-content hidden px-5 pb-5 font-body-md text-body-md text-on-surface-variant">
+            Yes, 100%. All codes strictly follow ISO/IEC 18004 international QR code standards. Any modern iOS or Android device with a standard built-in camera app can scan our codes natively without installing third-party scanning apps.
+          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- FINAL HIGH-CONVERSION CTA BANNER -->
+<section class="w-full py-20 bg-surface">
+<div class="max-w-7xl mx-auto px-margin-sm lg:px-margin">
+<div class="rounded-3xl bg-gradient-to-br from-primary to-tertiary p-8 sm:p-14 text-on-primary text-center shadow-xl relative overflow-hidden">
+<!-- Subtle background overlay pattern -->
+<div class="absolute -right-10 -bottom-10 w-80 h-80 rounded-full bg-white/10 blur-2xl pointer-events-none"></div>
+<div class="relative z-10 max-w-3xl mx-auto">
+<h2 class="font-headline-display text-headline-display text-on-primary mb-4 tracking-tight">
+            Ready to Create Your QR Code?
+          </h2>
+<p class="font-body-lg text-body-lg text-on-primary/90 mb-8 max-w-xl mx-auto">
+            Join thousands of American businesses creating professional, brand-tailored QR codes in seconds. Instant vector downloads, no credit card required.
+          </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+<a class="w-full sm:w-auto px-8 py-4 rounded-xl bg-surface-container-lowest text-primary hover:bg-surface-container font-title-md text-title-md shadow-lg transition-all" href="#interactive-generator">
+              Create Your Free QR Code Now
+            </a>
+<a class="w-full sm:w-auto px-8 py-4 rounded-xl bg-on-primary/15 hover:bg-on-primary/25 text-on-primary font-title-md text-title-md transition-colors" href="#qr-types">
+              Explore Features
+            </a>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-6 font-label-md text-label-md text-on-primary/80">
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">check_circle</span> Instant Download</span>
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">check_circle</span> No Credit Card Required</span>
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">check_circle</span> High-Resolution Print Ready</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- INTERACTIVE SCRIPTS -->
+<script>
+  // Hero Interactive QR Generator Logic
+  document.addEventListener('DOMContentLoaded', () => {
+    const qrInput = document.getElementById('hero-qr-input');
+    const inputLabel = document.getElementById('hero-input-label');
+    const typeButtons = document.querySelectorAll('.hero-type-btn');
+    const fgSwatches = document.querySelectorAll('.hero-fg-swatch');
+    const bgSwatches = document.querySelectorAll('.hero-bg-swatch');
+    const cornerButtons = document.querySelectorAll('.hero-corner-btn');
+    const logoToggle = document.getElementById('hero-logo-toggle');
+    const centerLogo = document.getElementById('hero-center-logo');
+    const qrCanvas = document.getElementById('hero-qr-canvas');
+    const qrFills = document.querySelectorAll('.qr-fill');
+    const qrBgFills = document.querySelectorAll('.qr-bg-fill');
+
+    // QR Type Tab Switching
+    typeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        typeButtons.forEach(b => {
+          b.classList.remove('bg-primary', 'text-on-primary');
+          b.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+        });
+        btn.classList.add('bg-primary', 'text-on-primary');
+        btn.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+
+        const type = btn.getAttribute('data-type');
+        if (type === 'url') {
+          inputLabel.textContent = 'Target Website URL';
+          qrInput.value = 'https://smartqrcraft.com';
+          qrInput.placeholder = 'https://yourbusiness.com';
+        } else if (type === 'wifi') {
+          inputLabel.textContent = 'WiFi Network Name (SSID)';
+          qrInput.value = 'Guest_WiFi_5G';
+          qrInput.placeholder = 'Network Name';
+        } else if (type === 'vcard') {
+          inputLabel.textContent = 'Full Name & Title';
+          qrInput.value = 'Alex Morgan, VP of Growth';
+          qrInput.placeholder = 'John Doe, CEO';
+        } else if (type === 'menu') {
+          inputLabel.textContent = 'Digital Menu URL or PDF';
+          qrInput.value = 'https://menu.craftbistro.com';
+          qrInput.placeholder = 'https://menu.example.com';
+        } else if (type === 'pdf') {
+          inputLabel.textContent = 'Document / Brochure Link';
+          qrInput.value = 'https://smartqrcraft.com/guide.pdf';
+          qrInput.placeholder = 'https://example.com/file.pdf';
+        }
+      });
+    });
+
+    // Foreground Color Switcher
+    fgSwatches.forEach(swatch => {
+      swatch.addEventListener('click', () => {
+        fgSwatches.forEach(s => s.classList.remove('ring-2', 'ring-primary', 'ring-offset-2', 'scale-110'));
+        swatch.classList.add('ring-2', 'ring-primary', 'ring-offset-2', 'scale-110');
+        const color = swatch.getAttribute('data-color');
+        qrFills.forEach(el => el.setAttribute('fill', color));
+      });
+    });
+
+    // Background Color Switcher
+    bgSwatches.forEach(swatch => {
+      swatch.addEventListener('click', () => {
+        bgSwatches.forEach(s => s.classList.remove('ring-2', 'ring-primary', 'ring-offset-2', 'scale-110'));
+        swatch.classList.add('ring-2', 'ring-primary', 'ring-offset-2', 'scale-110');
+        const bg = swatch.getAttribute('data-bg');
+        qrCanvas.style.backgroundColor = bg;
+        qrBgFills.forEach(el => el.setAttribute('fill', bg));
+      });
+    });
+
+    // Corner Shapes
+    cornerButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        cornerButtons.forEach(b => {
+          b.classList.remove('bg-primary', 'text-on-primary');
+          b.classList.add('bg-surface-container-lowest', 'text-on-surface-variant');
+        });
+        btn.classList.add('bg-primary', 'text-on-primary');
+        btn.classList.remove('bg-surface-container-lowest', 'text-on-surface-variant');
+
+        const corner = btn.getAttribute('data-corner');
+        const eyeOuterRects = document.querySelectorAll('#hero-svg-code > rect.qr-fill');
+        if (corner === 'square') {
+          eyeOuterRects.forEach(r => r.setAttribute('rx', '0'));
+        } else if (corner === 'rounded') {
+          eyeOuterRects.forEach(r => r.setAttribute('rx', '10'));
+        } else if (corner === 'dots') {
+          eyeOuterRects.forEach(r => r.setAttribute('rx', '20'));
+        }
+      });
+    });
+
+    // Logo Toggle
+    if (logoToggle && centerLogo) {
+      logoToggle.addEventListener('change', () => {
+        centerLogo.style.display = logoToggle.checked ? 'block' : 'none';
+      });
+    }
+
+    // FAQ Accordions
+    const faqButtons = document.querySelectorAll('.faq-btn');
+    faqButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const content = btn.nextElementSibling;
+        const icon = btn.querySelector('.material-symbols-outlined');
+        const isHidden = content.classList.contains('hidden');
+        
+        // Close other items
+        document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+        document.querySelectorAll('.faq-btn .material-symbols-outlined').forEach(i => i.classList.remove('rotate-180'));
+
+        if (isHidden) {
+          content.classList.remove('hidden');
+          icon.classList.add('rotate-180');
+        }
+      });
+    });
+
+    // Pricing Billing Toggle
+    const monthlyBtn = document.getElementById('billing-monthly-btn');
+    const annualBtn = document.getElementById('billing-annual-btn');
+    const priceElements = document.querySelectorAll('.price-amount');
+
+    if (monthlyBtn && annualBtn) {
+      monthlyBtn.addEventListener('click', () => {
+        monthlyBtn.classList.add('bg-primary', 'text-on-primary');
+        monthlyBtn.classList.remove('text-on-surface-variant');
+        annualBtn.classList.remove('bg-primary', 'text-on-primary');
+        annualBtn.classList.add('text-on-surface-variant');
+        priceElements.forEach(el => {
+          el.textContent = el.getAttribute('data-monthly');
+        });
+      });
+
+      annualBtn.addEventListener('click', () => {
+        annualBtn.classList.add('bg-primary', 'text-on-primary');
+        annualBtn.classList.remove('text-on-surface-variant');
+        monthlyBtn.classList.remove('bg-primary', 'text-on-primary');
+        monthlyBtn.classList.add('text-on-surface-variant');
+        priceElements.forEach(el => {
+          el.textContent = el.getAttribute('data-annual');
+        });
+      });
+    }
+  });
+</script></main><footer class="w-full bg-surface-container-lowest shadow-[0_-1px_8px_rgba(0,0,0,0.02)]"><div class="max-w-7xl mx-auto px-margin-sm lg:px-margin pt-space-xl pb-space-lg"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-space-xl"><div><div class="flex items-center gap-space-sm mb-space-sm"><div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">qr_code_2</span></div><span class="font-headline-sm text-headline-sm text-on-surface">Smart<span class="text-primary">QRCraft</span></span></div><p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md max-w-xs">Simple QR code creation and management for modern businesses.</p><div class="flex items-center gap-space-xs mb-space-md"><span class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-low text-on-surface font-label-sm text-label-sm"><span class="material-symbols-outlined text-primary text-[14px]">verified_user</span><span>SOC-2 Ready</span></span><span class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-low text-on-surface font-label-sm text-label-sm"><span class="material-symbols-outlined text-primary text-[14px]">flag</span><span>US Hosted</span></span></div><div class="inline-flex items-center gap-2 px-space-sm py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span><span>All QR Engines Operational</span></div></div><div><h4 class="font-title-sm text-title-sm text-on-surface mb-space-md tracking-tight uppercase">Product</h4><ul class="space-y-space-sm font-body-sm text-body-sm"><li class="flex"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="qr-code-generator" href="#">QR Code Generator</a></li><li class="flex"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="qr-types" href="#">QR Code Types</a></li><li class="flex"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="dynamic-qr-codes" href="#">Dynamic QR Codes</a></li><li class="flex"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="qr-analytics" href="#">QR Analytics</a></li><li class="flex"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="pricing" href="#">Pricing</a></li><li class="flex"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="api-sdk" href="#">API &amp; SDK</a></li></ul></div><div><h4 class="font-title-sm text-title-sm text-on-surface mb-space-md tracking-tight uppercase">Resources</h4><ul class="space-y-space-sm font-body-sm text-body-sm"><li class="flex"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="qr-code-guide" href="#">QR Code Guide</a></li><li class="flex"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="qr-code-blog" href="#">QR Code Blog</a></li><li class="flex"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="qr-code-faqs" href="#">QR Code FAQs</a></li><li class="flex"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="best-practices" href="#">Best Practices</a></li><li class="flex"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="help-center" href="#">Help Center</a></li></ul></div><div><h4 class="font-title-sm text-title-sm text-on-surface mb-space-md tracking-tight uppercase">Company</h4><ul class="space-y-space-sm font-body-sm text-body-sm"><li class="flex"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="about" href="#">About</a></li><li class="flex"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="contact" href="#">Contact</a></li><li class="flex"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="privacy-policy" href="#">Privacy Policy</a></li><li class="flex"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="terms-of-service" href="#">Terms of Service</a></li><li class="flex"><a class="text-on-surface-variant hover:text-on-surface transition-colors" data-path="security-gdpr" href="#">Security &amp; GDPR</a></li></ul></div></div><div class="pt-space-md border-t-0 flex flex-col sm:flex-row items-center justify-between gap-space-sm font-body-sm text-body-sm text-on-surface-variant"><p>© 2026 SmartQRCraft.com. All rights reserved.</p><p class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-primary">public</span><span>Made for modern US businesses.</span></p></div></div></footer></body></html>
