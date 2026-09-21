@@ -252,13 +252,90 @@
   }
 
   // Frame geometry shared by the canvas and SVG renderers.
+  var FRAME_STYLES = ["bottom", "top", "badge", "bubble", "outline", "corners", "text"];
+
   function frameGeometry(size, frameText, frameStyle) {
+    var style = FRAME_STYLES.indexOf(frameStyle) >= 0 ? frameStyle : "bottom";
     var barH = frameText ? Math.round(size * 0.14) : 0;
-    var style = frameStyle === "top" || frameStyle === "badge" ? frameStyle : "bottom";
     var gap = frameText && style === "badge" ? Math.round(size * 0.03) : 0;
-    var top = frameText && style === "top" ? barH : 0;
-    var bottom = frameText && style !== "top" ? barH + gap : 0;
-    return { barH: barH, style: style, gap: gap, top: top, bottom: bottom };
+    var ptr = frameText && style === "bubble" ? Math.round(size * 0.04) : 0;
+    var top = 0, bottom = 0;
+    if (frameText) {
+      if (style === "top") top = barH;
+      else if (style === "bubble") top = barH + ptr;
+      else if (style === "badge") bottom = barH + gap;
+      else if (style === "text") bottom = Math.round(barH * 0.85);
+      else bottom = barH; // bottom, outline, corners
+    }
+    return { barH: barH, style: style, gap: gap, ptr: ptr, top: top, bottom: bottom };
+  }
+
+  // Every frame is described as filled paths plus one text item, so the canvas,
+  // SVG, PDF and EPS renderers all draw exactly the same frame.
+  function frameOps(size, fr, text, fg, bg, transparent) {
+    var ops = [];
+    if (!text) return ops;
+    var st = fr.style, barH = fr.barH, top = fr.top;
+    var barText = function (cx, cy, fs) {
+      ops.push({ text: text, color: bg, knockout: transparent, size: fs, cx: cx, cy: cy });
+    };
+    var plainText = function (cy) {
+      ops.push({ text: text, color: fg, knockout: false, size: Math.round(barH * 0.5), cx: size / 2, cy: cy });
+    };
+    var fs = Math.round(barH * 0.42);
+    if (st === "bottom") {
+      ops.push({ fill: fg, path: pathRect(0, top + size, size, barH) });
+      barText(size / 2, top + size + barH / 2, fs);
+    } else if (st === "top") {
+      ops.push({ fill: fg, path: pathRect(0, 0, size, barH) });
+      barText(size / 2, barH / 2, fs);
+    } else if (st === "badge") {
+      var w = Math.round(size * 0.72), x0 = Math.round((size - w) / 2), y0 = top + size + fr.gap;
+      ops.push({ fill: fg, path: pathRRect(x0, y0, w, barH, barH / 2) });
+      barText(size / 2, y0 + barH / 2, fs);
+    } else if (st === "bubble") {
+      var bw = Math.round(size * 0.7), bx = Math.round((size - bw) / 2), cx = size / 2, pw = fr.ptr * 1.1;
+      ops.push({ fill: fg, path: pathRRect(bx, 0, bw, barH, barH * 0.3) });
+      ops.push({ fill: fg, path: [["M", cx - pw, barH - 1], ["L", cx + pw, barH - 1], ["L", cx, barH + fr.ptr], ["Z"]] });
+      barText(cx, barH / 2, fs);
+    } else if (st === "outline") {
+      var t = size * 0.022, r = size * 0.06;
+      ops.push({ fill: fg, evenodd: true, path: pathRRect(0, top, size, size, r).concat(pathRRect(t, top + t, size - 2 * t, size - 2 * t, Math.max(0, r - t))) });
+      ops.push({ fill: fg, path: pathRect(0, top + size, size, barH) });
+      barText(size / 2, top + size + barH / 2, fs);
+    } else if (st === "corners") {
+      var inset = size * 0.03, arm = size * 0.15, th = size * 0.022, L = inset, R = size - inset, T = top + inset, B = top + size - inset;
+      var corner = [];
+      corner = corner.concat(pathRect(L, T, arm, th), pathRect(L, T, th, arm));
+      corner = corner.concat(pathRect(R - arm, T, arm, th), pathRect(R - th, T, th, arm));
+      corner = corner.concat(pathRect(L, B - th, arm, th), pathRect(L, B - arm, th, arm));
+      corner = corner.concat(pathRect(R - arm, B - th, arm, th), pathRect(R - th, B - arm, th, arm));
+      ops.push({ fill: fg, path: corner });
+      plainText(top + size + fr.bottom / 2);
+    } else {
+      plainText(top + size + fr.bottom / 2);
+    }
+    return ops;
+  }
+
+  function tracePath(ctx, path) {
+    ctx.beginPath();
+    path.forEach(function (sg) {
+      if (sg[0] === "M") ctx.moveTo(sg[1], sg[2]);
+      else if (sg[0] === "L") ctx.lineTo(sg[1], sg[2]);
+      else if (sg[0] === "C") ctx.bezierCurveTo(sg[1], sg[2], sg[3], sg[4], sg[5], sg[6]);
+      else ctx.closePath();
+    });
+  }
+
+  function pathToD(path) {
+    var f = function (n) { return n.toFixed(2); };
+    return path.map(function (sg) {
+      if (sg[0] === "M") return "M" + f(sg[1]) + " " + f(sg[2]);
+      if (sg[0] === "L") return "L" + f(sg[1]) + " " + f(sg[2]);
+      if (sg[0] === "C") return "C" + f(sg[1]) + " " + f(sg[2]) + " " + f(sg[3]) + " " + f(sg[4]) + " " + f(sg[5]) + " " + f(sg[6]);
+      return "Z";
+    }).join("");
   }
 
   function gradientPoints(dir, size) {
@@ -397,19 +474,21 @@
 
     var finishFrame = function () {
       if (!frameText) return;
-      var y0, x0 = 0, w = size, rad = 0;
-      if (fr.style === "top") y0 = 0;
-      else if (fr.style === "badge") { w = Math.round(size * 0.72); x0 = Math.round((size - w) / 2); y0 = fr.top + size + fr.gap; rad = fr.barH / 2; }
-      else y0 = fr.top + size;
-      ctx.fillStyle = fg;
-      drawRoundedRect(x0, y0, w, fr.barH, rad);
-      ctx.fillStyle = bg;
-      if (transparent) ctx.globalCompositeOperation = "destination-out";
-      ctx.font = "700 " + Math.round(fr.barH * 0.42) + "px Inter, system-ui, sans-serif";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(frameText.toUpperCase(), x0 + w / 2, y0 + fr.barH / 2);
-      ctx.globalCompositeOperation = "source-over";
+      frameOps(size, fr, frameText.toUpperCase(), fg, bg, transparent).forEach(function (op) {
+        if (op.text != null) {
+          ctx.fillStyle = op.color;
+          if (op.knockout) ctx.globalCompositeOperation = "destination-out";
+          ctx.font = "700 " + op.size + "px Inter, system-ui, sans-serif";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(op.text, op.cx, op.cy);
+          ctx.globalCompositeOperation = "source-over";
+        } else {
+          ctx.fillStyle = op.fill;
+          tracePath(ctx, op.path);
+          ctx.fill(op.evenodd ? "evenodd" : "nonzero");
+        }
+      });
     };
 
     if (logoSrc) {
@@ -536,17 +615,15 @@
     parts.push("</g>");
 
     if (frameText) {
-      var y0, x0 = 0, w = size, rad = 0;
-      if (fr.style === "top") y0 = 0;
-      else if (fr.style === "badge") { w = Math.round(size * 0.72); x0 = Math.round((size - w) / 2); y0 = fr.top + size + fr.gap; rad = fr.barH / 2; }
-      else y0 = fr.top + size;
-      parts.push('<rect x="' + x0 + '" y="' + y0 + '" width="' + w + '" height="' + fr.barH + '" rx="' + rad + '" fill="' + fg + '"/>');
-      parts.push(
-        '<text x="' + (x0 + w / 2) + '" y="' + (y0 + fr.barH / 2) + '" fill="' + (transparent ? "#ffffff" : bg) +
-          '" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="' +
-          Math.round(fr.barH * 0.42) + '" text-anchor="middle" dominant-baseline="middle">' +
-          frameText.toUpperCase().replace(/&/g, "&amp;").replace(/</g, "&lt;") + "</text>"
-      );
+      frameOps(size, fr, frameText.toUpperCase(), fg, bg, transparent).forEach(function (op) {
+        if (op.text != null) {
+          parts.push('<text x="' + f2(op.cx) + '" y="' + f2(op.cy) + '" fill="' + (op.knockout ? "#ffffff" : op.color) +
+            '" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="' + op.size +
+            '" text-anchor="middle" dominant-baseline="middle">' + op.text.replace(/&/g, "&amp;").replace(/</g, "&lt;") + "</text>");
+        } else {
+          parts.push('<path fill="' + op.fill + '"' + (op.evenodd ? ' fill-rule="evenodd"' : "") + ' d="' + pathToD(op.path) + '"/>');
+        }
+      });
     }
 
     parts.push("</svg>");
@@ -629,14 +706,14 @@
     });
 
     if (frameText) {
-      var y0, x0 = 0, w = size, rad = 0;
-      if (fr.style === "top") y0 = 0;
-      else if (fr.style === "badge") { w = Math.round(size * 0.72); x0 = Math.round((size - w) / 2); y0 = fr.top + size + fr.gap; rad = fr.barH / 2; }
-      else y0 = fr.top + size;
-      ops.push({ fill: fg, path: pathRRect(x0, y0, w, fr.barH, rad) });
-      var fs = fr.barH * 0.42;
-      ops.push({ text: frameText, color: transparent ? "#ffffff" : bg, size: fs,
-        x: x0 + w / 2 - textWidth(frameText, fs) / 2, y: y0 + fr.barH / 2 + fs * 0.35 });
+      frameOps(size, fr, frameText, fg, bg, transparent).forEach(function (op) {
+        if (op.text != null) {
+          ops.push({ text: op.text, color: op.knockout ? "#ffffff" : op.color, size: op.size,
+            x: op.cx - textWidth(op.text, op.size) / 2, y: op.cy + op.size * 0.35 });
+        } else {
+          ops.push({ fill: op.fill, evenodd: op.evenodd, path: op.path });
+        }
+      });
     }
     return { w: size, h: H, ops: ops };
   }
@@ -761,6 +838,7 @@
     renderToSVG: renderToSVG,
     downloadCanvasPNG: downloadCanvasPNG,
     downloadCanvas: downloadCanvas,
+    FRAME_STYLES: FRAME_STYLES,
     vectorGeometry: vectorGeometry,
     toPDF: toPDF,
     toEPS: toEPS,

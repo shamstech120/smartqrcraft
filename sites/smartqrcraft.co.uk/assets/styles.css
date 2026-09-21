@@ -280,3 +280,30 @@ section{padding:72px 0}
 .adv-check{font-size:13px;color:var(--muted);display:inline-flex;align-items:center;gap:4px}
 
 .export-opts .exp-note{flex-basis:100%;text-align:center;font-size:12px;color:var(--muted)}
+
+/* ---- design tabs, thumbnails, hex fields, frame gallery ---- */
+.design-tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin:14px 0 14px;overflow-x:auto}
+.design-tab{background:none;border:0;padding:10px 14px;font-weight:600;font-size:14px;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap}
+.design-tab[aria-selected="true"]{color:var(--violet);border-bottom-color:var(--violet)}
+.dp{margin-bottom:6px}
+.pill.pill-thumb{padding:4px;border-radius:10px;line-height:0;background:#fff}
+.pill.pill-thumb[aria-pressed="true"]{outline:2px solid var(--violet);outline-offset:0;background:var(--lavender)}
+.thumb-canvas{width:46px;height:46px;display:block;border-radius:6px}
+.thumb-group{display:flex;gap:8px;flex-wrap:wrap}
+.hex-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 14px}
+.hex-field{position:relative;display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:10px;background:#fff;padding:12px 10px 8px 12px}
+.hex-label{position:absolute;top:-8px;left:10px;background:#fff;padding:0 4px;font-size:11.5px;color:var(--muted)}
+.hex-input{flex:1;min-width:0;border:0;outline:0;background:none;font:inherit;font-size:14px;color:var(--ink);text-transform:uppercase}
+.hex-input.hex-bad{color:#B91C1C}
+.hex-sw{position:relative;width:26px;height:26px;border-radius:7px;border:1px solid var(--border);overflow:hidden;flex:none}
+.hex-native{position:absolute;inset:-6px;width:40px;height:40px;opacity:0;cursor:pointer}
+.option-card .hex-field{margin-top:10px}
+.frame-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:10px;margin:0 0 14px}
+.frame-opt{border:1px solid var(--border);border-radius:10px;background:#F8FAFC;padding:6px;display:flex;align-items:center;justify-content:center;min-height:72px;color:var(--muted)}
+.frame-opt:hover{border-color:var(--violet)}
+.frame-opt[aria-pressed="true"]{border-color:var(--violet);background:var(--lavender);box-shadow:inset 0 0 0 1px var(--violet)}
+.frame-thumb{width:100%;height:auto;max-height:64px;object-fit:contain}
+.frame-text-card{margin-top:0}
+.frame-text-label{display:block;font-size:13px;font-weight:600;margin:0 0 6px}
+
+.hex-row{margin-top:16px}

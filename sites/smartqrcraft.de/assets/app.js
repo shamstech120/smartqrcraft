@@ -426,6 +426,8 @@
       ro.size = 480;
       window.SmartQR.renderToCanvas(canvas, payload, ro);
       updateContrastNote();
+      syncColorUI();
+      refreshThumbs();
     }
 
     function designOpts() {
@@ -544,6 +546,10 @@
         setTimeout(function () { dotsHint.style.display = state.style === "dots" || state.style === "diamond" ? "block" : "none"; }, 0);
       });
     }
+    var colorRegistry = [];
+    var thumbSig = "";
+    var frameGallery = null;
+    var frameThumbs = [];
     buildDesignControls();
     render();
 
@@ -677,16 +683,6 @@
       (eyeRow || firstRow).parentNode.insertBefore(row, eyeRow ? eyeRow.nextSibling : firstRow.nextSibling);
       row.parentNode.insertBefore(row2, row.nextSibling);
 
-      // frame style selector next to the frame text
-      if (frameInput) {
-        ui.frameSel = el("select", { class: "adv-select", style: "margin-top:8px", "aria-label": X("frameStyle", "Frame style") });
-        [["bottom", X("fBottom", "Bar below")], ["top", X("fTop", "Bar above")], ["badge", X("fBadge", "Badge below")]].forEach(function (o) {
-          ui.frameSel.appendChild(el("option", { value: o[0] }, o[1]));
-        });
-        frameInput.parentNode.appendChild(ui.frameSel);
-        ui.frameSel.addEventListener("change", function () { state.frameStyle = ui.frameSel.value; render(); });
-      }
-
       // contrast note under the preview
       var pf = root.querySelector(".preview-frame");
       if (pf) {
@@ -696,7 +692,201 @@
         pf.insertBefore(contrastNote, dlRow || null);
       }
 
-      ui.apply = null;
+      buildDesignTabs(ui, firstRow, row, row2, tpl);
+    }
+
+    // ---------- hex fields ----------
+    function attachHex(colorInput, key, label, host) {
+      var wrap = el("label", { class: "hex-field" });
+      wrap.appendChild(el("span", { class: "hex-label" }, label));
+      var txt = el("input", { type: "text", class: "hex-input", maxlength: "7", spellcheck: "false", value: state[key] || "#000000", "aria-label": label });
+      wrap.appendChild(txt);
+      var sw = el("span", { class: "hex-sw" });
+      wrap.appendChild(sw);
+      if (colorInput) {
+        colorInput.classList.add("hex-native");
+        sw.appendChild(colorInput);
+      }
+      host.appendChild(wrap);
+      var entry = { key: key, txt: txt, color: colorInput, sw: sw };
+      colorRegistry.push(entry);
+      txt.addEventListener("input", function () {
+        var v = txt.value.trim();
+        if (v && v[0] !== "#") v = "#" + v;
+        if (/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(v)) {
+          if (v.length === 4) v = "#" + v[1] + v[1] + v[2] + v[2] + v[3] + v[3];
+          state[key] = v.toUpperCase();
+          txt.classList.remove("hex-bad");
+          if (key === "fg" || key === "bg") {
+            var wrapEl = key === "fg" ? colorWrap : bgWrap;
+            wrapEl.querySelectorAll(".swatch").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+          }
+          render();
+        } else {
+          txt.classList.add("hex-bad");
+        }
+      });
+      if (colorInput) colorInput.addEventListener("input", function () { state[key] = colorInput.value.toUpperCase(); render(); });
+      return entry;
+    }
+
+    function syncColorUI() {
+      colorRegistry.forEach(function (c) {
+        var v = state[c.key];
+        if (!v) return;
+        if (document.activeElement !== c.txt) c.txt.value = v.toUpperCase();
+        if (c.color && document.activeElement !== c.color) c.color.value = v.length === 7 ? v : c.color.value;
+        c.sw.style.background = v;
+      });
+    }
+
+    // ---------- shape thumbnails ----------
+    function shapeThumb(kind, value) {
+      var c = document.createElement("canvas");
+      window.SmartQR.renderToCanvas(c, "SmartQR", {
+        fg: state.fg, bg: state.bg, size: 96, margin: 1, ecc: "L",
+        style: kind === "style" ? value : "square", eyeStyle: kind === "eye" ? value : "classic"
+      });
+      c.className = "thumb-canvas";
+      return c;
+    }
+    function decoratePills(wrap, kind) {
+      if (!wrap) return;
+      wrap.classList.add("thumb-group");
+      wrap.querySelectorAll(".pill").forEach(function (b) {
+        var label = b.textContent;
+        b.setAttribute("title", label);
+        b.setAttribute("aria-label", label);
+        b.classList.add("pill-thumb");
+        b.innerHTML = "";
+        b.appendChild(shapeThumb(kind, b.getAttribute("data-value")));
+      });
+    }
+    function refreshThumbs() {
+      var sig = [state.fg, state.bg, state.style, state.eyeStyle].join("|");
+      if (sig === thumbSig) return;
+      thumbSig = sig;
+      [[stylePillWrap, "style"], [eyePillWrap, "eye"]].forEach(function (t) {
+        if (!t[0]) return;
+        t[0].querySelectorAll(".pill").forEach(function (b) {
+          var old = b.querySelector("canvas");
+          if (!old) return;
+          b.replaceChild(shapeThumb(t[1], b.getAttribute("data-value")), old);
+        });
+      });
+      if (frameGallery) drawFrameThumbs();
+    }
+
+    // ---------- frame gallery ----------
+    function drawFrameThumbs() {
+      frameThumbs.forEach(function (t) {
+        var c = document.createElement("canvas");
+        window.SmartQR.renderToCanvas(c, "SmartQR", {
+          fg: state.fg, bg: state.bg, size: 110, margin: 1, ecc: "L", frameText: "SCAN", frameStyle: t.style
+        });
+        c.className = "thumb-canvas frame-thumb";
+        if (t.btn.firstChild) t.btn.replaceChild(c, t.btn.firstChild); else t.btn.appendChild(c);
+      });
+    }
+    function setFrame(styleName) {
+      var on = styleName !== "none";
+      state.frameOn = on;
+      if (on) state.frameStyle = styleName;
+      if (frameToggle) frameToggle.checked = on;
+      if (frameInput) {
+        frameInput.disabled = !on;
+        if (on) state.frameText = frameInput.value.trim() || SCAN_ME;
+      }
+      if (frameGallery) {
+        frameGallery.querySelectorAll(".frame-opt").forEach(function (b) {
+          b.setAttribute("aria-pressed", b.getAttribute("data-frame") === (on ? styleName : "none") ? "true" : "false");
+        });
+      }
+      render();
+    }
+
+    // ---------- tabs ----------
+    function buildDesignTabs(ui, firstRow, gradRow, advRow, tplRow) {
+      var col = root.querySelector(".builder-col");
+      var fieldBox = root.querySelector(".field-container");
+      if (!col || !fieldBox) return;
+      var styleRow = stylePillWrap && stylePillWrap.closest(".two-col");
+      var frameCard = frameToggle && frameToggle.closest(".option-card");
+      var logoCard = logoToggle && logoToggle.closest(".option-card");
+      var oldPair = frameCard && frameCard.parentNode;
+
+      var panels = {
+        shape: el("div", { class: "dp", "data-panel": "shape" }),
+        frame: el("div", { class: "dp", "data-panel": "frame" }),
+        logo: el("div", { class: "dp", "data-panel": "logo" }),
+        adv: el("div", { class: "dp", "data-panel": "adv" })
+      };
+      [tplRow, firstRow, styleRow, gradRow].forEach(function (n) { if (n) panels.shape.appendChild(n); });
+      if (advRow) panels.adv.appendChild(advRow);
+
+      // frame panel: gallery + text
+      frameGallery = el("div", { class: "frame-gallery", role: "group", "aria-label": X("tabFrame", "Frame") });
+      var options = ["none"].concat(window.SmartQR.FRAME_STYLES);
+      var names = { none: X("fNone", "No frame"), bottom: X("fBottom", "Bar below"), top: X("fTop", "Bar above"), badge: X("fBadge", "Badge below"),
+        bubble: X("fBubble", "Speech bubble"), outline: X("fOutline", "Outline box"), corners: X("fCorners", "Corner marks"), text: X("fText", "Text only") };
+      options.forEach(function (name) {
+        var b = el("button", { type: "button", class: "frame-opt", "data-frame": name, title: names[name], "aria-label": names[name], "aria-pressed": name === "none" ? "true" : "false" });
+        if (name === "none") {
+          b.innerHTML = '<svg viewBox="0 0 24 24" width="30" height="30" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M6 6l12 12" stroke="currentColor" stroke-width="1.8"/></svg>';
+        } else {
+          b.appendChild(document.createElement("canvas"));
+          frameThumbs.push({ style: name, btn: b });
+        }
+        b.addEventListener("click", function () { setFrame(name); });
+        frameGallery.appendChild(b);
+      });
+      panels.frame.appendChild(frameGallery);
+      if (frameCard) {
+        var tr = frameCard.querySelector(".toggle-row");
+        if (tr) tr.style.display = "none";
+        var lab = el("label", { class: "frame-text-label" }, X("frameText", "Frame text"));
+        frameCard.insertBefore(lab, frameInput);
+        frameCard.classList.add("frame-text-card");
+        panels.frame.appendChild(frameCard);
+      }
+      if (logoCard) panels.logo.appendChild(logoCard);
+      if (oldPair && oldPair.parentNode && !oldPair.children.length) oldPair.parentNode.removeChild(oldPair);
+
+      var bar = el("div", { class: "design-tabs", role: "tablist" });
+      var defs = [["shape", X("tabShape", "Color & Shape")], ["frame", X("tabFrame", "Frame")], ["logo", X("tabLogo", "Logo")], ["adv", X("tabAdv", "Advanced")]];
+      defs.forEach(function (d, i) {
+        var t = el("button", { type: "button", class: "design-tab", role: "tab", "data-tab": d[0], "aria-selected": i === 0 ? "true" : "false" }, d[1]);
+        t.addEventListener("click", function () {
+          bar.querySelectorAll(".design-tab").forEach(function (x) { x.setAttribute("aria-selected", x === t ? "true" : "false"); });
+          Object.keys(panels).forEach(function (k) { panels[k].style.display = k === d[0] ? "" : "none"; });
+          if (d[0] === "frame") drawFrameThumbs();
+        });
+        bar.appendChild(t);
+      });
+      Object.keys(panels).forEach(function (k) { if (k !== "shape") panels[k].style.display = "none"; });
+      fieldBox.parentNode.insertBefore(bar, fieldBox.nextSibling);
+      var anchor = bar;
+      ["shape", "frame", "logo", "adv"].forEach(function (k) {
+        anchor.parentNode.insertBefore(panels[k], anchor.nextSibling);
+        anchor = panels[k];
+      });
+
+      // hex fields for the colors
+      var colorHost = el("div", { class: "hex-row" });
+      var qrEntry = attachHex(ui.fgInput, "fg", X("qrColor", "QR Code Color"), colorHost);
+      var bgEntry = attachHex(ui.bgInput, "bg", X("bgColor", "Background Color"), colorHost);
+      firstRow.parentNode.insertBefore(colorHost, firstRow.nextSibling);
+      // the rainbow picker circles are now part of the hex fields
+      [colorWrap, bgWrap].forEach(function (w) { var c = w && w.querySelector(".swatch-custom"); if (c) c.style.display = "none"; });
+      var g2 = attachHex(ui.fg2Input, "fg2", X("gradient2", "Second color"), gradRow.querySelector(".option-card"));
+      var eyeHost = gradRow.querySelectorAll(".option-card")[1];
+      var ee = attachHex(ui.eyeInput, "eyeColor", X("eyeColor", "Corner color"), eyeHost);
+      ee.txt.value = "#6D28D9";
+
+      decoratePills(stylePillWrap, "style");
+      decoratePills(eyePillWrap, "eye");
+      drawFrameThumbs();
+      syncColorUI();
     }
 
     function applyTemplate(t) {
