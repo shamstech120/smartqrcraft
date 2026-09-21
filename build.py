@@ -2,7 +2,7 @@
 """Build one static site per ccTLD from the shared template in site/.
 
 Usage: python build.py            -> sites/<domain>/ for every domain
-Per-domain differences live in DOMAINS and OVERRIDES below.
+Per-country settings live in countries/<code>.json.
 """
 import json
 import re
@@ -12,25 +12,30 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 SRC = ROOT / "site"
 DIST = ROOT / "sites"
-BASE = "smartqrcraft.com"
+COUNTRIES = ROOT / "countries"
+_common = json.loads((COUNTRIES / "_common.json").read_text(encoding="utf-8"))
+DEFAULT_DOMAIN = _common["default_domain"]  # x-default
+BASE = DEFAULT_DOMAIN
 
-DOMAINS = {
-    "smartqrcraft.com":   {"lang": "en",    "hreflang": "en-US", "og_locale": "en_US", "currency": "USD"},
-    "smartqrcraft.co.uk": {"lang": "en-GB", "hreflang": "en-GB", "og_locale": "en_GB", "currency": "GBP"},
-    "smartqrcraft.in":    {"lang": "en-IN", "hreflang": "en-IN", "og_locale": "en_IN", "currency": "INR"},
-    "smartqrcraft.de":    {"lang": "de",    "hreflang": "de-DE", "og_locale": "de_DE", "currency": "EUR"},
-}
-DEFAULT_DOMAIN = "smartqrcraft.com"  # x-default
-
-# US-keyword pages live on .com only until localized versions exist for the other ccTLDs.
-COM_ONLY = {
-    "linkedin-qr-code-generator.html", "instagram-qr-code-generator.html",
-    "google-review-qr-code-generator.html", "qr-code-menu-generator.html", "pdf-to-qr-code.html",
-    "venmo-qr-code-generator.html", "cash-app-qr-code-generator.html", "paypal-qr-code-generator.html",
-    "snapchat-qr-code-generator.html", "spotify-qr-code-generator.html", "discord-qr-code-generator.html",
-    "qr-code-for-wedding-photos.html", "qr-code-stickers.html", "whatsapp-qr-code-generator.html",
-    "resume-qr-code-generator.html",
-}
+# Everything that differs per country lives in countries/<code>.json (see README).
+DOMAINS, EXCLUDE, OVERRIDES, HUB = {}, {}, {}, {}
+FOOTER_ONLY_OWN = set()
+_LABELS_FILE = {"*": _common.get("footer_labels", {})}
+COM_ONLY = set()  # legacy name: the per-country page lists are now "skip_pages" in the JSON files
+_countries = [json.loads(f.read_text(encoding="utf-8")) for f in COUNTRIES.glob("*.json") if not f.name.startswith("_")]
+for _c in sorted(_countries, key=lambda c: c.get("order", 99)):
+    _d = _c["domain"]
+    DOMAINS[_d] = {k: _c[k] for k in ("lang", "hreflang", "og_locale", "currency")}
+    if _c.get("skip_pages"):
+        EXCLUDE[_d] = set(_c["skip_pages"])
+    if _c.get("meta_overrides"):
+        OVERRIDES[_d] = _c["meta_overrides"]
+    if _c.get("hub_page"):
+        HUB[_d] = _c["hub_page"]
+    if _c.get("footer_labels"):
+        _LABELS_FILE[_d] = _c["footer_labels"]
+    if _c.get("footer_only_own"):
+        FOOTER_ONLY_OWN.add(_d)
 
 
 LOCAL = ROOT / "pages"
@@ -44,19 +49,8 @@ def local_pages(domain):
 ALL_LOCAL = {n for d in DOMAINS for n in local_pages(d)}
 SHARED = {p.name for p in SRC.glob("*.html")}
 
-# Shared pages that must not exist on a domain (replaced by localized pages with other slugs).
-EXCLUDE = {
-    "smartqrcraft.de": {"wifi-qr-code-generator.html", "vcard-qr-code-generator.html",
-                        "qr-code-scanner.html", "qr-code-tester.html",
-                        "bulk-qr-code-generator.html", "barcode-generator.html",
-                        "qr-code-with-logo.html", "youtube-qr-code-generator.html", "facebook-qr-code-generator.html",
-                        "google-forms-qr-code-generator.html", "event-qr-code-generator.html",
-                        "about.html", "contact.html", "privacy.html", "terms.html",
-                        "what-is-a-qr-code.html", "static-vs-dynamic-qr-codes.html", "qr-code-safety.html", "qr-code-size-guide.html", "qr-codes-for-restaurants.html", "qr-codes-for-real-estate.html", "qr-codes-for-hotels-and-airbnb.html", "qr-codes-for-retail.html"},
-}
 NOT_IN_SITEMAP = {"impressum.html", "datenschutz.html", "about.html", "contact.html", "privacy.html", "terms.html",
                   "ueber-uns.html", "kontakt.html", "nutzungsbedingungen.html"}
-HUB = {"smartqrcraft.de": "alle-qr-code-tools.html"}
 HUB_DEFAULT = "all-qr-code-tools.html"
 FOOTER_MAX = 9
 FOOTER_PRIORITY = [
@@ -166,75 +160,6 @@ def domains_for(name):
     return {d: DOMAINS[d] for d in DOMAINS if has_page(d, name)}
 
 
-# Per-domain, per-page overrides: title / description / og_title / og_description / h1 (inner HTML)
-OVERRIDES = {
-    "smartqrcraft.co.uk": {
-        "bulk-qr-code-generator.html": {
-            "title": "Bulk QR Code Generator UK | Make Many QR Codes from a List — SmartQRCraft",
-            "description": "Free bulk QR code generator for the UK. Paste or upload a list, get every QR code as PNG or SVG in one ZIP. Up to 1000 codes, private, no signup.",
-        },
-        "barcode-generator.html": {
-            "title": "Free Barcode Generator UK | Code 128, EAN-13, UPC, Code 39 — SmartQRCraft",
-            "description": "Free barcode generator for the UK: Code 128, EAN-13, EAN-8, UPC-A, Code 39 and more. One barcode or a bulk list, PNG or SVG. Private, no signup.",
-        },
-        "qr-code-scanner.html": {
-            "title": "QR Code Scanner Online UK | Scan a QR Code from an Image — SmartQRCraft",
-            "description": "Free online QR code scanner for the UK. Scan a QR code from an image, screenshot or camera and check what it contains before you open it. Private, no signup.",
-        },
-        "qr-code-tester.html": {
-            "title": "QR Code Tester UK | Check Your QR Code Scans Before Printing — SmartQRCraft",
-            "description": "Free QR code test. Check your code decodes and still scans when small, blurry or low contrast. Private, no signup, no upload.",
-        },
-        "index.html": {
-            "title": "Free QR Code Generator UK | Custom QR Codes, No Signup — SmartQRCraft",
-            "description": "Free QR code generator for UK businesses, cafes and shops. Make custom QR codes for links, WiFi, menus and contact cards, then download as PNG or SVG. No signup.",
-            "og_title": "Free QR Code Generator UK | SmartQRCraft",
-            "og_description": "Make free custom QR codes for your UK business: websites, WiFi, menus and more. No signup, no watermark.",
-        },
-        "wifi-qr-code-generator.html": {
-            "title": "Free WiFi QR Code Generator UK | Share Your WiFi Without the Password — SmartQRCraft",
-            "description": "Free WiFi QR code generator for UK homes, cafes, pubs and offices. Guests scan and connect without typing a password. Download PNG or SVG. No signup.",
-        },
-        "vcard-qr-code-generator.html": {
-            "title": "Free vCard QR Code Generator UK | Digital Business Card QR — SmartQRCraft",
-            "description": "Create a free vCard QR code for your UK business card. One scan saves your name, number and email to a phone. No signup, instant PNG/SVG download.",
-        },
-    },
-    "smartqrcraft.in": {
-        "bulk-qr-code-generator.html": {
-            "title": "Bulk QR Code Generator India | Make Hundreds of QR Codes Free — SmartQRCraft",
-            "description": "Free bulk QR code generator for India. Paste or upload a list of links or text and download all QR codes as PNG or SVG in one ZIP. Up to 1000 codes, no signup.",
-        },
-        "barcode-generator.html": {
-            "title": "Free Bulk Barcode Generator India | Code 128, EAN-13, UPC — SmartQRCraft",
-            "description": "Free barcode generator and bulk barcode generator for India. Code 128, EAN-13, EAN-8, UPC-A, Code 39. Download PNG or SVG, or a ZIP for a whole list. No signup.",
-        },
-        "qr-code-scanner.html": {
-            "title": "QR Code Scanner Online India | Scan QR from Image or Camera — SmartQRCraft",
-            "description": "Free online QR code scanner for India. Scan a QR from an image, screenshot or camera, including UPI codes, and see the payee and amount before you pay. Private, no signup.",
-        },
-        "qr-code-tester.html": {
-            "title": "QR Code Test India | Check If Your QR Code Scans Before Printing — SmartQRCraft",
-            "description": "Free QR code test tool. Check your QR code scans when small, blurry or low contrast, and see what it contains. Private, no signup, no upload.",
-        },
-        "index.html": {
-            "title": "Free QR Code Generator India | Custom QR Codes, No Signup — SmartQRCraft",
-            "description": "Free QR code generator for India. Create custom QR codes for links, WiFi, menus, WhatsApp and contact cards, then download as PNG or SVG. No signup, no watermark.",
-            "og_title": "Free QR Code Generator India | SmartQRCraft",
-            "og_description": "Make free custom QR codes for your shop, restaurant or business in India. No signup, no watermark.",
-        },
-        "wifi-qr-code-generator.html": {
-            "title": "Free WiFi QR Code Generator India | Share WiFi With One Scan — SmartQRCraft",
-            "description": "Free WiFi QR code generator for homes, cafes, hotels and offices in India. Guests scan and connect without typing a password. PNG or SVG, no signup.",
-        },
-        "vcard-qr-code-generator.html": {
-            "title": "Free vCard QR Code Generator India | Digital Visiting Card QR — SmartQRCraft",
-            "description": "Create a free vCard QR code for your visiting card. One scan saves your name, phone and email to a contact list. No signup, instant PNG/SVG download.",
-        },
-    },
-}
-
-
 def set_meta(html, pattern, repl_value):
     return re.sub(pattern, lambda m: m.group(1) + repl_value + m.group(2), html, count=1)
 
@@ -320,14 +245,13 @@ FOOTER_LABELS = {
     "qr-code-menu-generator.html": "QR Code Menu",
     "pdf-to-qr-code.html": "PDF to QR Code",
 }
-_LABELS_FILE = json.loads((ROOT / "footer_labels.json").read_text(encoding="utf-8")) if (ROOT / "footer_labels.json").exists() else {}
 FOOTER_LABELS.update(_LABELS_FILE.get("*", {}))
 
 
 def write_footer_links(out, domain, pages):
     """Footer only links to pages that exist on this domain."""
     labels = {**FOOTER_LABELS, **_LABELS_FILE.get(domain, {})}
-    if domain == "smartqrcraft.de":
+    if domain in FOOTER_ONLY_OWN:
         labels = {k: v for k, v in labels.items() if k in _LABELS_FILE.get(domain, {})}
     order = [p for p in FOOTER_PRIORITY if p in pages and p in labels]
     order += [p for p in pages if p in labels and p not in order]

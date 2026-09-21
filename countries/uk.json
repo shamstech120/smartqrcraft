@@ -1,0 +1,57 @@
+{
+  "domain": "smartqrcraft.co.uk",
+  "order": 2,
+  "lang": "en-GB",
+  "hreflang": "en-GB",
+  "og_locale": "en_GB",
+  "currency": "GBP",
+  "skip_pages": [
+    "cash-app-qr-code-generator.html",
+    "discord-qr-code-generator.html",
+    "google-review-qr-code-generator.html",
+    "instagram-qr-code-generator.html",
+    "linkedin-qr-code-generator.html",
+    "paypal-qr-code-generator.html",
+    "pdf-to-qr-code.html",
+    "qr-code-for-wedding-photos.html",
+    "qr-code-menu-generator.html",
+    "qr-code-stickers.html",
+    "resume-qr-code-generator.html",
+    "snapchat-qr-code-generator.html",
+    "spotify-qr-code-generator.html",
+    "venmo-qr-code-generator.html",
+    "whatsapp-qr-code-generator.html"
+  ],
+  "meta_overrides": {
+    "bulk-qr-code-generator.html": {
+      "title": "Bulk QR Code Generator UK | Make Many QR Codes from a List — SmartQRCraft",
+      "description": "Free bulk QR code generator for the UK. Paste or upload a list, get every QR code as PNG or SVG in one ZIP. Up to 1000 codes, private, no signup."
+    },
+    "barcode-generator.html": {
+      "title": "Free Barcode Generator UK | Code 128, EAN-13, UPC, Code 39 — SmartQRCraft",
+      "description": "Free barcode generator for the UK: Code 128, EAN-13, EAN-8, UPC-A, Code 39 and more. One barcode or a bulk list, PNG or SVG. Private, no signup."
+    },
+    "qr-code-scanner.html": {
+      "title": "QR Code Scanner Online UK | Scan a QR Code from an Image — SmartQRCraft",
+      "description": "Free online QR code scanner for the UK. Scan a QR code from an image, screenshot or camera and check what it contains before you open it. Private, no signup."
+    },
+    "qr-code-tester.html": {
+      "title": "QR Code Tester UK | Check Your QR Code Scans Before Printing — SmartQRCraft",
+      "description": "Free QR code test. Check your code decodes and still scans when small, blurry or low contrast. Private, no signup, no upload."
+    },
+    "index.html": {
+      "title": "Free QR Code Generator UK | Custom QR Codes, No Signup — SmartQRCraft",
+      "description": "Free QR code generator for UK businesses, cafes and shops. Make custom QR codes for links, WiFi, menus and contact cards, then download as PNG or SVG. No signup.",
+      "og_title": "Free QR Code Generator UK | SmartQRCraft",
+      "og_description": "Make free custom QR codes for your UK business: websites, WiFi, menus and more. No signup, no watermark."
+    },
+    "wifi-qr-code-generator.html": {
+      "title": "Free WiFi QR Code Generator UK | Share Your WiFi Without the Password — SmartQRCraft",
+      "description": "Free WiFi QR code generator for UK homes, cafes, pubs and offices. Guests scan and connect without typing a password. Download PNG or SVG. No signup."
+    },
+    "vcard-qr-code-generator.html": {
+      "title": "Free vCard QR Code Generator UK | Digital Business Card QR — SmartQRCraft",
+      "description": "Create a free vCard QR code for your UK business card. One scan saves your name, number and email to a phone. No signup, instant PNG/SVG download."
+    }
+  }
+}

@@ -1,5 +1,6 @@
 {
-  "*": {
+  "default_domain": "smartqrcraft.com",
+  "footer_labels": {
     "upi-qr-code-generator.html": "UPI QR Code",
     "location-qr-code-generator.html": "Location QR Code",
     "whatsapp-qr-code-generator.html": "WhatsApp QR Code",
@@ -21,15 +22,5 @@
     "qr-code-for-wedding-photos.html": "QR Code for Wedding Photos",
     "qr-code-stickers.html": "QR Code Stickers",
     "resume-qr-code-generator.html": "Resume QR Code"
-  },
-  "smartqrcraft.de": {
-    "wlan-qr-code-generator.html": "WLAN QR-Code",
-    "visitenkarte-qr-code-generator.html": "QR-Code Visitenkarte",
-    "qr-code-mit-logo.html": "QR-Code mit Logo",
-    "pdf-in-qr-code.html": "PDF in QR-Code",
-    "qr-code-scanner-online.html": "QR-Code Scanner",
-    "qr-code-testen.html": "QR-Code testen",
-    "barcode-generator-kostenlos.html": "Barcode erstellen",
-    "qr-code-ueberweisung-erstellen.html": "QR-Code Überweisung"
   }
 }

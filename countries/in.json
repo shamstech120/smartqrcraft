@@ -1,0 +1,57 @@
+{
+  "domain": "smartqrcraft.in",
+  "order": 3,
+  "lang": "en-IN",
+  "hreflang": "en-IN",
+  "og_locale": "en_IN",
+  "currency": "INR",
+  "skip_pages": [
+    "cash-app-qr-code-generator.html",
+    "discord-qr-code-generator.html",
+    "google-review-qr-code-generator.html",
+    "instagram-qr-code-generator.html",
+    "linkedin-qr-code-generator.html",
+    "paypal-qr-code-generator.html",
+    "pdf-to-qr-code.html",
+    "qr-code-for-wedding-photos.html",
+    "qr-code-menu-generator.html",
+    "qr-code-stickers.html",
+    "resume-qr-code-generator.html",
+    "snapchat-qr-code-generator.html",
+    "spotify-qr-code-generator.html",
+    "venmo-qr-code-generator.html",
+    "whatsapp-qr-code-generator.html"
+  ],
+  "meta_overrides": {
+    "bulk-qr-code-generator.html": {
+      "title": "Bulk QR Code Generator India | Make Hundreds of QR Codes Free — SmartQRCraft",
+      "description": "Free bulk QR code generator for India. Paste or upload a list of links or text and download all QR codes as PNG or SVG in one ZIP. Up to 1000 codes, no signup."
+    },
+    "barcode-generator.html": {
+      "title": "Free Bulk Barcode Generator India | Code 128, EAN-13, UPC — SmartQRCraft",
+      "description": "Free barcode generator and bulk barcode generator for India. Code 128, EAN-13, EAN-8, UPC-A, Code 39. Download PNG or SVG, or a ZIP for a whole list. No signup."
+    },
+    "qr-code-scanner.html": {
+      "title": "QR Code Scanner Online India | Scan QR from Image or Camera — SmartQRCraft",
+      "description": "Free online QR code scanner for India. Scan a QR from an image, screenshot or camera, including UPI codes, and see the payee and amount before you pay. Private, no signup."
+    },
+    "qr-code-tester.html": {
+      "title": "QR Code Test India | Check If Your QR Code Scans Before Printing — SmartQRCraft",
+      "description": "Free QR code test tool. Check your QR code scans when small, blurry or low contrast, and see what it contains. Private, no signup, no upload."
+    },
+    "index.html": {
+      "title": "Free QR Code Generator India | Custom QR Codes, No Signup — SmartQRCraft",
+      "description": "Free QR code generator for India. Create custom QR codes for links, WiFi, menus, WhatsApp and contact cards, then download as PNG or SVG. No signup, no watermark.",
+      "og_title": "Free QR Code Generator India | SmartQRCraft",
+      "og_description": "Make free custom QR codes for your shop, restaurant or business in India. No signup, no watermark."
+    },
+    "wifi-qr-code-generator.html": {
+      "title": "Free WiFi QR Code Generator India | Share WiFi With One Scan — SmartQRCraft",
+      "description": "Free WiFi QR code generator for homes, cafes, hotels and offices in India. Guests scan and connect without typing a password. PNG or SVG, no signup."
+    },
+    "vcard-qr-code-generator.html": {
+      "title": "Free vCard QR Code Generator India | Digital Visiting Card QR — SmartQRCraft",
+      "description": "Create a free vCard QR code for your visiting card. One scan saves your name, phone and email to a contact list. No signup, instant PNG/SVG download."
+    }
+  }
+}
