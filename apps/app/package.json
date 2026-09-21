@@ -1,0 +1,10 @@
+{
+  "name": "smartqrcraft-app",
+  "private": true,
+  "type": "module",
+  "description": "Accounts, dynamic QR codes and admin for SmartQRCraft (local prototype, no dependencies)",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test --no-warnings test/*.test.mjs"
+  }
+}

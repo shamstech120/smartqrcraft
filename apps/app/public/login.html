@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Sign in | SmartQRCraft</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/styles.css">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<main class="auth-wrap">
+  <a class="brand" href="/">SmartQRCraft</a>
+  <div class="auth-card">
+    <h1>Sign in or create an account</h1>
+    <p class="muted">Enter your email and we will send you a link. There is no password to remember. The same email works for a new account and an existing one.</p>
+    <p id="err" class="notice notice-err" hidden></p>
+    <form id="form" novalidate>
+      <label for="email">Email address</label>
+      <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+      <button class="btn btn-primary" type="submit" id="go">Email me a sign-in link</button>
+    </form>
+    <div id="sent" hidden>
+      <p class="notice notice-ok" id="sentText"></p>
+      <p id="devBox" class="notice" hidden>Test mode: no email is sent. <a id="devLink" href="#">Open the sign-in link</a></p>
+    </div>
+    <p class="muted small">By continuing you agree to our terms and privacy policy. The free QR code generator on the main site never needs an account.</p>
+  </div>
+</main>
+<script type="module" src="/js/login.js"></script>
+</body>
+</html>

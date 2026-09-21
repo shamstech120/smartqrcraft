@@ -65,3 +65,8 @@ Verify the license of `qrcode-lib.js` before launch.
 
 Country-specific features (for example UPI for India, GiroCode for Germany) are just pages that exist only
 on that domain, so nothing else needs to change.
+
+## App (accounts, dynamic QR codes, admin)
+
+`apps/app/` is a separate local prototype: one app for all four domains, see `apps/app/README.md`.
+Run it with `node apps/app/server.mjs` and open http://localhost:8700/login.

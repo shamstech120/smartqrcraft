@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Admin | SmartQRCraft</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/styles.css">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<main class="app-main wide">
+  <h1>Admin</h1>
+  <section id="summary" class="tiles" aria-live="polite"></section>
+
+  <section class="panel">
+    <div class="row between">
+      <h2>Users</h2>
+      <input id="search" type="search" placeholder="Search by email" aria-label="Search users">
+    </div>
+    <div class="table-wrap"><table id="users"></table></div>
+  </section>
+
+  <section class="panel">
+    <h2>QR codes</h2>
+    <div class="table-wrap"><table id="qrs"></table></div>
+  </section>
+
+  <section class="panel">
+    <h2>Blocked domains</h2>
+    <p class="muted small">Sites listed here (and their subdomains) can no longer be used as a QR destination, and existing QR codes pointing to them stop working.</p>
+    <form id="blockForm" class="row" novalidate>
+      <input id="blockDomain" placeholder="bad-site.com" aria-label="Domain to block">
+      <input id="blockReason" placeholder="Reason (optional)" aria-label="Reason">
+      <button class="btn btn-danger" type="submit">Block</button>
+    </form>
+    <p id="blockErr" class="notice notice-err" hidden></p>
+    <div class="table-wrap"><table id="blocked"></table></div>
+  </section>
+
+  <section class="panel">
+    <h2>Recent admin actions</h2>
+    <div class="table-wrap"><table id="audit"></table></div>
+  </section>
+</main>
+<script type="module" src="/js/admin.js"></script>
+</body>
+</html>
