@@ -1,0 +1,35 @@
+{
+  "*": {
+    "upi-qr-code-generator.html": "UPI QR Code",
+    "location-qr-code-generator.html": "Location QR Code",
+    "whatsapp-qr-code-generator.html": "WhatsApp QR Code",
+    "qr-code-with-logo.html": "QR Code with Logo",
+    "qr-code-scanner.html": "QR Code Scanner",
+    "qr-code-tester.html": "QR Code Tester",
+    "bulk-qr-code-generator.html": "Bulk QR Code Generator",
+    "barcode-generator.html": "Barcode Generator",
+    "venmo-qr-code-generator.html": "Venmo QR Code",
+    "cash-app-qr-code-generator.html": "Cash App QR Code",
+    "paypal-qr-code-generator.html": "PayPal QR Code",
+    "youtube-qr-code-generator.html": "YouTube QR Code",
+    "facebook-qr-code-generator.html": "Facebook QR Code",
+    "google-forms-qr-code-generator.html": "Google Forms QR Code",
+    "event-qr-code-generator.html": "Event QR Code",
+    "snapchat-qr-code-generator.html": "Snapchat QR Code",
+    "spotify-qr-code-generator.html": "Spotify QR Code",
+    "discord-qr-code-generator.html": "Discord QR Code",
+    "qr-code-for-wedding-photos.html": "QR Code for Wedding Photos",
+    "qr-code-stickers.html": "QR Code Stickers",
+    "resume-qr-code-generator.html": "Resume QR Code"
+  },
+  "smartqrcraft.de": {
+    "wlan-qr-code-generator.html": "WLAN QR-Code",
+    "visitenkarte-qr-code-generator.html": "QR-Code Visitenkarte",
+    "qr-code-mit-logo.html": "QR-Code mit Logo",
+    "pdf-in-qr-code.html": "PDF in QR-Code",
+    "qr-code-scanner-online.html": "QR-Code Scanner",
+    "qr-code-testen.html": "QR-Code testen",
+    "barcode-generator-kostenlos.html": "Barcode erstellen",
+    "qr-code-ueberweisung-erstellen.html": "QR-Code Überweisung"
+  }
+}

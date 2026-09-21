@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Discord QR Code Generator | Server Invite QR Code — SmartQRCraft</title>
+<meta name="description" content="Make a free QR code for your Discord server invite. Add colors and a logo, download PNG or SVG for posters, streams and events. No signup.">
+<link rel="canonical" href="https://smartqrcraft.com/discord-qr-code-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Discord QR Code Generator | SmartQRCraft">
+<meta property="og:description" content="Turn a Discord invite link into a QR code. Free, no signup, PNG or SVG.">
+<meta property="og:url" content="https://smartqrcraft.com/discord-qr-code-generator.html">
+<meta property="og:site_name" content="SmartQRCraft">
+<meta name="theme-color" content="#6D28D9">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://smartqrcraft.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Discord QR Code Generator",
+          "item": "https://smartqrcraft.com/discord-qr-code-generator.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I make a QR code for my Discord server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Create an invite link in Discord, paste it into the generator on this page and download the QR code. Scanning it opens the invite."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does my Discord QR code say the invite is invalid?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The invite probably expired or reached its use limit. Create an invite that never expires and generate a new code."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the Discord QR code generator free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. It is free, with no signup and no watermark."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it safe to put a permanent invite on a poster?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It lets anyone join, so set moderation and verification first. If it is abused, delete the invite and make a new one."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this affiliated with Discord?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. This is an independent tool and is not affiliated with Discord."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body data-base="">
+<div id="site-header"></div>
+
+<main>
+  <div class="wrap breadcrumbs">
+    <a href="index.html">Home</a><span class="sep">/</span><span class="current">Discord QR Code Generator</span>
+  </div>
+
+  <section class="hero" id="generator" style="padding-top:32px">
+    <div class="wrap">
+      <div class="hero-head">
+        <span class="trust-badge"><span class="trust-dot"></span>100% Free · No Signup Required</span>
+        <h1>Free <span class="accent">Discord QR Code</span> Generator</h1>
+        <p class="lead">Paste your Discord server invite link and download a QR code. Scanning it opens the invite so people can join your community from a poster or a screen.</p>
+      </div>
+
+      <div class="generator qr-generator" id="qr-builder" data-types="url" data-default="url" data-lock="true" data-label="Your Discord server invite link" data-placeholder="https://discord.gg/yourinvite">
+        <div class="generator-head">
+          <h2><svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="color:var(--violet)"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M14 14h3v3M21 14v.01M14 21h.01M17.5 21H21v-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Discord QR Code Generator</h2>
+          <span class="status-pill"><span class="status-dot"></span>Instant · Free Vector Output</span>
+        </div>
+        <div class="type-tabs" role="tablist" aria-label="QR code type"></div>
+        <div class="builder-body">
+          <div class="builder-col">
+            <div class="field-container"></div>
+            <div class="two-col">
+              <div class="option-card"><h3>QR Color</h3><div class="swatches color-swatches"></div></div>
+              <div class="option-card"><h3>Background</h3><div class="swatches bg-swatches"></div></div>
+            </div>
+            <div class="two-col">
+              <div class="option-card"><h3>QR Style</h3><div class="pill-group style-pills"></div></div>
+              <div class="option-card"><h3>Eye Style</h3><div class="pill-group eye-pills"></div></div>
+            </div>
+            <div class="two-col">
+              <div class="option-card">
+                <div class="toggle-row"><h3 style="margin:0">Frame &amp; CTA</h3><label class="switch"><input type="checkbox" class="frame-toggle"><span class="slider"></span></label></div>
+                <input type="text" class="frame-input" value="JOIN OUR DISCORD" disabled placeholder="JOIN OUR DISCORD" style="width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--border);font-size:13px">
+              </div>
+              <div class="option-card">
+                <div class="toggle-row"><h3 style="margin:0">Center Logo</h3><label class="switch"><input type="checkbox" class="logo-toggle"><span class="slider"></span></label></div>
+                <input type="file" class="logo-file visually-hidden" accept="image/png,image/jpeg,image/svg+xml">
+                <p class="field-hint" style="margin:0">Upload a square logo (PNG/JPG).</p>
+              </div>
+            </div>
+          </div>
+          <div class="preview-col">
+            <div class="preview-frame">
+              <div class="preview-canvas-wrap">
+                <canvas id="qr-canvas" width="480" height="480" aria-label="Discord QR Code Generator preview"></canvas>
+                <div class="empty-state" style="display:none;width:220px;height:220px;align-items:center;justify-content:center;text-align:center;color:var(--muted);font-size:13px;padding:12px">Paste your Discord invite link to generate the QR code.</div>
+              </div>
+              <div class="download-row">
+                <button type="button" class="btn btn-primary dl-png" disabled>Download PNG</button>
+                <div class="download-sub">
+                  <button type="button" class="btn dl-svg" disabled>Download SVG</button>
+                  <a class="btn" href="#faq">Need help?</a>
+                </div>
+              </div>
+              <p class="privacy-note">Your QR code is generated locally in your browser. Nothing is uploaded to a server.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-to">
+    <div class="wrap" style="max-width:760px">
+      <div class="section-head" style="text-align:left;margin-bottom:24px"><h2 style="font-size:26px">How to make a Discord server QR code</h2></div>
+      <p style="color:var(--muted);line-height:1.7;margin-bottom:16px">The code holds your server's invite link.</p>
+      <ol style="color:var(--muted);line-height:1.8;margin:0 0 16px 20px"><li>In Discord, open your server and use the invite option to create an invite link.</li><li>In the invite settings, choose how long the link lasts and how many uses it allows.</li><li>Copy the link and paste it into the field above.</li><li>Style the code and download the PNG or SVG.</li><li>Test the code with an account that has not joined the server.</li></ol>
+    </div>
+  </section>
+
+  <section id="expiry">
+    <div class="wrap" style="max-width:760px">
+      <div class="section-head" style="text-align:left;margin-bottom:24px"><h2 style="font-size:26px">Invite links can expire, and that breaks your QR code</h2></div>
+      <p style="color:var(--muted);line-height:1.7;margin-bottom:16px">A Discord invite may expire after a set time or a number of uses. If it does, the QR code will lead to an invalid invite. For printed codes, create an invite that does not expire and has no use limit, then use that link.</p>
+      <p style="color:var(--muted);line-height:1.7;margin-bottom:16px">Also consider who you are letting in. An open, permanent invite can be shared widely, so set up moderation and verification on your server first.</p>
+      
+    </div>
+  </section>
+
+  <section class="bg-lavender">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">Where to Use It</span><h2>Where a Discord QR code helps</h2></div>
+      <div class="card-grid"><div class="card"><div><h3>Posters &amp; flyers</h3><p>Recruit members at school, campus and meetups.</p></div></div><div class="card"><div><h3>Streams &amp; videos</h3><p>Show the code as an overlay or end card.</p></div></div><div class="card"><div><h3>Gaming events &amp; cons</h3><p>Print codes on badges and banners.</p></div></div><div class="card"><div><h3>Merch &amp; stickers</h3><p>Put the community link on physical items.</p></div></div><div class="card"><div><h3>Clubs &amp; classes</h3><p>Share the server with new members in person.</p></div></div><div class="card"><div><h3>Presentations</h3><p>Add a code on the last slide.</p></div></div></div>
+    </div>
+  </section>
+
+  <section id="tips">
+    <div class="wrap" style="max-width:760px">
+      <div class="section-head" style="text-align:left;margin-bottom:24px"><h2 style="font-size:26px">Tips for Discord QR codes</h2></div>
+      <p style="color:var(--muted);line-height:1.7;margin-bottom:16px">A few habits keep your community safe and your code working.</p>
+      <ul style="color:var(--muted);line-height:1.8;margin:0 0 16px 20px"><li><strong>Use a non-expiring invite</strong> for anything printed.</li><li><strong>Set verification levels</strong> and rules before you invite the public.</li><li><strong>Tell people what they are joining,</strong> for example &quot;Scan to join our study group&quot;.</li><li><strong>Replace the invite if it is abused.</strong> Delete the old invite and print a new code.</li></ul>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">FAQ</span><h2>Discord QR Code Questions</h2></div>
+      <div class="faq">
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">How do I make a QR code for my Discord server?<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/></svg></button><div class="faq-a"><p>Create an invite link in Discord, paste it into the generator on this page and download the QR code. Scanning it opens the invite.</p></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">Why does my Discord QR code say the invite is invalid?<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/></svg></button><div class="faq-a"><p>The invite probably expired or reached its use limit. Create an invite that never expires and generate a new code.</p></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">Is the Discord QR code generator free?<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/></svg></button><div class="faq-a"><p>Yes. It is free, with no signup and no watermark.</p></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">Is it safe to put a permanent invite on a poster?<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/></svg></button><div class="faq-a"><p>It lets anyone join, so set moderation and verification first. If it is abused, delete the invite and make a new one.</p></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">Is this affiliated with Discord?<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/></svg></button><div class="faq-a"><p>No. This is an independent tool and is not affiliated with Discord.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap" style="max-width:760px">
+      <div class="section-head" style="text-align:left;margin-bottom:16px"><h2 style="font-size:22px">Related QR code tools</h2></div>
+      <ul style="color:var(--muted);line-height:2;margin-left:20px"><li><a href="youtube-qr-code-generator.html">YouTube QR code generator</a></li><li><a href="qr-code-stickers.html">QR code stickers</a></li><li><a href="index.html#generator">Free QR code generator</a></li></ul>
+    </div>
+  </section>
+  <section>
+    <div class="wrap">
+      <div class="final-cta">
+        <h2>Need a different QR code?</h2>
+        <p>Explore WiFi, vCard, menu, URL and more on the main generator.</p>
+        <a href="index.html#generator" class="btn btn-primary">Go to Full Generator</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/qrcode-lib.js"></script>
+<script src="assets/qr-engine.js"></script>
+<script src="assets/components.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
