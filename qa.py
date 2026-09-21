@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Sanity checks over dist/: links, assets, metadata, hreflang reciprocity."""
+"""Sanity checks over sites/: links, assets, metadata, hreflang reciprocity."""
 import re
 import sys
 from pathlib import Path
 from html.parser import HTMLParser
 
-DIST = Path(__file__).parent / "dist"
+DIST = Path(__file__).parent / "sites"
 problems = []
 
 

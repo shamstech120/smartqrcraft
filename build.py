@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build one static site per ccTLD from the shared template in site/.
 
-Usage: python build.py            -> dist/<domain>/ for every domain
+Usage: python build.py            -> sites/<domain>/ for every domain
 Per-domain differences live in DOMAINS and OVERRIDES below.
 """
 import json
@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent
 SRC = ROOT / "site"
-DIST = ROOT / "dist"
+DIST = ROOT / "sites"
 BASE = "smartqrcraft.com"
 
 DOMAINS = {
@@ -399,7 +399,7 @@ def main():
             build_sitemap(domain, [p for p in domain_pages if p not in NOT_IN_SITEMAP]), encoding="utf-8")
         (out / "robots.txt").write_text(
             f"User-agent: *{chr(10)}Allow: /{chr(10)}{chr(10)}Sitemap: https://{domain}/sitemap.xml{chr(10)}", encoding="utf-8")
-        print(f"built dist/{domain} ({len(domain_pages)} pages)")
+        print(f"built sites/{domain} ({len(domain_pages)} pages)")
 
 
 if __name__ == "__main__":

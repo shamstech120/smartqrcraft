@@ -8,10 +8,10 @@ cd /d "%~dp0"
 python gen_pages.py
 python build.py
 python qa.py
-start "smartqrcraft.com  :8610" cmd /k python -m http.server 8610 --directory dist\smartqrcraft.com
-start "smartqrcraft.in   :8611" cmd /k python -m http.server 8611 --directory dist\smartqrcraft.in
-start "smartqrcraft.de   :8612" cmd /k python -m http.server 8612 --directory dist\smartqrcraft.de
-start "smartqrcraft.co.uk :8613" cmd /k python -m http.server 8613 --directory dist\smartqrcraft.co.uk
+start "smartqrcraft.com  :8610" cmd /k python -m http.server 8610 --directory sites\smartqrcraft.com
+start "smartqrcraft.in   :8611" cmd /k python -m http.server 8611 --directory sites\smartqrcraft.in
+start "smartqrcraft.de   :8612" cmd /k python -m http.server 8612 --directory sites\smartqrcraft.de
+start "smartqrcraft.co.uk :8613" cmd /k python -m http.server 8613 --directory sites\smartqrcraft.co.uk
 timeout /t 2 >nul
 start http://localhost:8610
 start http://localhost:8611
