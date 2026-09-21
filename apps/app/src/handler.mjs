@@ -99,10 +99,13 @@ async function rateLimited(env, key, max, windowSec) {
 async function currentUser(env, req) {
   const t = cookies(req).sqc_session;
   if (!t) return null;
-  return env.db.get(
+  const row = await env.db.get(
     "select u.* from sessions s join users u on u.id = s.user_id where s.token_hash = ? and s.expires_at > ?",
     [sha(t), now()]
   );
+  // Admin rights come from the allowlist on every request, so removing an email takes effect immediately.
+  if (row) row.is_admin = env.adminEmails.has(row.email) ? 1 : 0;
+  return row;
 }
 
 function sessionCookie(env, value, maxAge) {
@@ -315,7 +318,7 @@ export async function handle(req, env) {
            from users u where u.email like ? escape '\\' order by u.id desc limit 200`,
         [`%${q.replace(/[\\%_]/g, "\\$&")}%`]
       );
-      return json({ users: rows });
+      return json({ users: rows.map((u) => ({ ...u, is_admin: env.adminEmails.has(u.email) ? 1 : 0 })) });
     }
 
     m = p.match(/^\/api\/admin\/users\/(\d+)(\/ban)?$/);

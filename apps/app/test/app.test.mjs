@@ -291,3 +291,12 @@ test("only a hash of each token is stored", async () => {
   assert.notEqual(rows[0].token_hash, token);
   assert.equal(rows[0].token_hash.length, 64);
 });
+
+test("removing an admin from the allowlist ends their admin access immediately (no re-login needed)", async () => {
+  const env = newEnv();
+  const admin = await signIn(env, "admin@example.com", "7.7.7.7");
+  assert.equal((await call(env, "GET", "/api/admin/users", { cookie: admin.cookie })).status, 200);
+  env.adminEmails.delete("admin@example.com");
+  assert.equal((await call(env, "GET", "/api/admin/users", { cookie: admin.cookie })).status, 403);
+  assert.equal((await call(env, "GET", "/api/me", { cookie: admin.cookie })).data.is_admin, false);
+});
