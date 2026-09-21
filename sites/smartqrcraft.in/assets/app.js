@@ -828,7 +828,8 @@
       frameGallery = el("div", { class: "frame-gallery", role: "group", "aria-label": X("tabFrame", "Frame") });
       var options = ["none"].concat(window.SmartQR.FRAME_STYLES);
       var names = { none: X("fNone", "No frame"), bottom: X("fBottom", "Bar below"), top: X("fTop", "Bar above"), badge: X("fBadge", "Badge below"),
-        bubble: X("fBubble", "Speech bubble"), outline: X("fOutline", "Outline box"), corners: X("fCorners", "Corner marks"), text: X("fText", "Text only") };
+        bubble: X("fBubble", "Speech bubble"), outline: X("fOutline", "Outline box"), corners: X("fCorners", "Corner marks"), text: X("fText", "Text only"),
+        bag: X("fBag", "Shopping bag"), gift: X("fGift", "Gift box"), cup: X("fCup", "Coffee cup") };
       options.forEach(function (name) {
         var b = el("button", { type: "button", class: "frame-opt", "data-frame": name, title: names[name], "aria-label": names[name], "aria-pressed": name === "none" ? "true" : "false" });
         if (name === "none") {

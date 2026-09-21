@@ -252,22 +252,24 @@
   }
 
   // Frame geometry shared by the canvas and SVG renderers.
-  var FRAME_STYLES = ["bottom", "top", "badge", "bubble", "outline", "corners", "text"];
+  var FRAME_STYLES = ["bottom", "top", "badge", "bubble", "outline", "corners", "text", "bag", "gift", "cup"];
 
   function frameGeometry(size, frameText, frameStyle) {
     var style = FRAME_STYLES.indexOf(frameStyle) >= 0 ? frameStyle : "bottom";
     var barH = frameText ? Math.round(size * 0.14) : 0;
     var gap = frameText && style === "badge" ? Math.round(size * 0.03) : 0;
     var ptr = frameText && style === "bubble" ? Math.round(size * 0.04) : 0;
-    var top = 0, bottom = 0;
+    var top = 0, bottom = 0, left = 0, right = 0;
     if (frameText) {
-      if (style === "top") top = barH;
+      if (style === "bag" || style === "gift") { top = Math.round(size * 0.17); bottom = barH; }
+      else if (style === "cup") { top = Math.round(size * 0.15); bottom = barH; right = Math.round(size * 0.2); }
+      else if (style === "top") top = barH;
       else if (style === "bubble") top = barH + ptr;
       else if (style === "badge") bottom = barH + gap;
       else if (style === "text") bottom = Math.round(barH * 0.85);
       else bottom = barH; // bottom, outline, corners
     }
-    return { barH: barH, style: style, gap: gap, ptr: ptr, top: top, bottom: bottom };
+    return { barH: barH, style: style, gap: gap, ptr: ptr, top: top, bottom: bottom, left: left, right: right };
   }
 
   // Every frame is described as filled paths plus one text item, so the canvas,
@@ -303,6 +305,30 @@
       ops.push({ fill: fg, evenodd: true, path: pathRRect(0, top, size, size, r).concat(pathRRect(t, top + t, size - 2 * t, size - 2 * t, Math.max(0, r - t))) });
       ops.push({ fill: fg, path: pathRect(0, top + size, size, barH) });
       barText(size / 2, top + size + barH / 2, fs);
+    } else if (st === "bag" || st === "gift" || st === "cup") {
+      var tk = size * 0.022, rr = size * 0.05, bodyH = size + barH;
+      // the body: a rounded ring around the code with the label band filling its lower edge
+      ops.push({ fill: fg, evenodd: true, path: pathRRect(0, top, size, bodyH, rr).concat(pathRRect(tk, top + tk, size - 2 * tk, bodyH - 2 * tk, Math.max(0, rr - tk))) });
+      ops.push({ fill: fg, path: pathRect(tk, top + size, size - 2 * tk, barH - tk) });
+      barText(size / 2, top + size + (barH - tk) / 2, fs);
+      var cx2 = size / 2;
+      if (st === "bag") {
+        var hw = size * 0.42, th = size * 0.03;
+        ops.push({ fill: fg, path: pathArch((size - hw) / 2, size * 0.015, hw, top - size * 0.015 + th, th) });
+      } else if (st === "gift") {
+        var lr = size * 0.085, lt = size * 0.028, ly = top - size * 0.07;
+        [-1, 1].forEach(function (d) {
+          var lx2 = cx2 + d * size * 0.1;
+          ops.push({ fill: fg, evenodd: true, path: pathCircle(lx2, ly, lr).concat(pathCircle(lx2, ly, lr - lt)) });
+        });
+        ops.push({ fill: fg, path: pathRRect(cx2 - size * 0.04, top - size * 0.07, size * 0.08, size * 0.085, size * 0.016) });
+      } else {
+        [-1, 0, 1].forEach(function (d) {
+          ops.push({ fill: fg, path: pathRRect(cx2 + d * size * 0.12 - size * 0.014, size * 0.02 + (d === 0 ? 0 : size * 0.025), size * 0.028, size * 0.085, size * 0.014) });
+        });
+        var hy = top + size * 0.16, hh = size * 0.52, hth = size * 0.036, hx = size - tk;
+        ops.push({ fill: fg, evenodd: true, path: pathRRect(hx, hy, fr.right + tk, hh, size * 0.1).concat(pathRRect(hx + hth, hy + hth, fr.right + tk - 2 * hth, hh - 2 * hth, size * 0.07)) });
+      }
     } else if (st === "corners") {
       var inset = size * 0.03, arm = size * 0.15, th = size * 0.022, L = inset, R = size - inset, T = top + inset, B = top + size - inset;
       var corner = [];
@@ -362,7 +388,7 @@
     var cellSize = size / (count + margin * 2);
     var fr = frameGeometry(size, frameText, opts.frameStyle);
 
-    canvas.width = size;
+    canvas.width = fr.left + size + fr.right;
     canvas.height = fr.top + size + fr.bottom;
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -396,7 +422,7 @@
     };
 
     ctx.save();
-    ctx.translate(0, fr.top);
+    ctx.translate(fr.left, fr.top);
     // gradient was defined in absolute coordinates, so shift it back inside the translated space
     if (gradient !== "none") {
       var gp2 = gradientPoints(gradient, size);
@@ -481,11 +507,11 @@
           ctx.font = "700 " + op.size + "px Inter, system-ui, sans-serif";
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
-          ctx.fillText(op.text, op.cx, op.cy);
+          ctx.fillText(op.text, op.cx + fr.left, op.cy);
           ctx.globalCompositeOperation = "source-over";
         } else {
           ctx.fillStyle = op.fill;
-          tracePath(ctx, op.path);
+          tracePath(ctx, shiftPath(op.path, fr.left));
           ctx.fill(op.evenodd ? "evenodd" : "nonzero");
         }
       });
@@ -496,7 +522,7 @@
       img.crossOrigin = "anonymous";
       img.onload = function () {
         var logoSize = size * 0.2;
-        var lx = (size - logoSize) / 2;
+        var lx = fr.left + (size - logoSize) / 2;
         var ly = fr.top + (size - logoSize) / 2;
         var pad = logoSize * 0.12;
         ctx.fillStyle = bg;
@@ -538,6 +564,7 @@
     var cell = size / (count + margin * 2);
     var fr = frameGeometry(size, frameText, opts.frameStyle);
     var totalH = fr.top + size + fr.bottom;
+    var totalW = fr.left + size + fr.right;
     var logoSize = size * 0.2;
     var logoPad = logoSize * 0.12;
     var lx0 = (size - logoSize) / 2 - logoPad, lx1 = (size + logoSize) / 2 + logoPad;
@@ -557,8 +584,8 @@
     var fgFill = fg;
     var parts = [];
     parts.push(
-      '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + totalH +
-        '" viewBox="0 0 ' + size + " " + totalH + '">'
+      '<svg xmlns="http://www.w3.org/2000/svg" width="' + totalW + '" height="' + totalH +
+        '" viewBox="0 0 ' + totalW + " " + totalH + '">'
     );
     if (gradient !== "none") {
       var gp = gradientPoints(gradient, size);
@@ -568,7 +595,7 @@
     }
     var eyeFill = opts.eyeColor || fgFill;
     if (!transparent) parts.push('<rect width="100%" height="100%" fill="' + bg + '"/>');
-    parts.push('<g transform="translate(0,' + fr.top + ')">');
+    parts.push('<g transform="translate(' + fr.left + ',' + fr.top + ')">');
 
     for (var r = 0; r < count; r++) {
       for (var c = 0; c < count; c++) {
@@ -617,11 +644,11 @@
     if (frameText) {
       frameOps(size, fr, frameText.toUpperCase(), fg, bg, transparent).forEach(function (op) {
         if (op.text != null) {
-          parts.push('<text x="' + f2(op.cx) + '" y="' + f2(op.cy) + '" fill="' + (op.knockout ? "#ffffff" : op.color) +
+          parts.push('<text x="' + f2(op.cx + fr.left) + '" y="' + f2(op.cy) + '" fill="' + (op.knockout ? "#ffffff" : op.color) +
             '" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="' + op.size +
             '" text-anchor="middle" dominant-baseline="middle">' + op.text.replace(/&/g, "&amp;").replace(/</g, "&lt;") + "</text>");
         } else {
-          parts.push('<path fill="' + op.fill + '"' + (op.evenodd ? ' fill-rule="evenodd"' : "") + ' d="' + pathToD(op.path) + '"/>');
+          parts.push('<path fill="' + op.fill + '"' + (op.evenodd ? ' fill-rule="evenodd"' : "") + ' d="' + pathToD(shiftPath(op.path, fr.left)) + '"/>');
         }
       });
     }
@@ -653,6 +680,21 @@
       ["L", x + r, y + h], ["C", x + r - k, y + h, x, y + h - r + k, x, y + h - r],
       ["L", x, y + r], ["C", x, y + r - k, x + r - k, y, x + r, y], ["Z"]];
   }
+  function pathArch(x, y, w, h, t) {
+    var r = Math.min(w / 2, h), k = 0.5523 * r, ri = Math.max(0, r - t), ki = 0.5523 * ri;
+    return [["M", x, y + h], ["L", x, y + r], ["C", x, y + r - k, x + r - k, y, x + r, y], ["L", x + w - r, y],
+      ["C", x + w - r + k, y, x + w, y + r - k, x + w, y + r], ["L", x + w, y + h], ["L", x + w - t, y + h],
+      ["L", x + w - t, y + t + ri], ["C", x + w - t, y + t + ri - ki, x + w - t - ri + ki, y + t, x + w - t - ri, y + t],
+      ["L", x + t + ri, y + t], ["C", x + t + ri - ki, y + t, x + t, y + t + ri - ki, x + t, y + t + ri], ["L", x + t, y + h], ["Z"]];
+  }
+  function shiftPath(path, dx) {
+    if (!dx) return path;
+    return path.map(function (sg) {
+      if (sg[0] === "M" || sg[0] === "L") return [sg[0], sg[1] + dx, sg[2]];
+      if (sg[0] === "C") return ["C", sg[1] + dx, sg[2], sg[3] + dx, sg[4], sg[5] + dx, sg[6]];
+      return sg;
+    });
+  }
   function pathCircle(cx, cy, r) {
     var k = 0.5523 * r;
     return [["M", cx + r, cy], ["C", cx + r, cy + k, cx + k, cy + r, cx, cy + r], ["C", cx - k, cy + r, cx - r, cy + k, cx - r, cy],
@@ -672,14 +714,15 @@
     var cell = size / (count + margin * 2);
     var fr = frameGeometry(size, frameText, opts.frameStyle);
     var H = fr.top + size + fr.bottom;
+    var W = fr.left + size + fr.right;
     var ops = [];
-    if (!transparent) ops.push({ fill: bg, path: pathRect(0, 0, size, H) });
+    if (!transparent) ops.push({ fill: bg, path: pathRect(0, 0, W, H) });
 
     var mods = [];
     for (var r = 0; r < count; r++) {
       for (var c = 0; c < count; c++) {
         if (!qr.isDark(r, c) || isEye(count, r, c)) continue;
-        var x = (c + margin) * cell, y = fr.top + (r + margin) * cell;
+        var x = fr.left + (c + margin) * cell, y = fr.top + (r + margin) * cell;
         if (style === "diamond") mods = mods.concat([["M", x + cell / 2, y], ["L", x + cell, y + cell / 2], ["L", x + cell / 2, y + cell], ["L", x, y + cell / 2], ["Z"]]);
         else if (style === "dots") mods = mods.concat(pathCircle(x + cell / 2, y + cell / 2, cell / 2));
         else mods = mods.concat(pathRRect(x, y, cell, cell, radiusForStyle(style, cell)));
@@ -689,7 +732,7 @@
 
     var eyeFill = opts.eyeColor || fg;
     [[0, 0], [0, count - 7], [count - 7, 0]].forEach(function (pos) {
-      var ox = (pos[1] + margin) * cell, oy = fr.top + (pos[0] + margin) * cell;
+      var ox = fr.left + (pos[1] + margin) * cell, oy = fr.top + (pos[0] + margin) * cell;
       var outer = cell * 7, inner = cell * 3, cx = ox + outer / 2, cy = oy + outer / 2;
       var ring, core;
       if (eyeStyle === "circle") {
@@ -709,13 +752,13 @@
       frameOps(size, fr, frameText, fg, bg, transparent).forEach(function (op) {
         if (op.text != null) {
           ops.push({ text: op.text, color: op.knockout ? "#ffffff" : op.color, size: op.size,
-            x: op.cx - textWidth(op.text, op.size) / 2, y: op.cy + op.size * 0.35 });
+            x: op.cx + fr.left - textWidth(op.text, op.size) / 2, y: op.cy + op.size * 0.35 });
         } else {
-          ops.push({ fill: op.fill, evenodd: op.evenodd, path: op.path });
+          ops.push({ fill: op.fill, evenodd: op.evenodd, path: shiftPath(op.path, fr.left) });
         }
       });
     }
-    return { w: size, h: H, ops: ops };
+    return { w: W, h: H, ops: ops };
   }
 
   function rgb01(hex) {
