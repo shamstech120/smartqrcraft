@@ -10,11 +10,27 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://smartqrcraft.com/app-store-qr-code-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/app-store-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/app-store-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/app-store-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/app-store-qr-code-generator.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://smartqrcraft.com/barcode-generator.html</loc>
     <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/barcode-generator.html"/>
     <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/barcode-generator.html"/>
     <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/barcode-generator.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/barcode-generator.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartqrcraft.com/bitcoin-qr-code-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/bitcoin-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/bitcoin-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/bitcoin-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/bitcoin-qr-code-generator.html"/>
     <priority>0.8</priority>
   </url>
   <url>
@@ -35,6 +51,14 @@
     <loc>https://smartqrcraft.com/discord-qr-code-generator.html</loc>
     <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/discord-qr-code-generator.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/discord-qr-code-generator.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartqrcraft.com/email-qr-code-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/email-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/email-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/email-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/email-qr-code-generator.html"/>
     <priority>0.8</priority>
   </url>
   <url>
@@ -82,6 +106,14 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://smartqrcraft.com/mecard-qr-code-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/mecard-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/mecard-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/mecard-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/mecard-qr-code-generator.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://smartqrcraft.com/paypal-qr-code-generator.html</loc>
     <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/paypal-qr-code-generator.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/paypal-qr-code-generator.html"/>
@@ -91,6 +123,14 @@
     <loc>https://smartqrcraft.com/pdf-to-qr-code.html</loc>
     <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/pdf-to-qr-code.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/pdf-to-qr-code.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartqrcraft.com/phone-qr-code-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/phone-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/phone-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/phone-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/phone-qr-code-generator.html"/>
     <priority>0.8</priority>
   </url>
   <url>
@@ -190,6 +230,14 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://smartqrcraft.com/sms-qr-code-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/sms-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/sms-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/sms-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/sms-qr-code-generator.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://smartqrcraft.com/snapchat-qr-code-generator.html</loc>
     <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/snapchat-qr-code-generator.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/snapchat-qr-code-generator.html"/>
@@ -207,6 +255,30 @@
     <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/static-vs-dynamic-qr-codes.html"/>
     <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/static-vs-dynamic-qr-codes.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/static-vs-dynamic-qr-codes.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartqrcraft.com/telegram-qr-code-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/telegram-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/telegram-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/telegram-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/telegram-qr-code-generator.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartqrcraft.com/text-qr-code-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/text-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/text-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/text-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/text-qr-code-generator.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartqrcraft.com/twitter-x-qr-code-generator.html</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/twitter-x-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/twitter-x-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/twitter-x-qr-code-generator.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/twitter-x-qr-code-generator.html"/>
     <priority>0.8</priority>
   </url>
   <url>

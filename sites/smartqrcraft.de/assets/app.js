@@ -26,6 +26,7 @@
   ICONS.mecard = ICONS.vcard;
   ICONS.bitcoin = ICONS.upi;
   ICONS.x = ICONS.social;
+  ICONS.telegram = '<path d="M21 4L3 11l6 2.2L19 7l-8 7.5.3 5.5 3-3.8 4.2 3.3L21 4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>';
 
   var TYPES = {
     url: {
@@ -49,7 +50,8 @@
       label: "Email", short: "Pre-fill a recipient, subject and message.",
       fields: [
         { name: "to", label: "Recipient email", placeholder: "hello@example.com", type: "text" },
-        { name: "subject", label: "Subject (optional)", placeholder: "Let's talk", type: "text" }
+        { name: "subject", label: "Subject (optional)", placeholder: "Let's talk", type: "text" },
+        { name: "body", label: "Message (optional)", placeholder: "Hi, I scanned your QR code and...", type: "textarea" }
       ]
     },
     phone: {
@@ -142,6 +144,13 @@
       fields: [
         { name: "handle", label: "Your X username", placeholder: "@yourname", type: "text" },
         { name: "text", label: "Or a pre-filled post (optional, replaces the profile link)", placeholder: "I just tried this #qr", type: "text" }
+      ]
+    },
+    telegram: {
+      label: "Telegram", short: "Open a Telegram chat, channel or group with one scan.",
+      fields: [
+        { name: "user", label: "Telegram username, channel or group", placeholder: "@yourname", type: "text" },
+        { name: "message", label: "Pre-filled message (optional, works for chats)", placeholder: "Hi, I found you through your QR code", type: "text" }
       ]
     },
     venmo: {

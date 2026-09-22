@@ -19,6 +19,7 @@ BASE = DEFAULT_DOMAIN
 
 # Everything that differs per country lives in countries/<code>.json (see README).
 DOMAINS, EXCLUDE, OVERRIDES, HUB = {}, {}, {}, {}
+OWN_ONLY = set()  # domains that take no shared (English) pages at all
 FOOTER_ONLY_OWN = set()
 _LABELS_FILE = {"*": _common.get("footer_labels", {})}
 COM_ONLY = set()  # legacy name: the per-country page lists are now "skip_pages" in the JSON files
@@ -26,6 +27,8 @@ _countries = [json.loads(f.read_text(encoding="utf-8")) for f in COUNTRIES.glob(
 for _c in sorted(_countries, key=lambda c: c.get("order", 99)):
     _d = _c["domain"]
     DOMAINS[_d] = {k: _c[k] for k in ("lang", "hreflang", "og_locale", "currency")}
+    if _c.get("own_pages_only"):
+        OWN_ONLY.add(_d)
     if _c.get("skip_pages"):
         EXCLUDE[_d] = set(_c["skip_pages"])
     if _c.get("meta_overrides"):
@@ -151,7 +154,7 @@ NO_GOOGLE_FONTS = {"smartqrcraft.de"}  # loading Google Fonts from Google server
 def has_page(domain, name):
     if name in local_pages(domain):
         return True
-    if name not in SHARED or name in EXCLUDE.get(domain, set()):
+    if domain in OWN_ONLY or name not in SHARED or name in EXCLUDE.get(domain, set()):
         return False
     return not (name in COM_ONLY and domain != DEFAULT_DOMAIN)
 

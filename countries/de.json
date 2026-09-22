@@ -57,5 +57,6 @@
     "qr-code-ueberweisung-erstellen.html": "QR-Code Überweisung"
   },
   "footer_only_own": true,
-  "meta_overrides": {}
+  "meta_overrides": {},
+  "own_pages_only": true
 }

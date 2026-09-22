@@ -21,6 +21,15 @@
     "discord-qr-code-generator.html": "Discord QR Code",
     "qr-code-for-wedding-photos.html": "QR Code for Wedding Photos",
     "qr-code-stickers.html": "QR Code Stickers",
-    "resume-qr-code-generator.html": "Resume QR Code"
+    "resume-qr-code-generator.html": "Resume QR Code",
+    "phone-qr-code-generator.html": "Phone QR Code",
+    "email-qr-code-generator.html": "Email QR Code",
+    "sms-qr-code-generator.html": "SMS QR Code",
+    "text-qr-code-generator.html": "Text QR Code",
+    "app-store-qr-code-generator.html": "App Store QR Code",
+    "telegram-qr-code-generator.html": "Telegram QR Code",
+    "twitter-x-qr-code-generator.html": "X (Twitter) QR Code",
+    "mecard-qr-code-generator.html": "MeCard QR Code",
+    "bitcoin-qr-code-generator.html": "Bitcoin QR Code"
   }
 }

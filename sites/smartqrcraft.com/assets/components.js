@@ -45,8 +45,8 @@
       '<li><a href="' + base + 'wifi-qr-code-generator.html">WiFi QR Code</a></li>' +
       '<li><a href="' + base + 'vcard-qr-code-generator.html">vCard / Business Card QR</a></li>' +
       '<li><a href="' + base + 'qr-code-with-logo.html">QR Code with Logo</a></li>' +
-      '<li><a href="' + base + 'cash-app-qr-code-generator.html">Cash App QR Code</a></li>' +
-      '<li><a href="' + base + 'discord-qr-code-generator.html">Discord QR Code</a></li>' +
+      '<li><a href="' + base + 'app-store-qr-code-generator.html">App Store QR Code</a></li>' +
+      '<li><a href="' + base + 'bitcoin-qr-code-generator.html">Bitcoin QR Code</a></li>' +
 
       /*ENDTOOLLINKS*/
       '<li><a href="' + base + T("hub_href", "all-qr-code-tools.html") + '">' + T("all_types", "All QR Types") + '</a></li>' +

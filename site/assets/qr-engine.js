@@ -163,6 +163,12 @@
       var h = (f.handle || "").trim().replace(/^@/, "").replace(/^https?:\/\/(www\.)?(x|twitter)\.com\//i, "").replace(/[\/?#].*$/, "");
       return /^[A-Za-z0-9_]{1,15}$/.test(h) ? "https://x.com/" + h : "";
     },
+    telegram: function (f) {
+      var u = (f.user || "").trim().replace(/^@/, "").replace(/^https?:\/\/(www\.)?(t\.me|telegram\.me)\//i, "").replace(/[\/?#].*$/, "");
+      if (!/^[A-Za-z0-9_]{4,32}$/.test(u)) return "";
+      var msg = (f.message || "").trim();
+      return "https://t.me/" + u + (msg ? "?text=" + encodeURIComponent(msg) : "");
+    },
     venmo: function (f) {
       var u = (f.user || "").trim().replace(/^@/, "");
       return /^[A-Za-z0-9_-]{5,30}$/.test(u) ? "https://venmo.com/u/" + u : "";
