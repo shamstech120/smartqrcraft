@@ -258,7 +258,7 @@
   }
 
   // Frame geometry shared by the canvas and SVG renderers.
-  var FRAME_STYLES = ["bottom", "top", "badge", "bubble", "outline", "corners", "text", "bag", "gift", "cup"];
+  var FRAME_STYLES = ["bottom", "top", "badge", "bubble", "outline", "corners", "text", "bag", "gift", "cup", "envelope", "chef", "phone"];
 
   function frameGeometry(size, frameText, frameStyle) {
     var style = FRAME_STYLES.indexOf(frameStyle) >= 0 ? frameStyle : "bottom";
@@ -267,7 +267,9 @@
     var ptr = frameText && style === "bubble" ? Math.round(size * 0.04) : 0;
     var top = 0, bottom = 0, left = 0, right = 0;
     if (frameText) {
-      if (style === "bag" || style === "gift") { top = Math.round(size * 0.17); bottom = barH; }
+      if (style === "bag" || style === "gift" || style === "envelope") { top = Math.round(size * 0.17); bottom = barH; }
+      else if (style === "chef") { top = Math.round(size * 0.24); bottom = barH; }
+      else if (style === "phone") { top = Math.round(size * 0.11); bottom = barH + Math.round(size * 0.1); left = right = Math.round(size * 0.05); }
       else if (style === "cup") { top = Math.round(size * 0.15); bottom = barH; right = Math.round(size * 0.2); }
       else if (style === "top") top = barH;
       else if (style === "bubble") top = barH + ptr;
@@ -311,7 +313,16 @@
       ops.push({ fill: fg, evenodd: true, path: pathRRect(0, top, size, size, r).concat(pathRRect(t, top + t, size - 2 * t, size - 2 * t, Math.max(0, r - t))) });
       ops.push({ fill: fg, path: pathRect(0, top + size, size, barH) });
       barText(size / 2, top + size + barH / 2, fs);
-    } else if (st === "bag" || st === "gift" || st === "cup") {
+    } else if (st === "phone") {
+      // a phone outline: thick rounded body with a speaker slot at the top and a home bar at the bottom
+      var pt = size * 0.035, pr = size * 0.12, pw2 = size + fr.left + fr.right, ph = top + size + fr.bottom;
+      var px = -fr.left;
+      ops.push({ fill: fg, evenodd: true, path: pathRRect(px, 0, pw2, ph, pr).concat(pathRRect(px + pt, pt, pw2 - 2 * pt, ph - 2 * pt, pr - pt)) });
+      ops.push({ fill: fg, path: pathRRect(size / 2 - size * 0.09, size * 0.045, size * 0.18, size * 0.025, size * 0.0125) });
+      ops.push({ fill: fg, path: pathRect(px + pt, top + size, pw2 - 2 * pt, barH) });
+      barText(size / 2, top + size + barH / 2, fs);
+      ops.push({ fill: fg, path: pathRRect(size / 2 - size * 0.12, top + size + barH + fr.bottom - barH - size * 0.06, size * 0.24, size * 0.022, size * 0.011) });
+    } else if (st === "bag" || st === "gift" || st === "cup" || st === "envelope" || st === "chef") {
       var tk = size * 0.022, rr = size * 0.05, bodyH = size + barH;
       // the body: a rounded ring around the code with the label band filling its lower edge
       ops.push({ fill: fg, evenodd: true, path: pathRRect(0, top, size, bodyH, rr).concat(pathRRect(tk, top + tk, size - 2 * tk, bodyH - 2 * tk, Math.max(0, rr - tk))) });
@@ -321,6 +332,21 @@
       if (st === "bag") {
         var hw = size * 0.42, th = size * 0.03;
         ops.push({ fill: fg, path: pathArch((size - hw) / 2, size * 0.015, hw, top - size * 0.015 + th, th) });
+      } else if (st === "envelope") {
+        // open envelope flap above the body, drawn as an outlined triangle
+        var fh = top - size * 0.01, ft = size * 0.028, fk = ft * 2.2;
+        ops.push({ fill: fg, evenodd: true, path: [["M", 0, top], ["L", cx2, top - fh], ["L", size, top], ["Z"],
+          ["M", fk, top - ft * 0.2], ["L", size - fk, top - ft * 0.2], ["L", cx2, top - fh + fk * 0.9], ["Z"]] });
+        ops.push({ fill: fg, path: pathCircle(cx2, top - fh * 0.38, size * 0.035) });
+      } else if (st === "chef") {
+        // chef hat: three puffs over a band
+        var bandH = size * 0.06, bandW = size * 0.5, by = top - bandH - size * 0.01;
+        ops.push({ fill: fg, path: pathRRect(cx2 - bandW / 2, by, bandW, bandH, size * 0.012) });
+        var cr = size * 0.085;
+        ops.push({ fill: fg, path: pathCircle(cx2 - bandW * 0.3, by - cr * 0.55, cr) });
+        ops.push({ fill: fg, path: pathCircle(cx2 + bandW * 0.3, by - cr * 0.55, cr) });
+        ops.push({ fill: fg, path: pathCircle(cx2, by - cr * 0.95, cr * 1.12) });
+        ops.push({ fill: fg, path: pathRect(cx2 - bandW * 0.42, by - cr * 0.6, bandW * 0.84, cr * 0.62) });
       } else if (st === "gift") {
         var lr = size * 0.085, lt = size * 0.028, ly = top - size * 0.07;
         [-1, 1].forEach(function (d) {
@@ -877,6 +903,65 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
   }
 
+  // ---------------------------------------------------------------------
+  // Picture QR: the code drawn as small dots over a photo. Finder, timing and
+  // alignment patterns stay solid so scanners can lock on; ECC is always H.
+  // ---------------------------------------------------------------------
+  var ALIGN_POS = [[], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34], [6, 22, 38], [6, 24, 42], [6, 26, 46], [6, 28, 50], [6, 30, 54], [6, 32, 58], [6, 34, 62],
+    [6, 26, 46, 66], [6, 26, 48, 70], [6, 26, 50, 74], [6, 30, 54, 78], [6, 30, 56, 82], [6, 30, 58, 86], [6, 34, 62, 90], [6, 28, 50, 72, 94], [6, 26, 50, 74, 98],
+    [6, 30, 54, 78, 102], [6, 28, 54, 80, 106], [6, 32, 58, 84, 110], [6, 30, 58, 86, 114], [6, 34, 62, 90, 118], [6, 26, 50, 74, 98, 122], [6, 30, 54, 78, 102, 126],
+    [6, 26, 52, 78, 104, 130], [6, 30, 56, 82, 108, 134], [6, 34, 60, 86, 112, 138], [6, 30, 58, 86, 114, 142], [6, 34, 62, 90, 118, 146], [6, 30, 54, 78, 102, 126, 150],
+    [6, 24, 50, 76, 102, 128, 154], [6, 28, 54, 80, 106, 132, 158], [6, 32, 58, 84, 110, 136, 162], [6, 26, 54, 82, 110, 138, 166], [6, 30, 58, 86, 114, 142, 170]];
+
+  function structuralMask(count) {
+    var v = (count - 17) / 4, m = [];
+    for (var r = 0; r < count; r++) { m.push([]); for (var c = 0; c < count; c++) m[r].push(false); }
+    var mark = function (r0, c0, n) {
+      for (var r = r0; r < r0 + n; r++) for (var c = c0; c < c0 + n; c++) if (r >= 0 && c >= 0 && r < count && c < count) m[r][c] = true;
+    };
+    mark(-1, -1, 9); mark(-1, count - 8, 9); mark(count - 8, -1, 9);
+    for (var i = 8; i < count - 8; i++) { m[6][i] = true; m[i][6] = true; }
+    var pos = ALIGN_POS[v - 1] || [];
+    pos.forEach(function (r) {
+      pos.forEach(function (c) {
+        if ((r === 6 && c === 6) || (r === 6 && c === pos[pos.length - 1]) || (c === 6 && r === pos[pos.length - 1])) return;
+        mark(r - 2, c - 2, 5);
+      });
+    });
+    return m;
+  }
+
+  function renderPictureToCanvas(canvas, payload, opts) {
+    opts = opts || {};
+    var size = opts.size || 512, margin = opts.margin != null ? opts.margin : 4;
+    var fg = opts.fg || "#111827", light = "#ffffff";
+    var dot = Math.min(0.6, Math.max(0.3, opts.dot || 0.42));
+    var qr = encode(payload, { logo: true });
+    var count = qr.getModuleCount();
+    var cell = size / (count + margin * 2);
+    canvas.width = size; canvas.height = size;
+    var ctx = canvas.getContext("2d");
+    ctx.fillStyle = light;
+    ctx.fillRect(0, 0, size, size);
+    var img = opts.image, x0 = margin * cell, span = count * cell;
+    if (img && img.width) {
+      var s = Math.min(img.width, img.height);
+      ctx.drawImage(img, (img.width - s) / 2, (img.height - s) / 2, s, s, x0, x0, span, span);
+      if (opts.wash) { ctx.fillStyle = "rgba(255,255,255," + opts.wash + ")"; ctx.fillRect(x0, x0, span, span); }
+    }
+    var mask = structuralMask(count);
+    var d = cell * dot, off = (cell - d) / 2;
+    for (var r = 0; r < count; r++) {
+      for (var c = 0; c < count; c++) {
+        var dark = qr.isDark(r, c);
+        ctx.fillStyle = dark ? fg : light;
+        if (mask[r][c]) ctx.fillRect(x0 + c * cell, x0 + r * cell, cell + 0.5, cell + 0.5);
+        else ctx.fillRect(x0 + c * cell + off, x0 + r * cell + off, d, d);
+      }
+    }
+    return canvas;
+  }
+
   function isPayloadValid(payload) {
     return !!(payload && payload.trim().length);
   }
@@ -885,6 +970,7 @@
     buildPayload: buildPayload,
     renderToCanvas: renderToCanvas,
     renderToSVG: renderToSVG,
+    renderPictureToCanvas: renderPictureToCanvas,
     downloadCanvasPNG: downloadCanvasPNG,
     downloadCanvas: downloadCanvas,
     FRAME_STYLES: FRAME_STYLES,

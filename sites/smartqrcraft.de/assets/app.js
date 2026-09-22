@@ -311,7 +311,10 @@
       frameOn: false,
       frameText: SCAN_ME,
       logoOn: false,
-      logoSrc: null
+      logoSrc: null,
+      picOn: false,
+      picImg: null,
+      picDot: 0.42
     };
 
     function buildTabs() {
@@ -433,7 +436,10 @@
 
       var ro = designOpts();
       ro.size = 480;
-      window.SmartQR.renderToCanvas(canvas, payload, ro);
+      var pic = state.picOn && state.picImg;
+      [downloadSvgBtn, downloadPdfBtn, downloadEpsBtn].forEach(function (b) { if (b && pic) b.disabled = true; });
+      if (pic) window.SmartQR.renderPictureToCanvas(canvas, payload, { size: 480, image: state.picImg, fg: state.fg, dot: state.picDot });
+      else window.SmartQR.renderToCanvas(canvas, payload, ro);
       updateContrastNote();
       syncColorUI();
       refreshThumbs();
@@ -502,6 +508,11 @@
       var c = document.createElement("canvas");
       var o = exportOpts(forceOpaque);
       o.size = size;
+      if (state.picOn && state.picImg) {
+        window.SmartQR.renderPictureToCanvas(c, currentPayload(), { size: size, image: state.picImg, fg: state.fg, dot: state.picDot });
+        cb(c);
+        return;
+      }
       o.onReady = function () { cb(c); };
       window.SmartQR.renderToCanvas(c, currentPayload(), o);
     }
@@ -838,7 +849,8 @@
       var options = ["none"].concat(window.SmartQR.FRAME_STYLES);
       var names = { none: X("fNone", "No frame"), bottom: X("fBottom", "Bar below"), top: X("fTop", "Bar above"), badge: X("fBadge", "Badge below"),
         bubble: X("fBubble", "Speech bubble"), outline: X("fOutline", "Outline box"), corners: X("fCorners", "Corner marks"), text: X("fText", "Text only"),
-        bag: X("fBag", "Shopping bag"), gift: X("fGift", "Gift box"), cup: X("fCup", "Coffee cup") };
+        bag: X("fBag", "Shopping bag"), gift: X("fGift", "Gift box"), cup: X("fCup", "Coffee cup"),
+        envelope: X("fEnvelope", "Envelope"), chef: X("fChef", "Chef hat"), phone: X("fPhone", "Phone") };
       options.forEach(function (name) {
         var b = el("button", { type: "button", class: "frame-opt", "data-frame": name, title: names[name], "aria-label": names[name], "aria-pressed": name === "none" ? "true" : "false" });
         if (name === "none") {
@@ -860,6 +872,41 @@
         panels.frame.appendChild(frameCard);
       }
       if (logoCard) panels.logo.appendChild(logoCard);
+      (function buildPictureCard() {
+        var card = el("div", { class: "option-card pic-card" });
+        var tr = el("div", { class: "toggle-row" });
+        tr.appendChild(el("h3", { style: "margin:0" }, X("picTitle", "Picture QR (photo behind the code)")));
+        var sw = el("label", { class: "switch" });
+        var tog = el("input", { type: "checkbox", class: "pic-toggle", "aria-label": X("picTitle", "Picture QR (photo behind the code)") });
+        sw.appendChild(tog); sw.appendChild(el("span", { class: "slider" }));
+        tr.appendChild(sw);
+        card.appendChild(tr);
+        var file = el("input", { type: "file", accept: "image/png,image/jpeg,image/webp", class: "visually-hidden pic-file" });
+        var pick = el("button", { type: "button", class: "btn", style: "margin-top:10px" }, X("picChoose", "Choose a photo"));
+        pick.addEventListener("click", function () { file.click(); });
+        var dotLab = el("label", { class: "exp-field", style: "display:block;margin-top:12px;font-size:13px" }, X("picDot", "Dot size") + " ");
+        var dotIn = el("input", { type: "range", min: "0.32", max: "0.56", step: "0.02", value: String(state.picDot), style: "width:100%" });
+        dotLab.appendChild(dotIn);
+        card.appendChild(file); card.appendChild(pick); card.appendChild(dotLab);
+        card.appendChild(el("p", { class: "field-hint", style: "margin:10px 0 0" }, X("picHint", "The photo shows through small dots. Downloads are PNG or JPG only; frame and center logo are not used. Bigger dots scan more easily. Always test before printing.")));
+        function load(f) {
+          var rd = new FileReader();
+          rd.onload = function () {
+            var im = new Image();
+            im.onload = function () { state.picImg = im; state.picOn = true; tog.checked = true; render(); };
+            im.src = rd.result;
+          };
+          rd.readAsDataURL(f);
+        }
+        file.addEventListener("change", function () { if (file.files && file.files[0]) load(file.files[0]); });
+        tog.addEventListener("change", function () {
+          state.picOn = tog.checked;
+          if (state.picOn && !state.picImg) file.click();
+          render();
+        });
+        dotIn.addEventListener("input", function () { state.picDot = parseFloat(dotIn.value); render(); });
+        panels.logo.appendChild(card);
+      })();
       if (oldPair && oldPair.parentNode && !oldPair.children.length) oldPair.parentNode.removeChild(oldPair);
 
       var bar = el("div", { class: "design-tabs", role: "tablist" });
@@ -927,6 +974,90 @@
       if (dotsHint) dotsHint.style.display = state.style === "dots" || state.style === "diamond" ? "block" : "none";
       render();
     }
+
+    // ---- Recent QR codes: kept only in this browser (localStorage), never sent anywhere ----
+    var HKEY = "smartqr_history_v1", HMAX = 12;
+    function readHistory() {
+      try { var v = JSON.parse(window.localStorage.getItem(HKEY) || "[]"); return Array.isArray(v) ? v : []; } catch (e) { return []; }
+    }
+    function writeHistory(list) {
+      try { window.localStorage.setItem(HKEY, JSON.stringify(list)); } catch (e) { /* storage blocked: history is optional */ }
+    }
+    function saveHistory() {
+      var payload = currentPayload();
+      if (!window.SmartQR.isPayloadValid(payload)) return;
+      var entry = { t: state.type, f: JSON.parse(JSON.stringify(state.fields)), p: payload.slice(0, 80), ts: Date.now(),
+        d: { fg: state.fg, bg: state.bg, style: state.style, eye: state.eyeStyle, grad: state.gradient, fg2: state.fg2, eyeColor: state.eyeColor } };
+      var list = readHistory().filter(function (h) { return !(h.t === entry.t && h.p === entry.p); });
+      list.unshift(entry);
+      writeHistory(list.slice(0, HMAX));
+      drawHistory();
+    }
+    function restoreEntry(h) {
+      if (allowed.indexOf(h.t) === -1 || !TYPES[h.t]) {
+        try { window.sessionStorage.setItem("smartqr_restore", JSON.stringify(h)); } catch (e) { return; }
+        window.location.href = "index.html?type=" + encodeURIComponent(h.t) + "#generator";
+        return;
+      }
+      state.type = h.t;
+      buildTabs();
+      buildFields();
+      Object.keys(h.f || {}).forEach(function (k) {
+        var inp = root.querySelector("#f-" + k);
+        if (inp) { inp.value = h.f[k]; state.fields[k] = h.f[k]; }
+      });
+      var d = h.d || {};
+      applyTemplate({ fg: d.fg || COLOR_SWATCHES[0], bg: d.bg || BG_SWATCHES[0], style: d.style || "square", eye: d.eye || "classic",
+        grad: d.grad && d.grad !== "none" ? d.grad : null, fg2: d.fg2, eyeColor: d.eyeColor });
+      root.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    var histBox = null;
+    function drawHistory() {
+      var list = readHistory();
+      if (!histBox) {
+        histBox = el("div", { class: "qr-history" });
+        root.parentNode.insertBefore(histBox, root.nextSibling);
+      }
+      histBox.style.display = list.length ? "" : "none";
+      if (!list.length) return;
+      histBox.innerHTML = "";
+      var head = el("div", { class: "qr-history-head" }, "<h3>" + X("histTitle", "Your recent QR codes") + "</h3>");
+      var clear = el("button", { type: "button", class: "btn qr-history-clear" }, X("histClear", "Clear"));
+      clear.addEventListener("click", function () { writeHistory([]); drawHistory(); });
+      head.appendChild(clear);
+      histBox.appendChild(head);
+      histBox.appendChild(el("p", { class: "field-hint", style: "margin:0 0 10px" }, X("histNote", "Saved only in this browser when you download. Nothing is uploaded.")));
+      var row = el("div", { class: "qr-history-row" });
+      list.forEach(function (h) {
+        var b = el("button", { type: "button", class: "qr-history-item", title: h.p });
+        var c = document.createElement("canvas");
+        try {
+          var d = h.d || {};
+          window.SmartQR.renderToCanvas(c, window.SmartQR.buildPayload(h.t, h.f) || h.p, { size: 120, fg: d.fg, bg: d.bg, style: d.style, eyeStyle: d.eye,
+            gradient: d.grad, fg2: d.fg2, eyeColor: d.eyeColor, margin: 2 });
+        } catch (e) { /* bad entry: skip the thumbnail */ }
+        b.appendChild(c);
+        var label = (TYPES[h.t] && TYPES[h.t].label) || h.t;
+        var shown = h.t === "wifi" ? (h.f && h.f.ssid) || "" : h.p.replace(/^https?:\/\//, "");
+        b.appendChild(el("span", { class: "qr-history-type" }, label));
+        b.appendChild(el("span", { class: "qr-history-text" }, String(shown).replace(/[<>&"]/g, "").slice(0, 28)));
+        b.addEventListener("click", function () { restoreEntry(h); });
+        row.appendChild(b);
+      });
+      histBox.appendChild(row);
+    }
+    [downloadPngBtn, downloadJpgBtn, downloadSvgBtn, downloadPdfBtn, downloadEpsBtn].forEach(function (b) {
+      if (b) b.addEventListener("click", saveHistory);
+    });
+    try {
+      var pending = window.sessionStorage.getItem("smartqr_restore");
+      if (pending) {
+        window.sessionStorage.removeItem("smartqr_restore");
+        var ph = JSON.parse(pending);
+        if (allowed.indexOf(ph.t) !== -1) restoreEntry(ph);
+      }
+    } catch (e) { /* no session storage: nothing to restore */ }
+    drawHistory();
   }
 
   document.addEventListener("DOMContentLoaded", function () {
