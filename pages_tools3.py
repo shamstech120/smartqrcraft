@@ -1,0 +1,77 @@
+"""Tool pages, round 3: printable QR code templates and the embeddable QR code widget.
+Shared English pages (.com, .co.uk, .in)."""
+
+PRINTABLE = {
+    "slug": "printable-qr-code-templates.html",
+    "crumb": "Printable QR Code Templates",
+    "widget": "print",
+    "template": "tent",
+    "type": "url",
+    "tool_name": "Printable QR Code Templates",
+    "field_label": "", "field_placeholder": "", "cta": "", "empty": "",
+    "title": "Free Printable QR Code Templates | Table Tent, WiFi Card, Labels — SmartQRCraft",
+    "description": "Free printable QR code templates: table tents, Scan & Pay counter signs, WiFi cards and A4 label sheets. Add your text and colors, then print or save as PDF.",
+    "og_title": "Free Printable QR Code Templates | SmartQRCraft",
+    "og_description": "Table tents, counter signs, WiFi cards and label sheets with your QR code. Print or save as PDF.",
+    "h1": 'Free <span class="accent">Printable QR Code</span> Templates',
+    "lead": "Pick a layout, add your link, WiFi or payment details and your own text, and print it on A4 paper. No design software needed.",
+    "faq_h2": "Printable Template Questions",
+    "sections": [
+        {"kind": "table", "h2": "Which template to use",
+         "cols": ["Template", "What you get", "Good for"],
+         "rows": [
+             ["Table tent", "An A4 page you fold in half so it stands on a table, with the code on both sides", "Restaurant menus, feedback, WiFi on cafe tables"],
+             ["Counter sign", "A full A4 sign with a large heading and a big code", "Scan &amp; Pay at the till, reception desks, shop windows"],
+             ["Cards (4 per A4)", "Four A6 cards with cut marks", "Handouts, room cards, product shelves"],
+             ["WiFi cards", "Four cards with the network name, optional password and a WiFi QR code", "Hotels, Airbnb, offices, guest rooms"],
+             ["Label sheet", "The same code repeated in a grid, with an optional caption", "Sticker labels, packaging, inventory tags"],
+         ]},
+        {"kind": "prose", "id": "how-to", "h2": "How to print your QR code template",
+         "steps": [
+             "Choose a template and fill in what the QR code should do.",
+             "Type your heading, business name and small print, and pick an accent color.",
+             "Click <strong>Print / Save as PDF</strong>. In the print dialog, choose <strong>Actual size</strong> or 100% scale.",
+             "To get a PDF, choose <strong>Save as PDF</strong> as the printer. Send that PDF to a print shop for card stock or lamination.",
+             "Scan one printed copy with a phone before you print the rest.",
+         ]},
+        {"kind": "prose", "id": "table-tent", "h2": "Folding a table tent",
+         "p": ["Print on thick paper (160 g/m² or more) if your printer accepts it. Fold along the dashed line so both halves face out. The top half is printed upside down on purpose, so it reads the right way up after folding. Tape the bottom edges together or slide it into a clear acrylic stand."]},
+        {"kind": "prose", "id": "labels", "h2": "Printing on label sheets",
+         "p": ["Label sheets differ between brands, even when they have the same number of labels. Print one page on plain paper first and hold it against your label sheet in front of a light. If it lines up, print on the labels. If not, choose a different layout or adjust your printer's margins."],
+         "bullets": [
+             "<strong>24 per sheet (70 × 37 mm)</strong> and <strong>65 per sheet (38 × 21 mm)</strong> match common A4 address and mini label sizes.",
+             "Tiny labels only work with short content, such as a short link.",
+             "Use waterproof or vinyl labels for outdoors and anything that gets wet.",
+         ]},
+        {"kind": "cards", "eyebrow": "Tips", "h2": "Tips for printed QR codes",
+         "cards": [
+             ("Keep the code dark", "A dark code on white scans best. Use your brand color for the heading and border instead."),
+             ("Say what happens", "&quot;Scan to see the menu&quot; gets more scans than a bare code."),
+             ("Protect it", "Laminate signs and table tents that will be handled or wiped."),
+             ("WiFi passwords", "Untick &quot;Print the password&quot; if you do not want it visible on the card; the code still contains it."),
+             ("Check for tampering", "In public places, check now and then that nobody has stuck another code over yours."),
+             ("Size", "See the <a href=\"qr-code-size-guide.html\">size guide</a> for how big a code needs to be."),
+         ]},
+    ],
+    "faq": [
+        ("Are these QR code templates free?",
+         "Yes. They are free, with no signup and no watermark. You can print as many as you like."),
+        ("How do I save the template as a PDF?",
+         "Click Print / Save as PDF and choose Save as PDF (or Microsoft Print to PDF) as the printer."),
+        ("Why is the printed page smaller than A4?",
+         "Your print dialog is probably set to Fit to page. Choose Actual size or 100% scale."),
+        ("Can I print on Letter paper?",
+         "The layouts are A4. On US Letter, choose Fit to page; everything scales down slightly and stays scannable, but label sheets will not line up."),
+        ("Can I change the design further?",
+         "Download the SVG and open it in Canva, Figma, Illustrator or Inkscape to edit anything."),
+        ("Is the WiFi password stored anywhere?",
+         "No. The page is created in your browser and nothing is uploaded."),
+    ],
+    "related": [
+        ("qr-codes-in-print.html", "Printing QR codes: complete guide"),
+        ("wifi-qr-code-generator.html", "WiFi QR code generator"),
+        ("bulk-qr-code-generator.html", "Bulk QR code generator (different code on each label)"),
+    ],
+}
+
+TOOLS3_SHARED = [PRINTABLE]

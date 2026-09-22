@@ -30,6 +30,12 @@
     "telegram-qr-code-generator.html": "Telegram QR Code",
     "twitter-x-qr-code-generator.html": "X (Twitter) QR Code",
     "mecard-qr-code-generator.html": "MeCard QR Code",
-    "bitcoin-qr-code-generator.html": "Bitcoin QR Code"
+    "bitcoin-qr-code-generator.html": "Bitcoin QR Code",
+    "printable-qr-code-templates.html": "Printable QR Templates",
+    "qr-codes-in-print.html": "Printing QR Codes",
+    "how-to-scan-qr-code-on-iphone.html": "Scan QR on iPhone",
+    "how-to-scan-qr-code-on-android.html": "Scan QR on Android",
+    "shop-qr-code.html": "QR Code for Shop",
+    "qr-code-visiting-card.html": "Visiting Card QR Code"
   }
 }

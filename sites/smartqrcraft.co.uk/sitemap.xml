@@ -74,6 +74,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://smartqrcraft.co.uk/how-to-scan-qr-code-on-android.html</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/how-to-scan-qr-code-on-android.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/how-to-scan-qr-code-on-android.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/how-to-scan-qr-code-on-android.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/how-to-scan-qr-code-on-android.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartqrcraft.co.uk/how-to-scan-qr-code-on-iphone.html</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/how-to-scan-qr-code-on-iphone.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/how-to-scan-qr-code-on-iphone.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/how-to-scan-qr-code-on-iphone.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/how-to-scan-qr-code-on-iphone.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://smartqrcraft.co.uk/mecard-qr-code-generator.html</loc>
     <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/mecard-qr-code-generator.html"/>
     <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/mecard-qr-code-generator.html"/>
@@ -87,6 +103,14 @@
     <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/phone-qr-code-generator.html"/>
     <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/phone-qr-code-generator.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/phone-qr-code-generator.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartqrcraft.co.uk/printable-qr-code-templates.html</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/printable-qr-code-templates.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/printable-qr-code-templates.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/printable-qr-code-templates.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/printable-qr-code-templates.html"/>
     <priority>0.8</priority>
   </url>
   <url>
@@ -159,6 +183,14 @@
     <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/qr-codes-for-retail.html"/>
     <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/qr-codes-for-retail.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/qr-codes-for-retail.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartqrcraft.co.uk/qr-codes-in-print.html</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/qr-codes-in-print.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/qr-codes-in-print.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/qr-codes-in-print.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/qr-codes-in-print.html"/>
     <priority>0.8</priority>
   </url>
   <url>

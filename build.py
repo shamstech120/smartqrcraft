@@ -64,9 +64,9 @@ FOOTER_PRIORITY = [
     "upi-qr-code-generator.html", "qr-code-ueberweisung-erstellen.html",
     "qr-code-with-logo.html", "qr-code-mit-logo.html",
 ]
-GUIDE_PAGES = {"what-is-a-qr-code.html", "static-vs-dynamic-qr-codes.html", "qr-code-safety.html", "qr-code-size-guide.html", "qr-codes-for-restaurants.html", "qr-codes-for-real-estate.html", "qr-codes-for-hotels-and-airbnb.html", "qr-codes-for-retail.html"}
+GUIDE_PAGES = {"qr-codes-in-print.html", "how-to-scan-qr-code-on-iphone.html", "how-to-scan-qr-code-on-android.html", "what-is-a-qr-code.html", "static-vs-dynamic-qr-codes.html", "qr-code-safety.html", "qr-code-size-guide.html", "qr-codes-for-restaurants.html", "qr-codes-for-real-estate.html", "qr-codes-for-hotels-and-airbnb.html", "qr-codes-for-retail.html"}
 TOOL_PAGES = {
-    "qr-code-scanner.html", "qr-code-tester.html", "bulk-qr-code-generator.html", "barcode-generator.html",
+    "printable-qr-code-templates.html", "qr-code-scanner.html", "qr-code-tester.html", "bulk-qr-code-generator.html", "barcode-generator.html",
     "qr-code-scanner-online.html", "qr-code-testen.html", "barcode-generator-kostenlos.html",
 }
 HUB_TEXT = {

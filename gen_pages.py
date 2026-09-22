@@ -22,8 +22,11 @@ from pages_trust import TRUST_SHARED, TRUST_DE
 from pages_articles import ARTICLES
 from pages_core import CORE
 from pages_types import TYPES_SHARED
+from pages_in3 import IN_PAGES_3
+from pages_guides import GUIDES
+from pages_tools3 import TOOLS3_SHARED
 
-PAGES = _BASE_PAGES + MORE + IN_PAGES + IN_PAGES_2 + DE_PAGES + TOOLS_SHARED + TOOLS_DE + TOOLS2_SHARED + TOOLS2_DE + US_PAGES + LOGO_SHARED + DE_PAY + LINK_SHARED + LINK_US + TRUST_SHARED + TRUST_DE + ARTICLES + CORE + TYPES_SHARED
+PAGES = _BASE_PAGES + MORE + IN_PAGES + IN_PAGES_2 + DE_PAGES + TOOLS_SHARED + TOOLS_DE + TOOLS2_SHARED + TOOLS2_DE + US_PAGES + LOGO_SHARED + DE_PAY + LINK_SHARED + LINK_US + TRUST_SHARED + TRUST_DE + ARTICLES + CORE + TYPES_SHARED + IN_PAGES_3 + GUIDES + TOOLS3_SHARED
 
 ROOT = Path(__file__).parent
 SITE = ROOT / "site"
@@ -268,6 +271,11 @@ def render(page):
         tool_html = '<div class="generator qr-bulk" id="qr-builder"></div>'
         scripts = ("<script src=\"assets/qrcode-lib.js\"></script>" + NL + "<script src=\"assets/qr-engine.js\"></script>" + NL +
                    "<script src=\"assets/zip.js\"></script>" + NL + "<script src=\"assets/bulk.js\"></script>" + NL)
+        app_tag = ""
+    elif widget == "print":
+        tool_html = f'<div class="generator qr-print" id="qr-builder" data-template="{page.get("template", "tent")}"></div>'
+        scripts = ("<script src=\"assets/qrcode-lib.js\"></script>" + NL + "<script src=\"assets/qr-engine.js\"></script>" + NL +
+                   "<script src=\"assets/print.js\"></script>" + NL)
         app_tag = ""
     elif widget == "barcode":
         tool_html = '<div class="generator qr-barcode" id="qr-builder"></div>'
