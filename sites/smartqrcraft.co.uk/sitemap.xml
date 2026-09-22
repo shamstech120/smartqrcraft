@@ -146,6 +146,14 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://smartqrcraft.co.uk/qr-code-widget.html</loc>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/qr-code-widget.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/qr-code-widget.html"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://smartqrcraft.in/qr-code-widget.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://smartqrcraft.com/qr-code-widget.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://smartqrcraft.co.uk/qr-code-with-logo.html</loc>
     <xhtml:link rel="alternate" hreflang="en-US" href="https://smartqrcraft.com/qr-code-with-logo.html"/>
     <xhtml:link rel="alternate" hreflang="en-GB" href="https://smartqrcraft.co.uk/qr-code-with-logo.html"/>

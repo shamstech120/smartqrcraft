@@ -66,7 +66,7 @@ FOOTER_PRIORITY = [
 ]
 GUIDE_PAGES = {"qr-codes-in-print.html", "how-to-scan-qr-code-on-iphone.html", "how-to-scan-qr-code-on-android.html", "what-is-a-qr-code.html", "static-vs-dynamic-qr-codes.html", "qr-code-safety.html", "qr-code-size-guide.html", "qr-codes-for-restaurants.html", "qr-codes-for-real-estate.html", "qr-codes-for-hotels-and-airbnb.html", "qr-codes-for-retail.html"}
 TOOL_PAGES = {
-    "printable-qr-code-templates.html", "qr-code-scanner.html", "qr-code-tester.html", "bulk-qr-code-generator.html", "barcode-generator.html",
+    "printable-qr-code-templates.html", "qr-code-widget.html", "qr-code-scanner.html", "qr-code-tester.html", "bulk-qr-code-generator.html", "barcode-generator.html",
     "qr-code-scanner-online.html", "qr-code-testen.html", "barcode-generator-kostenlos.html",
 }
 HUB_TEXT = {
@@ -302,6 +302,18 @@ def add_icons(out):
             f.write_text(h.replace("</head>", ICON_TAGS + "</head>", 1), encoding="utf-8")
 
 
+def write_embed(out):
+    """Bundle qrcode-lib.js (without its UMD footer) and widgets/embed-core.js into /embed.js."""
+    lib = (SRC / "assets" / "qrcode-lib.js").read_text(encoding="utf-8")
+    cut = lib.find("(function (factory) {")
+    if cut > 0:
+        lib = lib[:cut]
+    core = (ROOT / "widgets" / "embed-core.js").read_text(encoding="utf-8")
+    (out / "embed.js").write_text(
+        "/*! SmartQRCraft QR widget - https://smartqrcraft.com/qr-code-widget.html | bundles qrcode-generator (c) 2009 Kazuhiko Arase, MIT License */\n"
+        "(function () {\n" + lib + "\n" + core + "\n})();\n", encoding="utf-8")
+
+
 def main():
     if DIST.exists():
         shutil.rmtree(DIST)
@@ -321,6 +333,7 @@ def main():
         prune_links(out, domain_pages)
         domain_pages.append(build_hub(out, domain, cfg, list(domain_pages)))
         add_icons(out)
+        write_embed(out)
         write_footer_links(out, domain, domain_pages)
         (out / "sitemap.xml").write_text(
             build_sitemap(domain, [p for p in domain_pages if p not in NOT_IN_SITEMAP]), encoding="utf-8")

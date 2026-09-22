@@ -272,6 +272,10 @@ def render(page):
         scripts = ("<script src=\"assets/qrcode-lib.js\"></script>" + NL + "<script src=\"assets/qr-engine.js\"></script>" + NL +
                    "<script src=\"assets/zip.js\"></script>" + NL + "<script src=\"assets/bulk.js\"></script>" + NL)
         app_tag = ""
+    elif widget == "embed":
+        tool_html = '<div class="generator qr-embed" id="qr-builder"></div>'
+        scripts = "<script src=\"assets/embed-builder.js\"></script>" + NL
+        app_tag = ""
     elif widget == "print":
         tool_html = f'<div class="generator qr-print" id="qr-builder" data-template="{page.get("template", "tent")}"></div>'
         scripts = ("<script src=\"assets/qrcode-lib.js\"></script>" + NL + "<script src=\"assets/qr-engine.js\"></script>" + NL +
