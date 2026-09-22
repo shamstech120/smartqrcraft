@@ -1,72 +1,73 @@
 # SmartQRCraft
 
-Free QR code and barcode tools, built as **four separate static sites**, one per domain.
+Free QR code and barcode tools, plus accounts with dynamic QR codes.
 
-## The four sites (ready to upload, one folder each)
+## The rule: one of everything
 
-| Folder | Domain | Language |
-|---|---|---|
-| `sites/smartqrcraft.com` | smartqrcraft.com | English (US) |
-| `sites/smartqrcraft.in` | smartqrcraft.in | English (India) |
-| `sites/smartqrcraft.de` | smartqrcraft.de | German |
-| `sites/smartqrcraft.co.uk` | smartqrcraft.co.uk | English (UK) |
+**One GitHub repo, one application, one database, one user account system.**
+There is no folder, repo, signup or database per country.
 
-Each folder is a complete website with its own pages, `sitemap.xml`, `robots.txt` and `assets/`.
-When you host a domain, point it at its own folder.
+The domains (smartqrcraft.com, .co.uk, .in, .de) all point at the **same app**. The app reads the
+request's `Host` and picks the country from `countries/*.json`. A country is **config + content**, never copied code.
 
-**The `sites/` folders are generated. Do not edit them by hand.** Change the source and rebuild.
+| Request | What the app does |
+|---|---|
+| `smartqrcraft.de/` | Country `de`: German pages, German footer, `lang="de"`, canonical and hreflang for .de |
+| `smartqrcraft.com/wifi-qr-code-generator.html` | Country `us` |
+| `www.smartqrcraft.co.uk/...` | 301 to `smartqrcraft.co.uk/...` |
+| `/login`, `/dashboard`, `/admin`, `/api/...` | The same app and the same accounts on every domain |
+| `/r/<slug>` | Dynamic QR short links (printed codes use one host, `BASE_URL`) |
+| `/sitemap.xml`, `/robots.txt` | Made per country on request |
 
-## Source (edit these)
+Sign-in cookies belong to the domain you signed in on (browsers never share cookies between .de and .com),
+so a person signs in once per domain, **with the same account**.
+
+## Where things live
 
 | Path | What it is |
 |---|---|
-| `site/` | Shared pages and assets (`assets/app.js`, `qr-engine.js`, `styles.css`, ...) |
-| `pages_*.py` | Page content. `pages_in*.py` = India, `pages_de.py` = Germany, others are shared |
-| `pages/<domain>/` | Generated pages that belong to one domain only |
-| `countries/*.json` | **One file per country**: domain, language, hreflang, currency, which shared pages to skip, meta overrides, footer labels |
-| `build.py` | Builds `sites/<domain>/` for every domain (hreflang, sitemaps, footers, icons) |
-| `gen_pages.py` | Turns the `pages_*.py` content into HTML |
-| `qa.py` | Checks links, assets, titles, descriptions, hreflang and sitemaps |
-| `research/` | Keyword research CSVs (US, UK, India, Germany) |
+| `apps/app/` | **The application**: `server.mjs` (entry), `src/site.mjs` (website by Host), `src/handler.mjs` (API, sign-in, short links, admin), `src/db.mjs`, `db/migrations/` |
+| `countries/*.json` | **Country config**: domain, language, hreflang, currency, pages to skip, meta overrides, footer labels |
+| `countries/_common.json` | Settings shared by all countries (default domain, footer order, hub text, ...) |
+| `site/` | Shared page content and assets (`assets/app.js`, `qr-engine.js`, `styles.css`, ...) |
+| `content/<code>/` | Country-only page content (for example `content/de/`, `content/in/`) |
+| `pages_*.py` + `gen_pages.py` | Page text; `python gen_pages.py` writes it to `site/` and `content/<code>/` |
+| `widgets/embed-core.js` | The embeddable widget; the app serves it bundled as `/embed.js` |
+| `research/` | Keyword research CSVs |
 
 ## Run it on your computer
 
-Double-click `start-all.bat`. It builds, runs the checks, and opens the four sites:
-
-- http://localhost:8610 (.com)
-- http://localhost:8611 (.in)
-- http://localhost:8612 (.de)
-- http://localhost:8613 (.co.uk)
-
-Or by hand:
+Double-click `start-all.bat`, or:
 
 ```
 python gen_pages.py
-python build.py
-python qa.py
+node --test --no-warnings "apps/app/test/*.test.mjs"
+node apps/app/server.mjs
 ```
+
+Then open (all served by the one server on port 8700):
+
+- http://localhost:8700 (US), http://uk.localhost:8700, http://in.localhost:8700, http://de.localhost:8700
+- http://localhost:8700/login (sign in works on every one of them)
+
+The tests check every page of every country (titles, descriptions, canonicals, hreflang, links, assets,
+sitemaps) plus sign-in, plans, teams and short links.
+
+## Add a new country
+
+1. Create `countries/<code>.json` (copy `uk.json`; change `domain`, `lang`, `hreflang`, `og_locale`, `currency`, `order`).
+2. `skip_pages` lists shared pages that must not exist there. `own_pages_only: true` uses only `content/<code>/`.
+3. Another language: add UI strings (copy `site/assets/i18n-de.js`) and pages in `pages_<code>.py` with `"domain": "<domain>"`.
+4. Point the new domain at the app. Nothing else changes; hreflang and sitemaps on all domains update themselves.
+
+## Deploy (later)
+
+One deployment of `apps/app` with every domain attached to it (for example one Cloudflare Worker with four
+custom domains, or one Node server). Set `BASE_URL` to the short-link domain and `ADMIN_EMAILS`.
+See `apps/app/README.md`.
 
 ## Before launch
 
 Fill every `[PLACEHOLDER ...]` / `[PLATZHALTER ...]` in the legal and trust pages
-(`pages_trust.py`, `pages_de.py`): Impressum, Datenschutz, Privacy, Terms, About, Contact.
-Have the legal pages reviewed by a qualified professional. Those pages are set to `noindex` until you do.
-
-Third-party code bundled in `site/assets/` is listed in `site/assets/THIRD-PARTY.txt`.
-Verify the license of `qrcode-lib.js` before launch.
-
-## Add a new country
-
-1. Create `countries/<code>.json` (copy `uk.json` and change `domain`, `lang`, `hreflang`, `og_locale`, `currency`, `order`).
-2. `skip_pages` lists the shared pages that must NOT exist on that domain (for example the US-only pages).
-3. English-language countries are done at this point. For another language, add its UI strings
-   (copy `site/assets/i18n-de.js`) and write its pages in `pages_<code>.py` with `"domain": "<domain>"`.
-4. Run `python build.py && python qa.py`. hreflang tags and sitemaps on every other site update by themselves.
-
-Country-specific features (for example UPI for India, GiroCode for Germany) are just pages that exist only
-on that domain, so nothing else needs to change.
-
-## App (accounts, dynamic QR codes, admin)
-
-`apps/app/` is a separate local prototype: one app for all four domains, see `apps/app/README.md`.
-Run it with `node apps/app/server.mjs` and open http://localhost:8700/login.
+(`pages_trust.py`, `pages_de.py`) and have them reviewed. Those pages are `noindex` until then.
+Third-party code is listed in `site/assets/THIRD-PARTY.txt`.

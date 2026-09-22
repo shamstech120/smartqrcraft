@@ -1,19 +1,14 @@
 @echo off
-rem Builds all four sites and serves them locally.
-rem   .com    http://localhost:8610
-rem   .in     http://localhost:8611
-rem   .de     http://localhost:8612
-rem   .co.uk  http://localhost:8613
+rem Runs THE SmartQRCraft app: one server for every domain, one database.
+rem   US (.com)     http://localhost:8700
+rem   UK (.co.uk)   http://uk.localhost:8700
+rem   India (.in)   http://in.localhost:8700
+rem   Germany (.de) http://de.localhost:8700
+rem   Sign in       http://localhost:8700/login   (works on every domain)
 cd /d "%~dp0"
 python gen_pages.py
-python build.py
-python qa.py
-start "smartqrcraft.com  :8610" cmd /k python -m http.server 8610 --directory sites\smartqrcraft.com
-start "smartqrcraft.in   :8611" cmd /k python -m http.server 8611 --directory sites\smartqrcraft.in
-start "smartqrcraft.de   :8612" cmd /k python -m http.server 8612 --directory sites\smartqrcraft.de
-start "smartqrcraft.co.uk :8613" cmd /k python -m http.server 8613 --directory sites\smartqrcraft.co.uk
+node --test --no-warnings "apps/app/test/*.test.mjs"
+start "SmartQRCraft :8700" cmd /k node apps\app\server.mjs
 timeout /t 2 >nul
-start http://localhost:8610
-start http://localhost:8611
-start http://localhost:8612
-start http://localhost:8613
+start http://localhost:8700
+start http://de.localhost:8700

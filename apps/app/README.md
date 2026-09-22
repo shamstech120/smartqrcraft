@@ -1,7 +1,7 @@
-# SmartQRCraft app (local prototype)
+# SmartQRCraft app
 
-Accounts, dynamic QR codes with scan counts, and an admin panel. **This is one app for all four domains.**
-The country sites (`.com`, `.in`, `.de`, `.co.uk`) stay as they are and link "Sign in" to this app.
+**The** application: the website for every country, accounts, dynamic QR codes with scan stats, and the admin panel.
+Every domain points here; the Host header picks the country (see the main README).
 
 No packages to install: it uses Node's built-in web server and built-in SQLite.
 
@@ -12,7 +12,7 @@ cd apps/app
 node server.mjs
 ```
 
-Open http://localhost:8700/login. In test mode no email is sent: the page shows an
+Open http://localhost:8700 (US), http://de.localhost:8700 (Germany), http://in.localhost:8700, http://uk.localhost:8700, or /login on any of them. In test mode no email is sent: the page shows an
 "Open the sign-in link" button, and the link is also printed in the terminal.
 
 `apps/app/.env.local` (not committed) holds your settings:
@@ -28,7 +28,7 @@ Sign in with an admin email to see `/admin`.
 
 ```
 cd apps/app
-node --test --no-warnings test/app.test.mjs
+node --test --no-warnings "test/*.test.mjs"
 ```
 
 34 tests cover sign-in, one-time links, rate limits, CSRF, per-user isolation, the free limit,

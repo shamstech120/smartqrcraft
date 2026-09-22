@@ -1,7 +1,0 @@
-Third-party software bundled with SmartQRCraft (all served from this domain, no external requests)
-
-jsQR 1.4.0 - Apache License 2.0 - https://github.com/cozmo/jsQR
-JsBarcode 3.11.6 - MIT License - https://github.com/lindell/JsBarcode
-qrcode-lib.js - 'qrcode-generator' by Kazuhiko Arase - MIT License - https://github.com/kazuhikoarase/qrcode-generator (identified by its API: createSvgTag, stringToBytesFuncs, createDataURL; license header restored)
-Inter - SIL Open Font License 1.1 - The Inter Project Authors
-Plus Jakarta Sans - SIL Open Font License 1.1 - The Plus Jakarta Sans Project Authors

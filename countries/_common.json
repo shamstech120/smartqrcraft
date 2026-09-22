@@ -1,6 +1,13 @@
 {
   "default_domain": "smartqrcraft.com",
   "footer_labels": {
+    "wifi-qr-code-generator.html": "WiFi QR Code",
+    "vcard-qr-code-generator.html": "vCard / Business Card QR",
+    "linkedin-qr-code-generator.html": "LinkedIn QR Code",
+    "instagram-qr-code-generator.html": "Instagram QR Code",
+    "google-review-qr-code-generator.html": "Google Review QR Code",
+    "qr-code-menu-generator.html": "QR Code Menu",
+    "pdf-to-qr-code.html": "PDF to QR Code",
     "upi-qr-code-generator.html": "UPI QR Code",
     "location-qr-code-generator.html": "Location QR Code",
     "whatsapp-qr-code-generator.html": "WhatsApp QR Code",
@@ -38,5 +45,84 @@
     "shop-qr-code.html": "QR Code for Shop",
     "qr-code-visiting-card.html": "Visiting Card QR Code",
     "qr-code-widget.html": "QR Code Widget"
-  }
+  },
+  "footer_max": 9,
+  "footer_priority": [
+    "qr-code-scanner.html",
+    "qr-code-scanner-online.html",
+    "qr-code-tester.html",
+    "qr-code-testen.html",
+    "bulk-qr-code-generator.html",
+    "barcode-generator.html",
+    "barcode-generator-kostenlos.html",
+    "wifi-qr-code-generator.html",
+    "wlan-qr-code-generator.html",
+    "vcard-qr-code-generator.html",
+    "visitenkarte-qr-code-generator.html",
+    "upi-qr-code-generator.html",
+    "qr-code-ueberweisung-erstellen.html",
+    "qr-code-with-logo.html",
+    "qr-code-mit-logo.html"
+  ],
+  "guide_pages": [
+    "how-to-scan-qr-code-on-android.html",
+    "how-to-scan-qr-code-on-iphone.html",
+    "qr-code-safety.html",
+    "qr-code-size-guide.html",
+    "qr-codes-for-hotels-and-airbnb.html",
+    "qr-codes-for-real-estate.html",
+    "qr-codes-for-restaurants.html",
+    "qr-codes-for-retail.html",
+    "qr-codes-in-print.html",
+    "static-vs-dynamic-qr-codes.html",
+    "what-is-a-qr-code.html"
+  ],
+  "tool_pages": [
+    "barcode-generator-kostenlos.html",
+    "barcode-generator.html",
+    "bulk-qr-code-generator.html",
+    "printable-qr-code-templates.html",
+    "qr-code-scanner-online.html",
+    "qr-code-scanner.html",
+    "qr-code-testen.html",
+    "qr-code-tester.html",
+    "qr-code-widget.html"
+  ],
+  "not_in_sitemap": [
+    "about.html",
+    "contact.html",
+    "datenschutz.html",
+    "impressum.html",
+    "kontakt.html",
+    "nutzungsbedingungen.html",
+    "privacy.html",
+    "terms.html",
+    "ueber-uns.html"
+  ],
+  "hub_default": "all-qr-code-tools.html",
+  "hub_text": {
+    "en": {
+      "title": "All QR Code Tools | Generators, Scanner, Tester and Barcode",
+      "description": "Every free SmartQRCraft tool in one place: QR code generators for links, WiFi, contacts, payments and more, plus a scanner, tester, bulk generator and barcode maker.",
+      "h1": "All QR Code Tools",
+      "crumb": "All QR Code Tools",
+      "home": "Home",
+      "lead": "Every free tool on SmartQRCraft. No signup, no watermark, everything runs in your browser.",
+      "tools": "Scanner, tester and bulk tools",
+      "types": "QR code generators by type",
+      "guides": "Guides and industry pages"
+    },
+    "de": {
+      "title": "Alle QR-Code Tools | Generator, Scanner, Test und Barcode",
+      "description": "Alle kostenlosen SmartQRCraft-Tools an einem Ort: QR-Code Generatoren für Links, WLAN, Visitenkarten, Überweisungen und mehr, dazu Scanner, Test und Barcode-Generator.",
+      "h1": "Alle QR-Code Tools",
+      "crumb": "Alle QR-Code Tools",
+      "home": "Startseite",
+      "lead": "Alle kostenlosen Tools von SmartQRCraft. Ohne Anmeldung, ohne Wasserzeichen, alles läuft in deinem Browser.",
+      "tools": "Scanner, Test und Massen-Tools",
+      "types": "QR-Code Generatoren nach Art",
+      "guides": "Ratgeber"
+    }
+  },
+  "brand_suffix": " — SmartQRCraft"
 }

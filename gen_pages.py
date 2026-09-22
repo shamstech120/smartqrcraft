@@ -30,7 +30,8 @@ PAGES = _BASE_PAGES + MORE + IN_PAGES + IN_PAGES_2 + DE_PAGES + TOOLS_SHARED + T
 
 ROOT = Path(__file__).parent
 SITE = ROOT / "site"
-LOCAL = ROOT / "pages"
+CONTENT = ROOT / "content"  # country-only pages: content/<country code>/, served by the one app
+COUNTRY_OF = {json.loads(f.read_text(encoding="utf-8"))["domain"]: f.stem for f in (ROOT / "countries").glob("*.json") if not f.name.startswith("_")}
 DEFAULT = "smartqrcraft.com"
 CHEVRON = '<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/></svg>'
 ICON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="color:var(--violet)"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M14 14h3v3M21 14v.01M14 21h.01M17.5 21H21v-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
@@ -382,7 +383,7 @@ def render(page):
 def main():
     for page in PAGES:
         domain = page.get("domain", DEFAULT)
-        out = SITE if domain == DEFAULT else LOCAL / domain
+        out = SITE if domain == DEFAULT else CONTENT / COUNTRY_OF[domain]
         out.mkdir(parents=True, exist_ok=True)
         html_out = render_static(page) if page.get("static") else render(page)
         (out / page["slug"]).write_text(html_out, encoding="utf-8")

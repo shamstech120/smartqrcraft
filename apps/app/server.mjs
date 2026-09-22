@@ -1,5 +1,8 @@
-// Local development server. No dependencies: Node's built-in http + SQLite.
-//   node server.mjs
+// THE SmartQRCraft application: one server for every domain (smartqrcraft.com, .co.uk, .in, .de).
+// The Host header picks the country; the website, the app (sign in, dashboard, admin), the API and the
+// /r/ short links all live here, with one database and one user account system.
+// No dependencies: Node's built-in http + SQLite.
+//   node server.mjs      then open http://localhost:8700 (US), http://uk.localhost:8700, http://in.localhost:8700, http://de.localhost:8700
 // Settings (environment variables):
 //   PORT=8700  BASE_URL=http://localhost:8700  ADMIN_EMAILS=you@example.com,other@example.com
 //   DB_PATH=data/dev.sqlite  FREE_QR_LIMIT=2  DEV=1 (prints sign-in links instead of emailing them)
@@ -9,6 +12,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { openDb } from "./src/db.mjs";
 import { handle } from "./src/handler.mjs";
+import { createSite, fileSource } from "./src/site.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 
@@ -21,13 +25,19 @@ try {
 } catch { /* no local settings file */ }
 
 const PUBLIC = path.join(here, "public");
-const ASSETS = path.join(here, "..", "..", "site", "assets"); // shared QR engine, fonts, styles
+const ROOT = path.join(here, "..", ".."); // repository root: site/, content/, countries/, widgets/
 
 export function makeEnv(overrides = {}) {
   const port = Number(process.env.PORT || 8700);
   const baseUrl = (overrides.baseUrl || process.env.BASE_URL || `http://localhost:${port}`).replace(/\/$/, "");
   const dev = overrides.dev ?? (process.env.DEV ? process.env.DEV === "1" : baseUrl.startsWith("http://localhost"));
+  const site = overrides.site || createSite(fileSource(ROOT), { cache: !dev });
+  const hosts = new Set([new URL(baseUrl).host.toLowerCase(), "localhost", "127.0.0.1"]);
+  for (const c of site.countries) for (const h of [c.domain, "www." + c.domain, c.code + ".localhost"]) hosts.add(h);
   const env = {
+    site,
+    // true for any host this app answers for (with or without a port)
+    isOurHost: (host) => hosts.has(String(host || "").toLowerCase()) || hosts.has(String(host || "").toLowerCase().replace(/:\d+$/, "")),
     db: overrides.db || openDb(process.env.DB_PATH ? path.resolve(process.env.DB_PATH) : path.join(here, "data", "dev.sqlite")),
     baseUrl,
     origin: new URL(baseUrl).origin,
@@ -47,6 +57,7 @@ const TYPES = {
   ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8",
   ".svg": "image/svg+xml", ".png": "image/png", ".ico": "image/x-icon", ".woff2": "font/woff2", ".webmanifest": "application/manifest+json", ".json": "application/json",
 };
+const SITE_CSP = "default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; media-src 'self' blob:; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
 const SECURITY = {
   "x-content-type-options": "nosniff",
   "referrer-policy": "same-origin",
@@ -54,11 +65,11 @@ const SECURITY = {
   "content-security-policy": "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
 };
 
-function serveStatic(pathname) {
-  const routes = { "/": "dashboard.html", "/login": "login.html", "/dashboard": "dashboard.html", "/admin": "admin.html" };
-  let root = PUBLIC, rel = routes[pathname] || pathname;
-  if (pathname.startsWith("/assets/")) { root = ASSETS; rel = pathname.slice("/assets/".length); }
-  else if (pathname === "/favicon.svg" || pathname === "/favicon.ico") { root = path.join(here, "..", "..", "site"); rel = pathname.slice(1); }
+// The app's own pages (same on every domain). Everything else is the country website.
+const APP_ROUTES = { "/login": "login.html", "/dashboard": "dashboard.html", "/admin": "admin.html" };
+function serveApp(pathname) {
+  if (!APP_ROUTES[pathname] && !pathname.startsWith("/js/") && pathname !== "/app.css") return null;
+  const root = PUBLIC, rel = APP_ROUTES[pathname] || pathname;
   const file = path.resolve(root, "." + path.sep + rel.replace(/^\/+/, ""));
   if (!file.startsWith(root + path.sep) || !fs.existsSync(file) || !fs.statSync(file).isFile()) return null;
   const type = TYPES[path.extname(file)] || "application/octet-stream";
@@ -70,7 +81,9 @@ function serveStatic(pathname) {
 export function createServer(env) {
   return http.createServer(async (nodeReq, nodeRes) => {
     try {
-      const url = new URL(nodeReq.url, env.baseUrl);
+      const host = String(nodeReq.headers.host || new URL(env.baseUrl).host);
+      if (!env.isOurHost(host)) { nodeRes.writeHead(421, { "content-type": "text/plain" }); nodeRes.end("Unknown host."); return; }
+      const url = new URL(nodeReq.url, `${env.secure ? "https" : "http"}://${host}`);
       const headers = new Headers();
       for (const [k, v] of Object.entries(nodeReq.headers)) if (v !== undefined) headers.set(k, Array.isArray(v) ? v.join(", ") : v);
       headers.set("x-client-ip", nodeReq.socket.remoteAddress || "unknown");
@@ -80,7 +93,22 @@ export function createServer(env) {
       const req = new Request(url, { method: nodeReq.method, headers, body: hasBody ? Buffer.concat(chunks) : undefined });
 
       let res = null;
-      if (nodeReq.method === "GET" && !url.pathname.startsWith("/api/") && !url.pathname.startsWith("/r/")) res = serveStatic(url.pathname);
+      const isGet = nodeReq.method === "GET" || nodeReq.method === "HEAD";
+      if (isGet && !url.pathname.startsWith("/api/") && !url.pathname.startsWith("/r/")) {
+        res = serveApp(url.pathname);
+        if (!res) {
+          const r = env.site.respond(host, url.pathname);
+          if (r) {
+            const headers = { "content-type": r.type || "text/plain", ...SECURITY, "content-security-policy": SITE_CSP,
+              "cache-control": r.cacheable && !env.dev ? "public, max-age=3600" : "no-cache", ...(r.headers || {}) };
+            if (r.country) headers["content-language"] = r.country;
+            res = new Response(nodeReq.method === "HEAD" ? null : r.body, { status: r.status, headers });
+          } else {
+            const nf = env.site.respond(host, "/404.html");
+            res = new Response(nf && nf.status === 200 ? nf.body : "Page not found.", { status: 404, headers: { "content-type": nf && nf.status === 200 ? nf.type : "text/plain", ...SECURITY, "content-security-policy": SITE_CSP } });
+          }
+        }
+      }
       if (!res) res = await handle(req, env);
 
       const out = {};

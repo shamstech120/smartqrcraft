@@ -129,7 +129,7 @@ async function validateDestination(env, raw) {
   if (url.username || url.password) return { error: "Links with a username or password are not allowed." };
   const host = url.hostname.toLowerCase();
   if (isPrivateHost(host)) return { error: "Links to local or private addresses are not allowed." };
-  if (url.origin === env.origin && url.pathname.startsWith("/r/")) return { error: "A QR code cannot point at another QR code." };
+  if (env.isOurHost(url.host) && url.pathname.startsWith("/r/")) return { error: "A QR code cannot point at another QR code." };
   if (await isBlockedHost(env, host)) return { error: "That website is blocked because it was reported for abuse." };
   return { url: url.href };
 }
@@ -244,7 +244,7 @@ export async function handle(req, env) {
   // ----- password-protected QR: the form posts back here -----
   if (m && method === "POST") {
     const origin = req.headers.get("origin");
-    if (origin && origin !== env.origin && origin !== "null") return page(403, "Not allowed", "Cross-site requests are not allowed.");
+    if (origin && origin !== url.origin && origin !== "null") return page(403, "Not allowed", "Cross-site requests are not allowed.");
     const q = await env.db.get("select q.*, u.banned as user_banned from qrs q join users u on u.id = q.user_id where q.slug = ?", [m[1]]);
     if (!q || !q.active || q.user_banned || !q.password_hash) return page(404, "QR code not found", "This QR code does not exist or is not protected.");
     const counted = (await env.db.get("select count(*) as n from scans where qr_id = ? and is_bot = 0", [q.id])).n;
@@ -261,7 +261,8 @@ export async function handle(req, env) {
   // ----- CSRF: browsers always send Origin on cross-site writes -----
   if (method !== "GET" && method !== "HEAD") {
     const origin = req.headers.get("origin");
-    if (origin && origin !== env.origin) return fail(403, "bad_origin", "Cross-site requests are not allowed.");
+    // every domain is the same app: a write must come from the domain it is sent to
+    if (origin && origin !== url.origin) return fail(403, "bad_origin", "Cross-site requests are not allowed.");
   }
 
   // ----- sign in -----
@@ -273,7 +274,8 @@ export async function handle(req, env) {
       return fail(429, "rate_limited", "Too many attempts. Please wait a few minutes and try again.");
     const t = newToken();
     await env.db.run("insert into login_tokens(token_hash, email, expires_at) values (?, ?, ?)", [sha(t), email, now() + 900]);
-    const link = `${env.baseUrl}/api/auth/verify?token=${t}`;
+    // the link opens on the domain the person is using, so they stay on their country site
+    const link = `${env.isOurHost(url.host) ? url.origin : env.baseUrl}/api/auth/verify?token=${t}`;
     await env.sendMail(email, link);
     // The reply is identical for every address, so it cannot be used to find out who has an account.
     const out = { ok: true, message: "If that address is valid, a sign-in link is on its way. It works once and expires in 15 minutes." };
