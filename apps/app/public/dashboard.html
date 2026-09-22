@@ -11,15 +11,23 @@
 </head>
 <body>
 <main class="app-main">
-  <h1>My QR codes</h1>
+  <div class="row between">
+    <h1 id="title">My QR codes</h1>
+    <div id="workspace" class="workspace" hidden>
+      <label for="ws">Workspace</label>
+      <select id="ws"></select>
+    </div>
+  </div>
   <p class="muted">A dynamic QR code points to a short link. You can change where it goes at any time, and see how many people scanned it. Print it once.</p>
 
-  <section class="panel">
+  <section class="panel plan-panel" id="planPanel" aria-live="polite"></section>
+
+  <section class="panel" id="createPanel">
     <h2>Create a dynamic QR code</h2>
     <form id="create" novalidate>
       <div class="row">
         <div class="field grow">
-          <label for="label">Name (only you see this)</label>
+          <label for="label">Name (only your team sees this)</label>
           <input id="label" maxlength="80" placeholder="Summer menu">
         </div>
         <div class="field grow2">
@@ -34,7 +42,24 @@
   </section>
 
   <section id="list" aria-live="polite"></section>
-  <p id="empty" class="muted" hidden>You have no dynamic QR codes yet. Create your first one above.</p>
+  <p id="empty" class="muted" hidden>No dynamic QR codes here yet. Create your first one above.</p>
+
+  <section class="panel" id="teamPanel" hidden>
+    <h2>Team</h2>
+    <p class="muted small" id="teamNote"></p>
+    <form id="invite" class="row" novalidate>
+      <div class="field grow2">
+        <label for="invEmail">Email address</label>
+        <input id="invEmail" type="email" placeholder="colleague@example.com">
+      </div>
+      <div class="field">
+        <label for="invRole">Access</label>
+        <select id="invRole"><option value="editor">Can edit</option><option value="viewer">View only</option></select>
+      </div>
+      <button class="btn btn-primary" type="submit">Invite</button>
+    </form>
+    <div id="members"></div>
+  </section>
 </main>
 <script src="/assets/qrcode-lib.js"></script>
 <script src="/assets/qr-engine.js"></script>

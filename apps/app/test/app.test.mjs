@@ -171,7 +171,7 @@ test("no IP address is stored with scans", async () => {
   const q = (await call(env, "POST", "/api/qrs", { cookie, body: { destination: "https://example.com" } })).data.qr;
   await handle(new Request(q.url, { headers: { "x-client-ip": "203.0.113.9", "cf-connecting-ip": "203.0.113.9" }, redirect: "manual" }), env);
   const cols = await env.db.all("pragma table_info(scans)");
-  assert.deepEqual(cols.map((c) => c.name).sort(), ["country", "device", "id", "is_bot", "qr_id", "ts"]);
+  assert.deepEqual(cols.map((c) => c.name).sort(), ["city", "country", "device", "id", "is_bot", "qr_id", "ts"]);
 });
 
 test("changing the destination changes where the printed code goes", async () => {
@@ -299,4 +299,153 @@ test("removing an admin from the allowlist ends their admin access immediately (
   env.adminEmails.delete("admin@example.com");
   assert.equal((await call(env, "GET", "/api/admin/users", { cookie: admin.cookie })).status, 403);
   assert.equal((await call(env, "GET", "/api/me", { cookie: admin.cookie })).data.is_admin, false);
+});
+
+// ---------- plans, protection, teams ----------
+async function setPlan(env, email, plan, until) {
+  const admin = await signIn(env, "admin@example.com", "9.9.9.9");
+  const users = (await call(env, "GET", "/api/admin/users", { cookie: admin.cookie })).data.users;
+  const u = users.find((x) => x.email === email);
+  return call(env, "POST", `/api/admin/users/${u.id}/plan`, { cookie: admin.cookie, body: { plan, until } });
+}
+
+test("paid features are refused on the free plan and allowed after an admin sets Pro", async () => {
+  const env = newEnv();
+  const { cookie } = await signIn(env, "a@example.com");
+  const q = (await call(env, "POST", "/api/qrs", { cookie, body: { destination: "https://example.com" } })).data.qr;
+  assert.equal((await call(env, "PATCH", `/api/qrs/${q.id}`, { cookie, body: { password: "secret1" } })).status, 403);
+  assert.equal((await call(env, "PATCH", `/api/qrs/${q.id}`, { cookie, body: { max_scans: 5 } })).status, 403);
+  assert.equal((await call(env, "GET", `/api/qrs/${q.id}/scans.csv`, { cookie })).status, 403);
+  assert.equal((await setPlan(env, "a@example.com", "pro")).status, 200);
+  const me = await call(env, "GET", "/api/me", { cookie });
+  assert.equal(me.data.plan.id, "pro");
+  assert.equal((await call(env, "PATCH", `/api/qrs/${q.id}`, { cookie, body: { password: "secret1" } })).status, 200);
+  // Pro allows more than the free limit
+  for (let i = 0; i < 3; i++) assert.equal((await call(env, "POST", "/api/qrs", { cookie, body: { destination: "https://example.com/" + i } })).status, 201);
+});
+
+test("an expired paid plan falls back to free", async () => {
+  const env = newEnv();
+  const { cookie } = await signIn(env, "a@example.com");
+  await setPlan(env, "a@example.com", "pro", Math.floor(Date.now() / 1000) + 3600);
+  assert.equal((await call(env, "GET", "/api/me", { cookie })).data.plan.id, "pro");
+  await env.db.run("update users set plan_until = ? where email = ?", [Math.floor(Date.now() / 1000) - 10, "a@example.com"]);
+  assert.equal((await call(env, "GET", "/api/me", { cookie })).data.plan.id, "free");
+});
+
+test("password-protected QR shows a form, refuses a wrong password and redirects with the right one", async () => {
+  const env = newEnv();
+  const { cookie } = await signIn(env, "a@example.com");
+  await setPlan(env, "a@example.com", "pro");
+  const q = (await call(env, "POST", "/api/qrs", { cookie, body: { destination: "https://example.com/secret" } })).data.qr;
+  await call(env, "PATCH", `/api/qrs/${q.id}`, { cookie, body: { password: "open sesame" } });
+  const row = await env.db.get("select password_hash from qrs where id = ?", [q.id]);
+  assert.ok(!row.password_hash.includes("open sesame"));
+  const form = await handle(new Request(q.url, { redirect: "manual" }), env);
+  assert.equal(form.status, 200);
+  assert.match(await form.text(), /name="password"/);
+  const post = (pw) => handle(new Request(q.url, { method: "POST", redirect: "manual",
+    headers: { "content-type": "application/x-www-form-urlencoded", origin: BASE }, body: "password=" + encodeURIComponent(pw) }), env);
+  assert.equal((await post("wrong")).status, 401);
+  const ok = await post("open sesame");
+  assert.equal(ok.status, 303);
+  assert.equal(ok.headers.get("location"), "https://example.com/secret");
+  // removing the password restores the plain redirect
+  await call(env, "PATCH", `/api/qrs/${q.id}`, { cookie, body: { password: "" } });
+  assert.equal((await handle(new Request(q.url, { redirect: "manual" }), env)).status, 302);
+});
+
+test("password attempts are rate limited", async () => {
+  const env = newEnv();
+  const { cookie } = await signIn(env, "a@example.com");
+  await setPlan(env, "a@example.com", "pro");
+  const q = (await call(env, "POST", "/api/qrs", { cookie, body: { destination: "https://example.com" } })).data.qr;
+  await call(env, "PATCH", `/api/qrs/${q.id}`, { cookie, body: { password: "right-one" } });
+  const post = (pw) => handle(new Request(q.url, { method: "POST", redirect: "manual",
+    headers: { "content-type": "application/x-www-form-urlencoded", "x-client-ip": "5.5.5.5" }, body: "password=" + pw }), env);
+  for (let i = 0; i < 10; i++) await post("nope" + i);
+  const r = await post("right-one");
+  assert.equal(r.status, 401);
+  assert.match(await r.text(), /Too many attempts/);
+});
+
+test("scan limit and expiry date stop a QR code", async () => {
+  const env = newEnv();
+  const { cookie } = await signIn(env, "a@example.com");
+  await setPlan(env, "a@example.com", "pro");
+  const q = (await call(env, "POST", "/api/qrs", { cookie, body: { destination: "https://example.com" } })).data.qr;
+  await call(env, "PATCH", `/api/qrs/${q.id}`, { cookie, body: { max_scans: 2 } });
+  const scan = () => handle(new Request(q.url, { redirect: "manual", headers: { "user-agent": "Mozilla/5.0 (iPhone)" } }), env);
+  assert.equal((await scan()).status, 302);
+  assert.equal((await scan()).status, 302);
+  assert.equal((await scan()).status, 410);
+  await call(env, "PATCH", `/api/qrs/${q.id}`, { cookie, body: { max_scans: null } });
+  assert.equal((await scan()).status, 302);
+  assert.equal((await call(env, "PATCH", `/api/qrs/${q.id}`, { cookie, body: { expires_at: 5 } })).status, 400);
+  await call(env, "PATCH", `/api/qrs/${q.id}`, { cookie, body: { expires_at: Math.floor(Date.now() / 1000) + 2 } });
+  await env.db.run("update qrs set expires_at = ? where id = ?", [Math.floor(Date.now() / 1000) - 1, q.id]);
+  assert.equal((await scan()).status, 410);
+});
+
+test("CSV export lists scans with city and neutralises formula cells", async () => {
+  const env = newEnv();
+  const { cookie } = await signIn(env, "a@example.com");
+  await setPlan(env, "a@example.com", "pro");
+  const q = (await call(env, "POST", "/api/qrs", { cookie, body: { destination: "https://example.com" } })).data.qr;
+  await handle(new Request(q.url, { redirect: "manual", headers: { "user-agent": "Mozilla/5.0 (iPhone)", "cf-ipcountry": "DE", "cf-ipcity": "=HYPERLINK(1)" } }), env);
+  await handle(new Request(q.url, { redirect: "manual", headers: { "user-agent": "Mozilla/5.0 (iPhone)", "cf-ipcountry": "GB", "cf-ipcity": "London" } }), env);
+  const r = await call(env, "GET", `/api/qrs/${q.id}/scans.csv`, { cookie });
+  assert.equal(r.status, 200);
+  assert.match(r.data, /^time_utc,country,city,device\n/);
+  assert.match(r.data, /,GB,London,mobile/);
+  assert.match(r.data, /'=HYPERLINK/);
+  const s = await call(env, "GET", `/api/qrs/${q.id}/stats`, { cookie });
+  assert.equal(s.data.hours.length, 24);
+  assert.ok(s.data.cities.some((c) => c.name === "London (GB)"));
+});
+
+test("Business teams: invite before signup, editor can edit, viewer cannot, removal ends access", async () => {
+  const env = newEnv();
+  const owner = await signIn(env, "boss@example.com");
+  assert.equal((await call(env, "POST", "/api/team", { cookie: owner.cookie, body: { email: "ed@example.com" } })).status, 403);
+  await setPlan(env, "boss@example.com", "business");
+  assert.equal((await call(env, "POST", "/api/team", { cookie: owner.cookie, body: { email: "ed@example.com", role: "editor" } })).status, 201);
+  assert.equal((await call(env, "POST", "/api/team", { cookie: owner.cookie, body: { email: "vi@example.com", role: "viewer" } })).status, 201);
+  const q = (await call(env, "POST", "/api/qrs", { cookie: owner.cookie, body: { destination: "https://example.com" } })).data.qr;
+  const ed = await signIn(env, "ed@example.com", "2.2.2.2");
+  const vi = await signIn(env, "vi@example.com", "3.3.3.3");
+  const me = await call(env, "GET", "/api/me", { cookie: ed.cookie });
+  assert.equal(me.data.teams.length, 1);
+  const ownerId = me.data.teams[0].owner_id;
+  assert.equal((await call(env, "GET", `/api/qrs?owner=${ownerId}`, { cookie: ed.cookie })).data.qrs.length, 1);
+  assert.equal((await call(env, "PATCH", `/api/qrs/${q.id}`, { cookie: ed.cookie, body: { label: "by editor" } })).status, 200);
+  assert.equal((await call(env, "POST", "/api/qrs", { cookie: ed.cookie, body: { destination: "https://example.org", owner_id: ownerId } })).status, 201);
+  assert.equal((await call(env, "DELETE", `/api/qrs/${q.id}`, { cookie: ed.cookie })).status, 403);
+  assert.equal((await call(env, "GET", `/api/qrs/${q.id}/stats`, { cookie: vi.cookie })).status, 200);
+  assert.equal((await call(env, "PATCH", `/api/qrs/${q.id}`, { cookie: vi.cookie, body: { label: "x" } })).status, 403);
+  // outsiders see nothing
+  const out = await signIn(env, "out@example.com", "4.4.4.4");
+  assert.equal((await call(env, "GET", `/api/qrs?owner=${ownerId}`, { cookie: out.cookie })).status, 404);
+  assert.equal((await call(env, "GET", `/api/qrs/${q.id}/stats`, { cookie: out.cookie })).status, 404);
+  // downgrade: team access stops
+  await setPlan(env, "boss@example.com", "free");
+  assert.equal((await call(env, "GET", `/api/qrs?owner=${ownerId}`, { cookie: ed.cookie })).status, 404);
+  await setPlan(env, "boss@example.com", "business");
+  const members = (await call(env, "GET", "/api/team", { cookie: owner.cookie })).data.members;
+  const edRow = members.find((x) => x.email === "ed@example.com");
+  assert.equal(edRow.joined, true);
+  assert.equal((await call(env, "DELETE", `/api/team/${edRow.id}`, { cookie: owner.cookie })).status, 200);
+  assert.equal((await call(env, "GET", `/api/qrs?owner=${ownerId}`, { cookie: ed.cookie })).status, 404);
+});
+
+test("only admins can set plans, and plan changes are audited", async () => {
+  const env = newEnv();
+  const a = await signIn(env, "a@example.com");
+  const me = (await call(env, "GET", "/api/me", { cookie: a.cookie })).data;
+  assert.equal((await call(env, "POST", `/api/admin/users/${me.id}/plan`, { cookie: a.cookie, body: { plan: "business" } })).status, 403);
+  assert.equal((await setPlan(env, "a@example.com", "platinum")).status, 400);
+  await setPlan(env, "a@example.com", "business");
+  const admin = await signIn(env, "admin@example.com", "9.9.9.8");
+  const log = (await call(env, "GET", "/api/admin/audit", { cookie: admin.cookie })).data.log;
+  assert.ok(log.some((l) => l.action === "set_plan" && l.target.startsWith("a@example.com -> business")));
 });

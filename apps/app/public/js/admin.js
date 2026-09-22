@@ -22,15 +22,29 @@ async function loadSummary() {
     .forEach(([k, v]) => box.appendChild(el("div", { class: "tile" }, el("strong", null, v), el("span", null, k))));
 }
 
+// Plans are assigned by hand until payments are connected. Optional end date: the plan falls back to Free after it.
+function planPicker(u) {
+  if (u.is_admin) return el("span", { class: "muted small" }, "Admin");
+  const sel = el("select", { "aria-label": `Plan for ${u.email}` },
+    [["free", "Free"], ["pro", "Pro"], ["business", "Business"]].map(([v, t]) => el("option", { value: v, selected: (u.plan || "free") === v }, t)));
+  const until = el("input", { type: "date", "aria-label": "Plan end date (optional)", value: u.plan_until ? new Date(u.plan_until * 1000).toISOString().slice(0, 10) : "" });
+  const save = el("button", { class: "btn", type: "button", onclick: () => {
+    const body = { plan: sel.value, until: until.value ? Math.floor(new Date(until.value + "T23:59:59").getTime() / 1000) : null };
+    act(() => api(`/api/admin/users/${u.id}/plan`, { method: "POST", body }), "Plan saved.");
+  } }, "Set");
+  return el("div", { class: "plan-pick" }, sel, until, save);
+}
+
 async function loadUsers() {
   const { users } = await api("/api/admin/users?q=" + encodeURIComponent($("#search").value));
-  fill($("#users"), ["Email", "Joined", "Last sign-in", "QR codes", "Scans", "Status", ""], users.map((u) =>
+  fill($("#users"), ["Email", "Joined", "Last sign-in", "QR codes", "Scans", "Plan", "Status", ""], users.map((u) =>
     el("tr", null,
       el("td", null, u.email, u.is_admin ? el("span", { class: "chip chip-on" }, "admin") : null),
       el("td", null, fmtDate(u.created_at)),
       el("td", null, fmtDate(u.last_login_at)),
       el("td", { class: "num" }, u.qrs),
       el("td", { class: "num" }, u.scans),
+      el("td", null, planPicker(u)),
       el("td", null, el("span", { class: "chip " + (u.banned ? "chip-off" : "chip-on") }, u.banned ? "Banned" : "Active")),
       el("td", { class: "actions" },
         u.email === user.email ? null : el("button", { class: "btn", type: "button", onclick: () => act(() => api(`/api/admin/users/${u.id}/ban`, { method: "POST", body: { banned: !u.banned } }), u.banned ? "User restored." : "User banned.") }, u.banned ? "Unban" : "Ban"),
