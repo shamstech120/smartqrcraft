@@ -67,7 +67,9 @@
   "guide_pages": [
     "how-to-scan-qr-code-on-android.html",
     "how-to-scan-qr-code-on-iphone.html",
+    "qr-code-beispiele.html",
     "qr-code-drucken.html",
+    "qr-code-in-canva.html",
     "qr-code-safety.html",
     "qr-code-scannen-handy.html",
     "qr-code-size-guide.html",
@@ -77,7 +79,8 @@
     "qr-codes-for-retail.html",
     "qr-codes-in-print.html",
     "static-vs-dynamic-qr-codes.html",
-    "what-is-a-qr-code.html"
+    "what-is-a-qr-code.html",
+    "wie-erstelle-ich-einen-qr-code.html"
   ],
   "tool_pages": [
     "barcode-generator-kostenlos.html",

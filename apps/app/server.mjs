@@ -35,7 +35,8 @@ export function makeEnv(overrides = {}) {
   const hosts = new Set([new URL(baseUrl).host.toLowerCase(), "localhost", "127.0.0.1"]);
   for (const c of site.countries) for (const h of [c.domain, "www." + c.domain, c.code + ".localhost"]) hosts.add(h);
   const env = {
-    site,
+    // in development every request reads the files again, so new or edited pages show up without a restart
+    get site() { return dev && !overrides.site ? createSite(fileSource(ROOT), { cache: false }) : site; },
     // true for any host this app answers for (with or without a port)
     isOurHost: (host) => hosts.has(String(host || "").toLowerCase()) || hosts.has(String(host || "").toLowerCase().replace(/:\d+$/, "")),
     db: overrides.db || openDb(process.env.DB_PATH ? path.resolve(process.env.DB_PATH) : path.join(here, "data", "dev.sqlite")),
@@ -50,7 +51,8 @@ export function makeEnv(overrides = {}) {
       console.log(`\n[sign-in link for ${email}]\n${link}\n`);
     },
   };
-  return { ...env, ...(overrides.sendMail ? { sendMail: overrides.sendMail } : {}) };
+  if (overrides.sendMail) env.sendMail = overrides.sendMail;
+  return env; // not spread: that would freeze the dev-mode `site` getter
 }
 
 const TYPES = {

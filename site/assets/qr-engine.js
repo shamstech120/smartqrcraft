@@ -234,6 +234,9 @@
   function encode(payload, opts) {
     opts = opts || {};
     var ecc = opts.logo ? "H" : (/^[LMQH]$/.test(opts.ecc || "") ? opts.ecc : "M");
+    // The library defaults to one byte per character (Latin-1), which breaks umlauts in scanners that
+    // expect UTF-8 and mangles anything outside Latin-1 (euro sign, emoji). Always encode as UTF-8.
+    global.qrcode.stringToBytes = global.qrcode.stringToBytesFuncs["UTF-8"];
     var qr = global.qrcode(0, ecc); // typeNumber 0 = auto-detect smallest size
     qr.addData(payload || " ");
     qr.make();

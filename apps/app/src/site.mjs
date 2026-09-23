@@ -116,7 +116,7 @@ export function createSite(src, { cache = true } = {}) {
     for (const p of pageList(c)) {
       if (p === "index.html" || p === fname || notIn.has(p)) continue;
       const h = page(c, p);
-      const m1 = h.match(/<h1>([\s\S]*?)<\/h1>/);
+      const m1 = h.match(/<h1[^>]*>([\s\S]*?)<\/h1>/); // article pages style their h1
       const m2 = h.match(/<meta name="description" content="([^"]*)"/);
       if (m1) entries.push([p, strip(m1[1]), m2 ? m2[1] : ""]);
     }

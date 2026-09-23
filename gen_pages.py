@@ -26,8 +26,9 @@ from pages_in3 import IN_PAGES_3
 from pages_guides import GUIDES
 from pages_tools3 import TOOLS3_SHARED
 from pages_de2 import DE_PAGES_2
+from pages_de3 import DE_PAGES_3
 
-PAGES = _BASE_PAGES + MORE + IN_PAGES + IN_PAGES_2 + DE_PAGES + TOOLS_SHARED + TOOLS_DE + TOOLS2_SHARED + TOOLS2_DE + US_PAGES + LOGO_SHARED + DE_PAY + LINK_SHARED + LINK_US + TRUST_SHARED + TRUST_DE + ARTICLES + CORE + TYPES_SHARED + IN_PAGES_3 + GUIDES + TOOLS3_SHARED + DE_PAGES_2
+PAGES = _BASE_PAGES + MORE + IN_PAGES + IN_PAGES_2 + DE_PAGES + TOOLS_SHARED + TOOLS_DE + TOOLS2_SHARED + TOOLS2_DE + US_PAGES + LOGO_SHARED + DE_PAY + LINK_SHARED + LINK_US + TRUST_SHARED + TRUST_DE + ARTICLES + CORE + TYPES_SHARED + IN_PAGES_3 + GUIDES + TOOLS3_SHARED + DE_PAGES_2 + DE_PAGES_3
 
 ROOT = Path(__file__).parent
 SITE = ROOT / "site"
@@ -113,6 +114,16 @@ def render_section(sec):
         return (f'  <section class="bg-lavender">\n    <div class="wrap">\n'
                 f'      <div class="section-head"><span class="eyebrow">{sec["eyebrow"]}</span><h2>{sec["h2"]}</h2></div>\n'
                 f'      <div class="card-grid">{cards}</div>\n    </div>\n  </section>\n')
+    if kind == "gallery":
+        items = "".join(
+            f'<figure class="card" style="text-align:center;margin:0"><img src="{g["img"]}" alt="{e(g["alt"])}" width="160" height="160" loading="lazy" style="width:160px;height:auto;margin:0 auto 10px">'
+            f'<figcaption><h3>{g["h3"]}</h3><p>{g["p"]}</p>'
+            + (f'<p style="margin-top:8px"><a href="{g["href"]}">{g["label"]}</a></p>' if g.get("href") else "")
+            + '</figcaption></figure>' for g in sec["items"])
+        intro = paras(sec.get("p", []))
+        return (f'  <section class="bg-lavender">\n    <div class="wrap">\n'
+                f'      <div class="section-head"><h2>{sec["h2"]}</h2></div>\n      <div style="max-width:760px;margin:0 auto">{intro}</div>\n'
+                f'      <div class="card-grid">{items}</div>\n    </div>\n  </section>\n')
     if kind == "cta":
         return (f'  <section>\n    <div class="wrap" style="max-width:760px"><div class="final-cta" style="margin:8px 0">'
                 f'<h2>{sec["h2"]}</h2><p>{sec["p"]}</p><a href="{sec["href"]}" class="btn btn-primary">{sec["label"]}</a></div></div>\n  </section>\n')

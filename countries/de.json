@@ -63,7 +63,13 @@
     "text-in-qr-code.html": "Text in QR-Code",
     "qr-code-fuer-app-erstellen.html": "QR-Code für App",
     "qr-code-scannen-handy.html": "QR-Code scannen mit Handy",
-    "qr-code-widget-website.html": "QR-Code Widget"
+    "qr-code-widget-website.html": "QR-Code Widget",
+    "qr-code-erstellen-kostenlos-dauerhaft.html": "QR-Code dauerhaft kostenlos",
+    "link-in-qr-code-umwandeln.html": "Link in QR-Code",
+    "wie-erstelle-ich-einen-qr-code.html": "Wie erstelle ich einen QR-Code?",
+    "qr-code-in-canva.html": "QR-Code in Canva",
+    "qr-code-beispiele.html": "QR-Code Beispiele",
+    "bild-als-qr-code.html": "Bild als QR-Code"
   },
   "footer_only_own": true,
   "meta_overrides": {},

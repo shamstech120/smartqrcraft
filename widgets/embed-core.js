@@ -8,6 +8,7 @@
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
 
   function svgFor(text, size, fg, bg) {
+    qrcode.stringToBytes = qrcode.stringToBytesFuncs["UTF-8"]; // default is Latin-1; UTF-8 keeps umlauts intact
     var qr = qrcode(0, "M");
     qr.addData(text);
     qr.make();

@@ -255,6 +255,27 @@ VISITENKARTE = {**_D,
             ],
         },
         {
+            "kind": "prose", "id": "digital",
+            "h2": "QR-Code als Visitenkarte: die digitale Visitenkarte",
+            "p": [
+                "Ein vCard-QR-Code ist selbst schon eine digitale Visitenkarte. Du musst ihn nicht auf Papier drucken: Zeig ihn auf dem Handy-Bildschirm, setz ihn in deine E-Mail-Signatur, auf dein Namensschild, deinen Messestand oder in deine Präsentation. Wer ihn scannt, speichert deinen Kontakt sofort.",
+                "Tipp: Speichere den Code als Bild in deinen Fotos oder als Hintergrund auf dem Sperrbildschirm. So hast du deine Visitenkarte immer dabei, auch wenn die gedruckten Karten ausgegangen sind."
+            ],
+        },
+        {
+            "kind": "prose", "id": "drucken-lassen",
+            "h2": "Visitenkarten mit QR-Code drucken lassen",
+            "steps": [
+                "Erstelle oben deinen Code und lade ihn als <strong>SVG</strong> oder <strong>PDF</strong> herunter. Beide sind Vektordateien und bleiben im Druck gestochen scharf.",
+                "Füge den Code in dein Visitenkarten-Layout ein, zum Beispiel in Canva, bei einer Online-Druckerei oder in der Vorlage deines Grafikers. Ein Rand von einigen Millimetern um den Code muss frei bleiben.",
+                "Bestelle wenn möglich einen Probedruck oder eine kleine Auflage und scanne den Code mit zwei Handys.",
+                "Drucke erst dann die volle Auflage."
+            ],
+            "after": [
+                "Mehr zu Dateiformaten, Größen und Material steht im Ratgeber <a href=\"qr-code-drucken.html\">QR-Code drucken</a>. Wie du den Code in Canva einsetzt, zeigt <a href=\"qr-code-in-canva.html\">QR-Code in Canva</a>."
+            ],
+        },
+        {
             "kind": "prose", "id": "datenschutz",
             "h2": "Datenschutz bei Kontaktdaten im QR-Code",
             "p": [
@@ -276,6 +297,12 @@ VISITENKARTE = {**_D,
          "Ja. Die Kamera-App aktueller Geräte erkennt den Code und bietet an, den Kontakt zu speichern."),
         ("Soll ich vCard oder Link auf die Visitenkarte drucken?",
          "Eine vCard speichert deine Daten direkt im Adressbuch. Ein Link zeigt dagegen immer aktuelle Inhalte, etwa dein Profil. Wähle die vCard, wenn du gefunden und angerufen werden willst, und den Link, wenn du vor allem Inhalte zeigen möchtest."),
+        ("Kann ich einen QR-Code als Visitenkarte nutzen, ohne sie zu drucken?",
+         "Ja. Der vCard-QR-Code ist eine digitale Visitenkarte. Zeig ihn auf dem Handy, in der E-Mail-Signatur oder auf dem Namensschild."),
+        ("Wo lasse ich Visitenkarten mit QR-Code drucken?",
+         "Bei jeder Druckerei oder Online-Druckerei. Lade den Code als SVG oder PDF herunter, setze ihn ins Layout und bestelle zuerst einen Probedruck."),
+        ("Was ist ein vCard-QR-Code?",
+         "Ein QR-Code, der Kontaktdaten im Standardformat vCard enthält. Handys erkennen ihn und bieten an, den Kontakt zu speichern."),
     ],
     "related": [
         ("index.html#generator", "QR-Code kostenlos erstellen"),
