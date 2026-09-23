@@ -67,7 +67,9 @@
   "guide_pages": [
     "how-to-scan-qr-code-on-android.html",
     "how-to-scan-qr-code-on-iphone.html",
+    "qr-code-drucken.html",
     "qr-code-safety.html",
+    "qr-code-scannen-handy.html",
     "qr-code-size-guide.html",
     "qr-codes-for-hotels-and-airbnb.html",
     "qr-codes-for-real-estate.html",
@@ -86,6 +88,8 @@
     "qr-code-scanner.html",
     "qr-code-testen.html",
     "qr-code-tester.html",
+    "qr-code-vorlagen-drucken.html",
+    "qr-code-widget-website.html",
     "qr-code-widget.html"
   ],
   "not_in_sitemap": [

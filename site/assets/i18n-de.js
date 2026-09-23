@@ -86,7 +86,8 @@ window.SMARTQR_I18N = {
       label: "E-Mail", short: "Empfänger, Betreff und Nachricht vorausfüllen.",
       fields: [
         { name: "to", label: "E-Mail-Adresse des Empfängers", placeholder: "hallo@beispiel.de", type: "text" },
-        { name: "subject", label: "Betreff (optional)", placeholder: "Meine Anfrage", type: "text" }
+        { name: "subject", label: "Betreff (optional)", placeholder: "Meine Anfrage", type: "text" },
+        { name: "body", label: "Nachricht (optional)", placeholder: "Hallo, ich habe deinen QR-Code gescannt und ...", type: "textarea" }
       ]
     },
     phone: {
@@ -143,4 +144,37 @@ window.SMARTQR_I18N = {
       fields: [{ name: "value", label: "App-Store- oder Play-Store-Link", placeholder: "https://apps.apple.com/de/app/deineapp", type: "text" }]
     }
   }
+};
+
+// Printable templates (print.js) and the widget builder (embed-builder.js)
+window.SMARTQR_PRINT_I18N = {
+  title: "QR-Code Vorlagen zum Drucken", pill: "Druckfertig in A4",
+  template: "Vorlage", content: "Inhalt des QR-Codes", texts: "Text auf der Seite",
+  t_tent: "Tischaufsteller (in der Mitte falten)", t_sign: "Theken-Schild / Scannen & Bezahlen (A4)", t_cards: "Karten, 4 pro A4 (A6)",
+  t_wifi: "WLAN-Karten, 4 pro A4", t_labels: "Etikettenbogen (gleicher Code mehrfach)",
+  layout: "Etiketten-Layout", heading: "Überschrift", sub: "Firmen- oder Netzwerkname", note: "Kleingedrucktes",
+  caption: "Etikett-Text (optional)", accent: "Akzentfarbe", qrColor: "Farbe des QR-Codes",
+  ctype: "Art", url: "Link", text: "Text", phone: "Telefon", whatsapp: "WhatsApp", email: "E-Mail", wifi: "WLAN",
+  f_value: "Link", f_text: "Text", f_phone: "Telefonnummer mit Ländervorwahl", f_wa: "WhatsApp-Nummer mit Ländervorwahl",
+  f_email: "E-Mail-Adresse", f_ssid: "Netzwerkname (SSID)", f_pw: "Passwort", f_sec: "Verschlüsselung",
+  showPw: "Passwort auf die Karte drucken", print: "Drucken / als PDF speichern", svg: "SVG herunterladen", png: "PNG herunterladen (300 dpi)",
+  empty: "Gib den Inhalt des QR-Codes ein, um die Seite zu sehen.",
+  hint: "Drucke in Originalgröße (100 %), nicht \u201eAn Seite anpassen\u201c. Etikettenbögen unterscheiden sich je nach Hersteller: Drucke zuerst eine Probeseite auf normales Papier und halte sie gegen deinen Bogen.",
+  privacy: "Alles wird in deinem Browser erstellt. Es wird nichts hochgeladen.",
+  d_heading_tent: "Scanne für unsere Speisekarte", d_heading_sign: "Scannen & bezahlen", d_heading_cards: "Scan mich",
+  d_heading_wifi: "Kostenloses WLAN", d_note: "Richte die Handykamera auf den Code", d_note_wifi: "Mit der Kamera scannen und verbinden",
+  d_sub: "Dein Firmenname", network: "Netzwerk", password: "Passwort",
+  lay_24: "24 pro Bogen: 3 \u00d7 8 (70 \u00d7 37 mm)", lay_65: "65 pro Bogen: 5 \u00d7 13 (38 \u00d7 21 mm)",
+  lay_8: "8 pro Bogen: 2 \u00d7 4 (105 \u00d7 74 mm)", lay_12: "12 pro Bogen: 3 \u00d7 4 (70 \u00d7 74 mm)",
+  placeholders: { "url.value": "https://beispiel.de/speisekarte", "phone.value": "+49 30 1234567", "whatsapp.number": "4915123456789",
+    "email.to": "hallo@beispiel.de", "wifi.ssid": "Cafe_Gast" }
+};
+window.SMARTQR_EMBED_I18N = {
+  title: "QR-Code Widget erstellen", pill: "Kopieren, einfügen, fertig", opens: "Der QR-Code öffnet",
+  mPage: "Die Seite, auf der der Besucher ist (automatisch)", mFixed: "Einen festen Link oder Text",
+  opensHint: "Im automatischen Modus zeigt jede Seite einen Code ihrer eigenen Adresse. Ein Code-Schnipsel reicht für die ganze Website.",
+  content: "Link oder Text", size: "Größe", color: "Farbe", caption: "Beschriftung (leer lassen zum Ausblenden)",
+  credit: "Kleinen Link \u201eQR by SmartQRCraft\u201c anzeigen (danke!)", paste: "Füge das in deine Seite ein",
+  copy: "Code kopieren", copied: "Kopiert", codeLabel: "Widget-Code", defaultCaption: "Scannen, um die Seite am Handy zu öffnen",
+  origin: "https://smartqrcraft.de"
 };

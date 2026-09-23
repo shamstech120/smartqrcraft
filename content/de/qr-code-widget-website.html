@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QR-Code Widget für deine Website kostenlos | Einbinden per HTML — SmartQRCraft</title>
+<meta name="description" content="QR-Code in die eigene Website einbinden: Zwei Zeilen HTML zeigen einen QR-Code der aktuellen Seite, damit Besucher am Handy weiterlesen. Kostenlos, ohne API-Schlüssel.">
+<link rel="canonical" href="https://smartqrcraft.de/qr-code-widget-website.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="QR-Code Widget für Websites | SmartQRCraft">
+<meta property="og:description" content="Zwei Zeilen HTML: ein QR-Code der aktuellen Seite auf deiner Website. Kostenlos, ohne Tracking.">
+<meta property="og:url" content="https://smartqrcraft.de/qr-code-widget-website.html">
+<meta property="og:site_name" content="SmartQRCraft">
+<meta name="theme-color" content="#6D28D9">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Startseite",
+          "item": "https://smartqrcraft.de/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "QR-Code Widget für die Website",
+          "item": "https://smartqrcraft.de/qr-code-widget-website.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Ist das QR-Code Widget kostenlos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja, für private und gewerbliche Websites, ohne API-Schlüssel und ohne Anmeldung."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Setzt das Widget Cookies?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nein. Es setzt keine Cookies und sendet keine Daten. Der Code entsteht im Browser des Besuchers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Zeigt ein Code-Schnipsel auf jeder Seite einen anderen QR-Code?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja. Im automatischen Modus zeigt jede Seite einen Code ihrer eigenen Adresse. Du kannst den Schnipsel also in ein gemeinsames Template einbauen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kann ich den SmartQRCraft-Link entfernen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja, mit data-credit=\"off\". Wir freuen uns aber, wenn du ihn drin lässt."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Muss ich das Widget in der Datenschutzerklärung erwähnen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wenn du die Datei von unserem Server lädst, ist ein kurzer Hinweis sinnvoll, weil dabei die IP-Adresse übertragen wird. Alternativ hostest du embed.js selbst."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body data-base="">
+<div id="site-header"></div>
+
+<main>
+  <div class="wrap breadcrumbs">
+    <a href="index.html">Startseite</a><span class="sep">/</span><span class="current">QR-Code Widget für die Website</span>
+  </div>
+
+  <section class="hero" id="generator" style="padding-top:32px">
+    <div class="wrap">
+      <div class="hero-head">
+        <span class="trust-badge"><span class="trust-dot"></span>100 % kostenlos · ohne Anmeldung</span>
+        <h1><span class="accent">QR-Code Widget</span> für deine Website</h1>
+        <p class="lead">Füge zwei Zeilen HTML ein, und deine Seite zeigt einen QR-Code von sich selbst. Besucher am Computer scannen ihn und lesen am Handy weiter. Funktioniert mit WordPress, Shopify, Wix, Jimdo und normalem HTML.</p>
+      </div>
+
+<div class="generator qr-embed" id="qr-builder"></div>
+    </div>
+  </section>
+
+  <section id="anleitung">
+    <div class="wrap" style="max-width:760px">
+      <div class="section-head" style="text-align:left;margin-bottom:24px"><h2 style="font-size:26px">So bindest du das Widget ein</h2></div>
+      
+      <ol style="color:var(--muted);line-height:1.8;margin:0 0 16px 20px"><li>Wähle oben die Einstellungen: automatisch (die aktuelle Seite) oder ein fester Link, Größe, Farbe und Beschriftung.</li><li>Klicke auf <strong>Code kopieren</strong>.</li><li>Füge den Code dort in deine Seite ein, wo der QR-Code erscheinen soll, zum Beispiel in die Seitenleiste, den Footer oder eine Produktseite.</li><li>Öffne die Seite und scanne den Code mit dem Handy.</li></ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap" style="max-width:860px">
+      <div class="section-head" style="text-align:left;margin-bottom:24px"><h2 style="font-size:26px">Wo du den Code einfügst</h2></div>
+      
+      <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:14.5px;color:var(--muted);line-height:1.6"><thead><tr><th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--border)">System</th><th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--border)">Wo der Code hinkommt</th></tr></thead><tbody><tr><td style="padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top">WordPress</td><td style="padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top">In einen <strong>Individuelles HTML</strong>-Block oder ein HTML-Widget in Seitenleiste oder Footer</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top">Shopify</td><td style="padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top">Onlineshop &gt; Themes &gt; Anpassen, dann ein <strong>Benutzerdefiniertes Liquid</strong>-Abschnitt</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top">Wix</td><td style="padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top">Hinzufügen &gt; Einbetten &gt; <strong>HTML einbetten</strong></td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top">Jimdo</td><td style="padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top">Element hinzufügen &gt; <strong>Widget/HTML</strong></td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top">Eigenes HTML</td><td style="padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top">Irgendwo innerhalb von &lt;body&gt;</td></tr></tbody></table></div>
+    </div>
+  </section>
+
+  <section id="datenschutz">
+    <div class="wrap" style="max-width:760px">
+      <div class="section-head" style="text-align:left;margin-bottom:24px"><h2 style="font-size:26px">Datenschutz und Ladezeit</h2></div>
+      <p style="color:var(--muted);line-height:1.7;margin-bottom:16px">Das Widget ist ein einzelnes kleines Skript ohne Cookies, ohne Tracking und ohne Aufrufe anderer Dienste. Der QR-Code wird im Browser des Besuchers gezeichnet, Seitenadressen werden nicht an uns oder Dritte gesendet. Das Skript lädt mit <code>async</code> und bremst deine Seite nicht aus.</p>
+      <p style="color:var(--muted);line-height:1.7;margin-bottom:16px">Beim Laden des Skripts von unserem Server wird wie bei jeder eingebundenen Datei die IP-Adresse des Besuchers übertragen. Erwähne das Widget deshalb in deiner Datenschutzerklärung, oder lade die Datei embed.js herunter und binde sie von deinem eigenen Server ein.</p>
+      
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">FAQ</span><h2>Fragen zum QR-Code Widget</h2></div>
+      <div class="faq">
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">Ist das QR-Code Widget kostenlos?<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/></svg></button><div class="faq-a"><p>Ja, für private und gewerbliche Websites, ohne API-Schlüssel und ohne Anmeldung.</p></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">Setzt das Widget Cookies?<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/></svg></button><div class="faq-a"><p>Nein. Es setzt keine Cookies und sendet keine Daten. Der Code entsteht im Browser des Besuchers.</p></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">Zeigt ein Code-Schnipsel auf jeder Seite einen anderen QR-Code?<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/></svg></button><div class="faq-a"><p>Ja. Im automatischen Modus zeigt jede Seite einen Code ihrer eigenen Adresse. Du kannst den Schnipsel also in ein gemeinsames Template einbauen.</p></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">Kann ich den SmartQRCraft-Link entfernen?<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/></svg></button><div class="faq-a"><p>Ja, mit data-credit=&quot;off&quot;. Wir freuen uns aber, wenn du ihn drin lässt.</p></div></div>
+        <div class="faq-item"><button class="faq-q" aria-expanded="false">Muss ich das Widget in der Datenschutzerklärung erwähnen?<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/></svg></button><div class="faq-a"><p>Wenn du die Datei von unserem Server lädst, ist ein kurzer Hinweis sinnvoll, weil dabei die IP-Adresse übertragen wird. Alternativ hostest du embed.js selbst.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap" style="max-width:760px">
+      <div class="section-head" style="text-align:left;margin-bottom:16px"><h2 style="font-size:22px">Weitere QR-Code Tools</h2></div>
+      <ul style="color:var(--muted);line-height:2;margin-left:20px"><li><a href="index.html#generator">Kostenloser QR-Code Generator</a></li><li><a href="qr-code-mit-logo.html">QR-Code mit Logo</a></li><li><a href="qr-code-scanner-online.html">QR-Code Scanner online</a></li></ul>
+    </div>
+  </section>
+  <section>
+    <div class="wrap">
+      <div class="final-cta">
+        <h2>Du brauchst einen anderen QR-Code?</h2>
+        <p>WLAN, Visitenkarte, Link und mehr findest du im vollständigen Generator.</p>
+        <a href="index.html#generator" class="btn btn-primary">Zum vollständigen Generator</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/i18n-de.js"></script>
+<script src="assets/embed-builder.js"></script>
+<script src="assets/components.js"></script>
+
+</body>
+</html>

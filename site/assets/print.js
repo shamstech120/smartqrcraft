@@ -121,7 +121,7 @@
       (CONTENT_TYPES[state.ctype] || []).forEach(function (f) {
         var ctrl = f[3]
           ? select(f[3], state.fields[f[0]] || f[3][0][0], function (v) { state.fields[f[0]] = v; render(); })
-          : input(state.fields[f[0]], f[2], function (v) { state.fields[f[0]] = v; render(); }, f[0] === "value" && state.ctype === "text" ? "text" : "text");
+          : input(state.fields[f[0]], (T.placeholders || {})[state.ctype + "." + f[0]] || f[2], function (v) { state.fields[f[0]] = v; render(); }, f[0] === "value" && state.ctype === "text" ? "text" : "text");
         if (f[3] && !state.fields[f[0]]) state.fields[f[0]] = f[3][0][0];
         contentBox.appendChild(field(T[f[1]], ctrl));
       });

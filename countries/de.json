@@ -54,7 +54,16 @@
     "qr-code-scanner-online.html": "QR-Code Scanner",
     "qr-code-testen.html": "QR-Code testen",
     "barcode-generator-kostenlos.html": "Barcode erstellen",
-    "qr-code-ueberweisung-erstellen.html": "QR-Code Überweisung"
+    "qr-code-ueberweisung-erstellen.html": "QR-Code Überweisung",
+    "qr-code-vorlagen-drucken.html": "QR-Code Vorlagen drucken",
+    "qr-code-drucken.html": "QR-Code drucken",
+    "qr-code-telefonnummer.html": "QR-Code Telefonnummer",
+    "e-mail-qr-code-erstellen.html": "E-Mail-QR-Code",
+    "sms-qr-code-erstellen.html": "SMS-QR-Code",
+    "text-in-qr-code.html": "Text in QR-Code",
+    "qr-code-fuer-app-erstellen.html": "QR-Code für App",
+    "qr-code-scannen-handy.html": "QR-Code scannen mit Handy",
+    "qr-code-widget-website.html": "QR-Code Widget"
   },
   "footer_only_own": true,
   "meta_overrides": {},
