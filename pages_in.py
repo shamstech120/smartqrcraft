@@ -62,6 +62,17 @@ UPI = {
                 ("Freelancers &amp; services", "Add it to a business card, quotation or WhatsApp catalogue."),
             ],
         },
+        {"kind": "table", "id": "apps",
+         "h2": "BHIM, PhonePe, Paytm and Google Pay UPI IDs",
+         "p": ["A UPI QR code follows the common NPCI format, so one code works in every UPI app. The part after the @ in a UPI ID is the handle of the app or bank that issued it. You can use any of them here:"],
+         "cols": ["App", "Common UPI ID handles"],
+         "rows": [
+             ["PhonePe", "@ybl, @ibl, @axl"],
+             ["Google Pay", "@okaxis, @okhdfcbank, @okicici, @oksbi"],
+             ["Paytm", "@paytm, @ptyes, @ptaxis, @pthdfc, @ptsbi"],
+             ["BHIM", "@upi"],
+             ["Bank apps", "Your bank's own handle"],
+         ]},
         {
             "kind": "prose", "id": "safety",
             "h2": "Staying safe with UPI QR codes",
@@ -84,6 +95,10 @@ UPI = {
         },
     ],
     "faq": [
+        ("Can I make a PhonePe or BHIM QR code here?",
+         "Yes. Enter your PhonePe (for example name@ybl) or BHIM (name@upi) UPI ID. The code is a standard UPI QR code, so customers can pay from any UPI app."),
+        ("What is a universal UPI QR code?",
+         "Every UPI QR code in the NPCI format is universal: GPay, PhonePe, Paytm, BHIM and bank apps can all scan it."),
         ("How do I make a UPI QR code?",
          "Enter your UPI ID in the generator on this page, add your name and an optional amount, then download the QR code. Customers can scan it with any UPI app to pay you."),
         ("Is this UPI QR code generator free?",

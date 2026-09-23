@@ -77,7 +77,7 @@ export function createSite(src, { cache = true } = {}) {
     if ("description" in ov) html = setMeta(html, /(<meta name="description" content=")[^"]*("\s*>)/, ov.description);
     if ("og_title" in ov) html = setMeta(html, /(<meta property="og:title" content=")[^"]*(">)/, ov.og_title);
     if ("og_description" in ov) html = setMeta(html, /(<meta property="og:description" content=")[^"]*(">)/, ov.og_description);
-    if ("h1" in ov) html = setMeta(html, /(<h1>)[\s\S]*?(<\/h1>)/, ov.h1);
+    if ("h1" in ov) html = setMeta(html, /(<h1[^>]*>)[\s\S]*?(<\/h1>)/, ov.h1);
     return html;
   }
   function shortenTitle(html) {

@@ -27,8 +27,9 @@ from pages_guides import GUIDES
 from pages_tools3 import TOOLS3_SHARED
 from pages_de2 import DE_PAGES_2
 from pages_de3 import DE_PAGES_3
+from pages_in4 import IN4_SHARED, IN4_LOCAL
 
-PAGES = _BASE_PAGES + MORE + IN_PAGES + IN_PAGES_2 + DE_PAGES + TOOLS_SHARED + TOOLS_DE + TOOLS2_SHARED + TOOLS2_DE + US_PAGES + LOGO_SHARED + DE_PAY + LINK_SHARED + LINK_US + TRUST_SHARED + TRUST_DE + ARTICLES + CORE + TYPES_SHARED + IN_PAGES_3 + GUIDES + TOOLS3_SHARED + DE_PAGES_2 + DE_PAGES_3
+PAGES = _BASE_PAGES + MORE + IN_PAGES + IN_PAGES_2 + DE_PAGES + TOOLS_SHARED + TOOLS_DE + TOOLS2_SHARED + TOOLS2_DE + US_PAGES + LOGO_SHARED + DE_PAY + LINK_SHARED + LINK_US + TRUST_SHARED + TRUST_DE + ARTICLES + CORE + TYPES_SHARED + IN_PAGES_3 + GUIDES + TOOLS3_SHARED + DE_PAGES_2 + DE_PAGES_3 + IN4_SHARED + IN4_LOCAL
 
 ROOT = Path(__file__).parent
 SITE = ROOT / "site"
@@ -195,7 +196,8 @@ def render_static(page):
 '''
 
 def generator_block(page, U, types, lock):
-    return f'''      <div class="generator qr-generator" id="qr-builder" data-types="{types}" data-default="{page["type"]}" data-lock="{lock}" data-label="{e(page["field_label"])}" data-placeholder="{e(page["field_placeholder"])}">
+    preset = "".join(f' data-{k}="{e(page[k])}"' for k in ("fg", "frame", "style") if page.get(k))
+    return f'''      <div class="generator qr-generator" id="qr-builder" data-types="{types}" data-default="{page["type"]}" data-lock="{lock}" data-label="{e(page["field_label"])}" data-placeholder="{e(page["field_placeholder"])}"{preset}>
         <div class="generator-head">
           <h2>{ICON}{e(page["tool_name"])}</h2>
           <span class="status-pill"><span class="status-dot"></span>{U["pill"]}</span>

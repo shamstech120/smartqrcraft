@@ -49,6 +49,40 @@
     rowFile.appendChild(fileBtn); rowFile.appendChild(file); rowFile.appendChild(sample);
     left.appendChild(rowFile);
 
+    // Numbered sequence: fills the list with prefix + serial number + suffix (SN-0001, SN-0002, ...)
+    var seq = el("details", { class: "bulk-seq" });
+    seq.appendChild(el("summary", null, "Make a numbered list (serial numbers)"));
+    var seqGrid = el("div", { class: "bulk-opts" });
+    var sPrefix = el("input", { type: "text", value: "SN-", "aria-label": "Prefix" });
+    var sStart = el("input", { type: "number", value: "1", min: "0", step: "1", "aria-label": "First number" });
+    var sEnd = el("input", { type: "number", value: "100", min: "0", step: "1", "aria-label": "Last number" });
+    var sPad = el("select", { "aria-label": "Digits" }, "<option value=\"0\">No padding</option><option value=\"3\">001</option><option value=\"4\" selected>0001</option><option value=\"5\">00001</option><option value=\"6\">000001</option>");
+    var sSuffix = el("input", { type: "text", value: "", placeholder: "optional", "aria-label": "Suffix" });
+    seqGrid.appendChild(field("Prefix (text or link)", sPrefix));
+    seqGrid.appendChild(field("First number", sStart));
+    seqGrid.appendChild(field("Last number", sEnd));
+    seqGrid.appendChild(field("Digits", sPad));
+    seqGrid.appendChild(field("Suffix", sSuffix));
+    seq.appendChild(seqGrid);
+    var sFill = el("button", { type: "button", class: "btn" }, "Fill the list");
+    var sNote = el("p", { class: "field-hint", style: "margin:8px 0 0" }, "Example: prefix https://example.com/item/ gives one link per item. Up to " + MAX_ROWS + " numbers.");
+    seq.appendChild(sFill); seq.appendChild(sNote);
+    left.appendChild(seq);
+    sFill.addEventListener("click", function () {
+      var a = parseInt(sStart.value, 10), b = parseInt(sEnd.value, 10), pad = parseInt(sPad.value, 10) || 0;
+      if (isNaN(a) || isNaN(b) || b < a) { sNote.textContent = "Enter a first number that is not bigger than the last number."; return; }
+      if (b - a + 1 > MAX_ROWS) b = a + MAX_ROWS - 1;
+      var out = [];
+      for (var n = a; n <= b; n++) {
+        var num = String(n);
+        while (num.length < pad) num = "0" + num;
+        out.push(sPrefix.value + num + sSuffix.value);
+      }
+      ta.value = out.join("\n");
+      mode.value = "content";
+      sNote.textContent = out.length + " lines added. Choose your options and click Generate QR codes.";
+    });
+
     var opts = el("div", { class: "bulk-opts" });
     function field(label, node) { var w = el("label", { class: "bulk-field" }, "<span>" + label + "</span>"); w.appendChild(node); return w; }
     var mode = el("select", null, "<option value=\"content\">Content only</option><option value=\"named\">Name, content (comma separated)</option>");

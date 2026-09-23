@@ -28,8 +28,10 @@
       "description": "Free bulk QR code generator for India. Paste or upload a list of links or text and download all QR codes as PNG or SVG in one ZIP. Up to 1000 codes, no signup."
     },
     "barcode-generator.html": {
-      "title": "Free Bulk Barcode Generator India | Code 128, EAN-13, UPC — SmartQRCraft",
-      "description": "Free barcode generator and bulk barcode generator for India. Code 128, EAN-13, EAN-8, UPC-A, Code 39. Download PNG or SVG, or a ZIP for a whole list. No signup."
+      "title": "Bulk Barcode Generator India | Code 128, EAN-13, UPC Free — SmartQRCraft",
+      "description": "Free bulk barcode generator: paste a list and get Code 128, EAN-13, EAN-8, UPC-A or Code 39 barcodes as PNG or SVG in one ZIP. For shops, stock and labels. Private.",
+      "og_title": "Bulk Barcode Generator India | SmartQRCraft",
+      "h1": "Free <span class=\"accent\">Bulk Barcode</span> Generator"
     },
     "qr-code-scanner.html": {
       "title": "QR Code Scanner Online India | Scan QR from Image or Camera — SmartQRCraft",
@@ -52,6 +54,26 @@
     "vcard-qr-code-generator.html": {
       "title": "Free vCard QR Code Generator India | Digital Visiting Card QR — SmartQRCraft",
       "description": "Create a free vCard QR code for your visiting card. One scan saves your name, phone and email to a contact list. No signup, instant PNG/SVG download."
+    },
+    "phone-qr-code-generator.html": {
+      "title": "Call QR Code Generator | QR Code for Phone Number — SmartQRCraft",
+      "description": "Make a free call QR code for your mobile number. Customers scan and their phone offers to call you. Add +91, your logo and colours, download PNG or SVG. No signup.",
+      "og_title": "Free Call QR Code Generator | SmartQRCraft India",
+      "h1": "Free <span class=\"accent\">Call QR Code</span> Generator"
+    },
+    "qr-codes-in-print.html": {
+      "title": "How to Print a QR Code on Paper: Size, File Type and Tips",
+      "description": "How to print a QR code on paper, stickers, visiting cards, flex banners and packaging: the right file, minimum size, colours and a checklist so it always scans.",
+      "og_title": "How to Print a QR Code on Paper | SmartQRCraft",
+      "h1": "How to Print a QR Code on Paper (and Anything Else)"
+    },
+    "serial-number-qr-code-generator.html": {
+      "title": "QR Code with Serial Number Generator | Numbered QR in Bulk — SmartQRCraft",
+      "description": "Make QR codes with serial numbers for products, assets, tickets and stock labels: SN-0001 to SN-1000 in one ZIP with a CSV list. Free, private, no signup."
+    },
+    "color-qr-code-generator.html": {
+      "title": "Blue QR Code Generator | Colour QR Codes Free — SmartQRCraft",
+      "description": "Make a blue QR code or any colour: red, green, gold or your brand colour, with a contrast check that keeps it scannable. Free, no signup, PNG, JPG or SVG."
     }
   }
 }

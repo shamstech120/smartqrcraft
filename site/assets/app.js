@@ -850,7 +850,7 @@
       var names = { none: X("fNone", "No frame"), bottom: X("fBottom", "Bar below"), top: X("fTop", "Bar above"), badge: X("fBadge", "Badge below"),
         bubble: X("fBubble", "Speech bubble"), outline: X("fOutline", "Outline box"), corners: X("fCorners", "Corner marks"), text: X("fText", "Text only"),
         bag: X("fBag", "Shopping bag"), gift: X("fGift", "Gift box"), cup: X("fCup", "Coffee cup"),
-        envelope: X("fEnvelope", "Envelope"), chef: X("fChef", "Chef hat"), phone: X("fPhone", "Phone") };
+        envelope: X("fEnvelope", "Envelope"), chef: X("fChef", "Chef hat"), phone: X("fPhone", "Phone"), heart: X("fHeart", "Heart") };
       options.forEach(function (name) {
         var b = el("button", { type: "button", class: "frame-opt", "data-frame": name, title: names[name], "aria-label": names[name], "aria-pressed": name === "none" ? "true" : "false" });
         if (name === "none") {
@@ -1049,6 +1049,16 @@
     [downloadPngBtn, downloadJpgBtn, downloadSvgBtn, downloadPdfBtn, downloadEpsBtn].forEach(function (b) {
       if (b) b.addEventListener("click", saveHistory);
     });
+    // Page presets: a landing page can open the generator with a color (data-fg) or a frame (data-frame).
+    (function applyPagePreset() {
+      var pfg = root.getAttribute("data-fg");
+      if (pfg && /^#[0-9a-fA-F]{6}$/.test(pfg)) {
+        applyTemplate({ fg: pfg, bg: "#ffffff", style: root.getAttribute("data-style") || "rounded", eye: "rounded" });
+      }
+      var pframe = root.getAttribute("data-frame");
+      var fbtn = pframe && root.querySelector('.frame-opt[data-frame="' + pframe + '"]');
+      if (fbtn) fbtn.click();
+    })();
     try {
       var pending = window.sessionStorage.getItem("smartqr_restore");
       if (pending) {

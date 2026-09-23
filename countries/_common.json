@@ -44,7 +44,14 @@
     "how-to-scan-qr-code-on-android.html": "Scan QR on Android",
     "shop-qr-code.html": "QR Code for Shop",
     "qr-code-visiting-card.html": "Visiting Card QR Code",
-    "qr-code-widget.html": "QR Code Widget"
+    "qr-code-widget.html": "QR Code Widget",
+    "qr-code-examples.html": "QR Code Examples",
+    "qr-code-image.html": "QR Code Image",
+    "color-qr-code-generator.html": "Color QR Code",
+    "heart-qr-code-generator.html": "Heart QR Code",
+    "qr-code-styles.html": "QR Code Styles",
+    "serial-number-qr-code-generator.html": "Serial Number QR Codes",
+    "qr-code-for-bill.html": "QR Code for Bills"
   },
   "footer_max": 9,
   "footer_priority": [
@@ -69,6 +76,7 @@
     "how-to-scan-qr-code-on-iphone.html",
     "qr-code-beispiele.html",
     "qr-code-drucken.html",
+    "qr-code-examples.html",
     "qr-code-in-canva.html",
     "qr-code-safety.html",
     "qr-code-scannen-handy.html",
@@ -93,7 +101,8 @@
     "qr-code-tester.html",
     "qr-code-vorlagen-drucken.html",
     "qr-code-widget-website.html",
-    "qr-code-widget.html"
+    "qr-code-widget.html",
+    "serial-number-qr-code-generator.html"
   ],
   "not_in_sitemap": [
     "about.html",

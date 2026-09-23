@@ -261,7 +261,7 @@
   }
 
   // Frame geometry shared by the canvas and SVG renderers.
-  var FRAME_STYLES = ["bottom", "top", "badge", "bubble", "outline", "corners", "text", "bag", "gift", "cup", "envelope", "chef", "phone"];
+  var FRAME_STYLES = ["bottom", "top", "badge", "bubble", "outline", "corners", "text", "bag", "gift", "cup", "envelope", "chef", "phone", "heart"];
 
   function frameGeometry(size, frameText, frameStyle) {
     var style = FRAME_STYLES.indexOf(frameStyle) >= 0 ? frameStyle : "bottom";
@@ -272,6 +272,11 @@
     if (frameText) {
       if (style === "bag" || style === "gift" || style === "envelope") { top = Math.round(size * 0.17); bottom = barH; }
       else if (style === "chef") { top = Math.round(size * 0.24); bottom = barH; }
+      else if (style === "heart") {
+        // the code sits inside a heart drawn in a 100 x 88 box; the square spans x 27..73, y 22..68 of that box
+        var hk = size / 46;
+        left = right = Math.round(27 * hk); top = Math.round(22 * hk); bottom = Math.round(20 * hk);
+      }
       else if (style === "phone") { top = Math.round(size * 0.11); bottom = barH + Math.round(size * 0.1); left = right = Math.round(size * 0.05); }
       else if (style === "cup") { top = Math.round(size * 0.15); bottom = barH; right = Math.round(size * 0.2); }
       else if (style === "top") top = barH;
@@ -316,6 +321,24 @@
       ops.push({ fill: fg, evenodd: true, path: pathRRect(0, top, size, size, r).concat(pathRRect(t, top + t, size - 2 * t, size - 2 * t, Math.max(0, r - t))) });
       ops.push({ fill: fg, path: pathRect(0, top + size, size, barH) });
       barText(size / 2, top + size + barH / 2, fs);
+    } else if (st === "heart") {
+      // heart outline (outer heart minus a slightly smaller copy), with the text on a pill under the code
+      var k = size / 46;
+      var heartPath = function (sc) {
+        var cx0 = 50, cy0 = 46;
+        var P = function (x, y) { return [((cx0 + (x - cx0) * sc) - 27) * k, (cy0 + (y - cy0) * sc) * k]; };
+        var pts = [["M", 50, 88], ["C", 20, 65, 0, 45, 0, 25], ["C", 0, 10, 12, 0, 27, 0], ["C", 38, 0, 46, 6, 50, 15],
+          ["C", 54, 6, 62, 0, 73, 0], ["C", 88, 0, 100, 10, 100, 25], ["C", 100, 45, 80, 65, 50, 88]];
+        return pts.map(function (sg) {
+          if (sg[0] === "M") { var a = P(sg[1], sg[2]); return ["M", a[0], a[1]]; }
+          var c1 = P(sg[1], sg[2]), c2 = P(sg[3], sg[4]), e = P(sg[5], sg[6]);
+          return ["C", c1[0], c1[1], c2[0], c2[1], e[0], e[1]];
+        }).concat([["Z"]]);
+      };
+      ops.push({ fill: fg, evenodd: true, path: heartPath(1).concat(heartPath(0.93)) });
+      var pw3 = 30 * k, ph3 = 6.4 * k, py3 = 70.2 * k;
+      ops.push({ fill: fg, path: pathRRect(size / 2 - pw3 / 2, py3, pw3, ph3, ph3 / 2) });
+      barText(size / 2, py3 + ph3 / 2, Math.round(ph3 * 0.5));
     } else if (st === "phone") {
       // a phone outline: thick rounded body with a speaker slot at the top and a home bar at the bottom
       var pt = size * 0.035, pr = size * 0.12, pw2 = size + fr.left + fr.right, ph = top + size + fr.bottom;
