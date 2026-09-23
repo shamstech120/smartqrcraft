@@ -51,7 +51,9 @@
     "heart-qr-code-generator.html": "Heart QR Code",
     "qr-code-styles.html": "QR Code Styles",
     "serial-number-qr-code-generator.html": "Serial Number QR Codes",
-    "qr-code-for-bill.html": "QR Code for Bills"
+    "qr-code-for-bill.html": "QR Code for Bills",
+    "how-to-make-a-qr-code.html": "How to Make a QR Code",
+    "qr-code-in-canva.html": "QR Codes in Canva"
   },
   "footer_max": 9,
   "footer_priority": [
@@ -72,6 +74,7 @@
     "qr-code-mit-logo.html"
   ],
   "guide_pages": [
+    "how-to-make-a-qr-code.html",
     "how-to-scan-qr-code-on-android.html",
     "how-to-scan-qr-code-on-iphone.html",
     "qr-code-beispiele.html",

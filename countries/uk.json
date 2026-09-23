@@ -52,6 +52,12 @@
     "vcard-qr-code-generator.html": {
       "title": "Free vCard QR Code Generator UK | Digital Business Card QR — SmartQRCraft",
       "description": "Create a free vCard QR code for your UK business card. One scan saves your name, number and email to a phone. No signup, instant PNG/SVG download."
+    },
+    "qr-code-safety.html": {
+      "title": "Fake QR Codes: How to Spot a QR Code Scam (UK Guide)",
+      "description": "How to spot a fake QR code on parking machines, menus and letters, what to do if you scanned one, and how to report it to Report Fraud, 7726 or your bank on 159.",
+      "og_title": "Fake QR Codes: How to Spot a Scam | SmartQRCraft UK",
+      "h1": "Fake QR Codes: How to Spot a QR Code Scam"
     }
   }
 }
